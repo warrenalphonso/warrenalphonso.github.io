@@ -1,0 +1,46 @@
+
+body{
+  background-color: #201f1d;
+  margin: 0px 300px;
+  font-size:
+}
+
+
+h1{
+  font-family: 'IBM Plex Serif', serif;
+  font-weight: 600;
+  font-style: italic;
+  color: #de8d47;
+  margin-bottom: 0px
+}
+
+h2{
+  font-family: 'IBM Plex Serif', serif;
+  font-weight: 400;
+  color: #868686;
+  font-size: 1.1em;
+  margin-top: 10px;
+  padding-left: 25px;
+}
+
+h3{
+  font-family: 'IBM Plex Serif', serif;
+  font-weight: 600;
+  color: #de8d47;
+  font-size: 1em;
+}
+
+p{
+  font-family: 'IBM Plex Serif', serif;
+  font-weight: 400;
+  color: #868686;
+  font-size: 1em;
+}
+
+a:link{
+  color: #de8d47;
+}
+
+a:visited{
+
+}
