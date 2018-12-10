@@ -45,3 +45,13 @@ a:link{
 a:visited{
 
 }
+
+#middle{
+  height: 50%;
+  width: 50%;
+  background-color: #000000;
+  top: 20%;
+  left: 20%;
+
+
+}
