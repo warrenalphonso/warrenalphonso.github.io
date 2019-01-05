@@ -1,10 +1,10 @@
 
-/* body{ */
-  /* background-color: #201f1d; */
-  /* background-color: #f4e7b7;
+body{
+  background-color: #201f1d;
+  /* background-color: #f4e7b7; */
   margin: 0px 300px;
-  font-size: */
-/* } */
+  font-size:
+}
 
 
 h1{
@@ -43,7 +43,7 @@ a:link{
 }
 
 a:visited{
-
+  color: #de8d47;
 }
 
 #middle{
@@ -52,6 +52,4 @@ a:visited{
   background-color: #000000;
   top: 0;
   left: 0;
-
-
 }
