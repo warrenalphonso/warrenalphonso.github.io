@@ -1,4 +1,4 @@
-console.log('Connected!');
+console.log('Connected ayy!');
 
 if (process.env.PORT) {
   console.log(process.env.PORT);
