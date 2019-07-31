@@ -1,0 +1,6 @@
+- name: Home 
+  link: / 
+- name: QC 
+  link: /qc/
+- name: Courses 
+  link: /courses/
