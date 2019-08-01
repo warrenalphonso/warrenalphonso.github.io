@@ -1,9 +1,12 @@
 ---
-layout: default 
-title: Warren Alphonso
+layout: home 
+title: Home 
+
+list_title: Projects
 ---
+## Hi 
+Insert image. 
 
-# {{ page.title }} 
+Insert bio. 
 
-Built using Jekyll.
-
+{% include google-analytics.html %}

@@ -1,7 +1,5 @@
 --- 
-layout: default 
-title: Quantum Computing 
-permalink: /qc/
+layout: page 
+title: Quantum Computing
 --- 
 
-# {{ page.title }}
