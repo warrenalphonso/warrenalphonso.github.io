@@ -2,12 +2,12 @@ name: Warren Alphonso
 theme: minima 
 
 header_pages: 
-  - index.md
-  - qc.md 
-  - courses.md
+  - index.html
+  - qc.html 
+  - courses.html
 
 minima:
-  date_format: ""
+  date_format: " "
 
   social_links: 
     github: warrenalphonso
