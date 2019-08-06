@@ -6,6 +6,11 @@ header_pages:
   - qc.html 
   - courses.html
 
+collections: 
+  projects:
+    sequence: true
+    output: true
+    permalink: /projects/:name
 minima:
   date_format: " "
 
