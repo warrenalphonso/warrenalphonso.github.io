@@ -17,11 +17,20 @@ layout: default
       <li>
         <!-- {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%} -->
         <!-- <span class="post-meta">{{ post.date | date: date_format }}</span> -->
-        <h3>
-          <a class="post-link" href="{{ project.url | relative_url }}">
-            {{ project.title | escape }}
-          </a>
-        </h3>
+        {%- assign projectmod = project.sequence | modulo: 2 -%}
+        {%- if projectmod == 1 -%}
+          <h3 style="text-align: left; padding-left: 10px;">
+            <a class="post-link" href="{{ project.url | relative_url }}">
+              {{ project.title | escape }}
+            </a>
+          </h3>
+        {%- else -%}
+          <h3 style="text-align: right; padding-right: 30px;">
+            <a class="post-link" href="{{ project.url | relative_url }}">
+              {{ project.title | escape }}
+            </a>
+          </h3>
+        {%- endif -%}
         <!-- {%- if site.show_excerpts -%}
           {{ post.excerpt }}
         {%- endif -%} -->
