@@ -2,7 +2,7 @@
  * Site header
  */
 .site-header {
-  border-top: 5px solid $grey-color-dark;
+  // border-top: 5px solid $grey-color-dark; //Hella annoying top border
   border-bottom: 1px solid $grey-color-light;
   min-height: $spacing-unit * 1.865;
 
@@ -42,7 +42,7 @@
 
     // Gaps between nav items, but not on the last one
     &:not(:last-child) {
-      margin-right: 20px;
+      margin-right: 25px;
     }
   }
 

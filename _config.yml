@@ -1,5 +1,6 @@
 name: Warren Alphonso 
 theme: minima 
+description: Built with Jekyll. 
 
 header_pages: 
   - index.html
@@ -11,8 +12,8 @@ collections:
     sequence: true
     output: true
     permalink: /projects/:name
+
 minima:
   date_format: " "
 
-  social_links: 
-    github: warrenalphonso
+google_analytics: UA-147966026-1
