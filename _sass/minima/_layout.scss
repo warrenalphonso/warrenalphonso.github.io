@@ -241,6 +241,37 @@ h4 {
 
 
 /**
+ * Readings stuff
+ */
+#now-reading {
+  background-color: lighten(lightblue, 2%);
+  padding: 14px;
+  text-align: left;
+  font-weight: bold;
+}
+
+#thinking-about {
+  background-color: lighten(gold, 20%);
+  padding: 14px;
+  text-align: left;
+  font-weight: bold;
+}
+
+#finished {
+  background-color: lighten(lightsalmon, 11%);
+  visibility: 10%;
+  padding: 14px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.books>li {
+  padding: 5px;
+}
+
+
+
+/**
  * Posts
  */
 .post-header {
