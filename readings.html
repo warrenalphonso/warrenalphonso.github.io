@@ -1,4 +1,4 @@
---- 
+---
 layout: page 
 title: Readings
 publish: false
@@ -8,6 +8,14 @@ permalink: /readings/
 <html>
     <head></head>
     <body>
+        <ul>
+        {% for writing in site.writings %}
+            <li>
+            <a href="{{ writing.url }}">{{ writing.title }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+                  
         <h1>Readings</h1>
         <div id="now-reading">Now Reading</div>
         <ol class="books">
@@ -24,6 +32,10 @@ permalink: /readings/
             <li>test 1</li>
             <li>test 2</li>
             <li>test 3</li>
+        </ol>
+        <div>Reread list?</div>
+        <ol class="books">
+            <li>Wait but why's How to pick a career</li>
         </ol>
     </body>
 </html>

@@ -5,14 +5,17 @@ description: Built with Jekyll.
 header_pages: 
   - index.html
   - qc.html 
-  - courses.html
+  - courses.html 
+  - readings.html
 
 collections: 
   projects:
     sequence: true
     output: true
     permalink: /projects/:name
-
+  writings: 
+    output: true 
+    permalink: /writings/:name
 minima:
   date_format: " "
 
