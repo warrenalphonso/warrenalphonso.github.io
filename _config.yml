@@ -3,20 +3,15 @@ theme: minima
 description: Built with Jekyll. 
 
 header_pages: 
-  - index.html
-  - qc.html 
-  - courses.html 
-  - readings.html
+  - index.md
+  - qc.md
+  - courses.html
+  - readings.md
 
 collections: 
   projects:
     sequence: true
     output: true
     permalink: /projects/:name
-  writings: 
-    output: true 
-    permalink: /writings/:name
-minima:
-  date_format: " "
 
 google_analytics: UA-147966026-1
