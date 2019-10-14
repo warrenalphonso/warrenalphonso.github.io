@@ -1,5 +1,6 @@
 <!-- Layout is not a branch of default! -->
 
+
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
@@ -12,8 +13,7 @@
     <main class="page-content" aria-label="Content">
         <article class="writing">
             <div class="writing-map">
-              <p>This should persist during scrolling. Also shouldn't be visible on mobile view. </p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas scelerisque risus metus, at mattis sem dignissim nec. Proin porta fringilla gravida. Fusce vehicula libero gravida, porttitor neque vel, malesuada est. Etiam semper rhoncus augue vitae scelerisque. Suspendisse iaculis purus quis elit cursus, ut blandit nisl posuere. Mauris tempus viverra magna nec dictum. Aliquam hendrerit ipsum vel ullamcorper cursus. Donec gravida interdum nulla nec porttitor. Donec ultricies nunc tortor, nec cursus massa maximus non. Phasellus et lorem eget lacus vestibulum lacinia. Morbi tempus nisi augue, ac eleifend lacus hendrerit ac. Suspendisse potenti.
+              {% toc %}
             </div>  
             <div class="writing-content">
                 <p class="post-meta">
@@ -23,8 +23,8 @@
                     </time>
                     {%- if page.author -%}
                       • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
-                    {%- endif -%}</p>
-              
+                    {%- endif -%}
+                </p>
               {{ content }}
             </div>
             <div class="writing-annotations">

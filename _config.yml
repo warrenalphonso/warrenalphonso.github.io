@@ -15,3 +15,26 @@ collections:
     permalink: /projects/:name
 
 google_analytics: UA-147966026-1
+
+plugins: 
+  - jekyll-toc
+  - jekyll-youtube
+
+defaults: 
+  - 
+    scope: 
+      path: "" # Empty string means all files. 'path' is necessary for defaults. 
+      type: "posts" # Possible types are pages, posts, drafts, or any collection. 
+    values: 
+      layout: "post"
+      publish: "true"
+      toc: "true"
+  - 
+    scope: 
+      path: ""
+      type: "projects"
+    values: 
+      layout: "page"
+
+toc:
+  min_level: 2
