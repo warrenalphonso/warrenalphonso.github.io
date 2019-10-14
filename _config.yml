@@ -1,4 +1,4 @@
-name: Warren Alphonso 
+title: "" # Displayed on header but I think it looks ugly
 theme: minima 
 description: Built with Jekyll. 
 
@@ -15,10 +15,6 @@ collections:
     permalink: /projects/:name
 
 google_analytics: UA-147966026-1
-
-plugins: 
-  - jekyll-toc
-  - jekyll-youtube
 
 defaults: 
   - 
@@ -38,3 +34,17 @@ defaults:
 
 toc:
   min_level: 2
+
+plugins: 
+  - jekyll-toc
+  - jekyll-youtube
+
+# Exclude these files from the build process results.
+# Prevents them from showing up in the master branch which is the live site.
+exclude:
+  - vendor
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - Rakefile

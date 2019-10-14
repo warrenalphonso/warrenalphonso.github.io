@@ -4,11 +4,16 @@ source "https://rubygems.org"
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-# gem "rails"
+# We'll need rake to build our site in TravisCI
+gem "rake", "~> 12"
 gem "jekyll"
 gem "minima"
 
-gem "github-pages", group: :jekyll_plugins
+# gem "rails"
+# gem "jekyll"
+# gem "minima"
+
+# gem "github-pages", group: :jekyll_plugins
 
 group :jekyll_plugins do
     gem "jekyll-toc"
