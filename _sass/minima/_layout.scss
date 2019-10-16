@@ -250,15 +250,7 @@ h4 {
   font-weight: bold;
   margin-top: 10px;
   margin-bottom: 10px;
-}
-
-#thinking-about {
-  background-color: lighten(gold, 20%);
-  padding: 14px;
-  text-align: left;
-  font-weight: bold;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  font-size: 110%;
 }
 
 #finished {
@@ -269,8 +261,23 @@ h4 {
   font-weight: bold;
   margin-top: 10px;
   margin-bottom: 10px;
+  font-size: 110%;
 }
 
+#anti-library {
+  background-color: lighten(gold, 20%);
+  padding: 14px;
+  text-align: left;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 110%;
+}
+
+#reading-list > li {
+  font-size: 105%;
+  padding-bottom: 10px;
+}
 
 
 /**

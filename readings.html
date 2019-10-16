@@ -1,0 +1,51 @@
+---
+layout: page 
+title: Readings
+publish: false
+permalink: /readings/
+--- 
+
+<h1>Readings</h1> 
+
+<div id="now-reading">Now Reading</div>
+
+<ol id="reading-list">
+    <li><em>Zero to One</em> by Peter Thiel</li>
+    <li><em>Understanding Media</em> by Marshall McLuhan</li>
+</ol>
+
+
+<div id="finished">Finished</div>
+
+<ol id="reading-list">
+    <li>"When We Build" by Wilson Miner</li>
+    <li><em>When Breath Becomes Air</em> by Paul Kalanithi</li>
+    <li><em>The Lessons of History</em> by Will and Ariel Durant</li>
+    <li><em>Hackers and Painters</em> by Paul Graham</li>
+    <li><em>The Innovators</em> by Walter Isaacson</li>
+</ol>
+
+
+<div id="anti-library">Anti-Library</div>
+
+<ol id="reading-list">
+    <li><em>Thinking Fast and Slow</em> by Daniel Kahneman</li>
+    <li><em>Ideas and Opinions</em> by Albert Einstein</li>
+    <li><em>How to Live or A Life of Montaigne</em> by Sarah Bakewell</li>
+    <li><em>Einstein</em> by Walter Isaacson</li>
+    <li><em>Linear Operators for Quantum Mechanics</em> by Thomas Jordan</li>
+    <li><em>Quantum Computing Since Democritus</em> by Scott Aaronson</li>
+    <li><em>Practical Vim</em> by Drew Neil</li>
+    <li><em>ANSI Common Lisp</em> by Paul Graham</li>
+    <li><em>Quantum Computation and Quantum Information</em> by Nielsen and Chuang</li>
+    <li><em>Algorithms</em> by Dasgupta, Papadimitriou, and Vazirani</li>
+    <li><em>Quantum Mechanics: The Theoretical Minimum</em> by Susskind and Friedman</li>
+</ol>
+
+<h1>Writings</h1>
+
+<ul>
+    {% for post in site.posts %}
+        <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}    
+</ul>
