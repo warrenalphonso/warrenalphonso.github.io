@@ -6,7 +6,7 @@ header_pages:
   - index.md
   - qc.md
   - courses.html
-  - readings.md
+  - readings.html
 
 collections: 
   projects:
@@ -33,7 +33,7 @@ defaults:
       layout: "page"
 
 toc:
-  min_level: 2
+  min_level: 1
 
 plugins: 
   - jekyll-toc

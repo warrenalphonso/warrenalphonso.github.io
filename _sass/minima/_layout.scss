@@ -6,7 +6,7 @@ h1 {
 }
 
 h2 {
-  @include relative-font-size(1.50);
+  @include relative-font-size(1.75);
 
   // @include media-query($on-laptop) {
   //   @include relative-font-size(1.75);
@@ -14,7 +14,7 @@ h2 {
 }
 
 h3 {
-  @include relative-font-size(1.25);
+  @include relative-font-size(1.5);
 
   // @include media-query($on-laptop) {
   //   @include relative-font-size(1.375);
@@ -22,7 +22,7 @@ h3 {
 }
 
 h4 {
-  @include relative-font-size(1.1);
+  @include relative-font-size(1.25);
 
   // @include media-query($on-laptop) {
   //   @include relative-font-size(1.125);
@@ -299,6 +299,16 @@ h4 {
 
 .post-content {
   margin-bottom: $spacing-unit;
+}
+
+// No bullets
+.toc-entry {
+  list-style-type: none;
+}
+
+// Nested unorder lists are indented by 5%
+.toc-entry > ul {
+  margin-left: 5%;
 }
 
 
