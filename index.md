@@ -3,7 +3,7 @@ layout: home
 title: Home 
 publish: true
 list_title: Projects
-display_projects: true
+display_projects: false
 ---
 
 # Welcome 
