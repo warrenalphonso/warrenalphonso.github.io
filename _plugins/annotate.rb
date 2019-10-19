@@ -8,7 +8,7 @@ module Jekyll
 
         def render(context) 
             @@i = @@i + 1
-            return ("<sup>#{@@i}</sup> <span class='writing-annotations'>#{@@i}. #{@text}</span>")
+            return ("[#{@@i}] <span class='writing-annotations'>[#{@@i}] #{@text}</span>")
         end 
     end 
 end 
