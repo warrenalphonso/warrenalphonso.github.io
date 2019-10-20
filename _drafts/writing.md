@@ -9,8 +9,9 @@ permalink: posts/writing
 
 - Paul Graham's [The Age of the Essay](http://www.paulgraham.com/essay.html)
 - Nielsen's [Notes on Writing Well](https://github.com/mnielsen/notes-on-writing/blob/master/notes_on_writing.md)
-- Postman from [defMacro's rereading list](https://www.defmacro.org/2016/11/25/essay-reading-list.html)
-- On Writing Well by Zinsser (and other things from [Siver's blog](http://sivers.com/book))
+- Roberts from [defMacro's rereading list](https://www.defmacro.org/2016/11/25/essay-reading-list.html)
+- *On Writing Well* by William Zinsser 
+- *Draft No. 4: On the Writing Process* by John McPhee
 
 ## Notes 
 

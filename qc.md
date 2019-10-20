@@ -14,4 +14,3 @@ permalink: /qc/
 - [Advice](http://www.mit.edu/~aram/advice/quantum.html) from someone more qualified. 
 
 Nielsen and Chuang's *Quantum Computation and Quantum Information* is a standard introductory text. I'm working on a solution set to the exercises [here](https://github.com/warrenalphonso/qc-latex/tree/master/nielsen-and-chuang-notes). 
-
