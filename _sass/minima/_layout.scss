@@ -241,7 +241,7 @@ h4 {
 
 
 /**
- * Readings stuff
+ * Reading stuff
  */
 #now-reading {
   background-color: lighten(lightblue, 2%);
@@ -274,10 +274,11 @@ h4 {
   font-size: 110%;
 }
 
-#reading-list > li {
+.reading-list > li {
   font-size: 105%;
   padding-bottom: 10px;
 }
+
 
 
 /**
@@ -305,6 +306,11 @@ h4 {
 .toc-entry {
   list-style-type: none;
   font-weight: normal;
+  text-decoration: none;
+}
+
+.toc-entry > a:hover {
+  text-decoration: underline;
 }
 
 // Title h1 is bold to distinguish from h2

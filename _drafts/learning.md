@@ -4,7 +4,9 @@ permalink: posts/learning
 --- 
 # On Learning 
 
-This is a reminder to myself of how I should structure my learning. 
+This is a reminder to myself of how I should structure my learning. This doesn't mean I'm allowed to write something dull with the obvious stuff for the sake of writing a blog post. What surprising things can I discover about learning? I should write in a way that the obvious basics *are* obvious after reading the surprising things. Dig! Work fast but remember that this will take months to finish. That's good because then I'll be conditioned to look for more material in everything I read. 
+
+Read the websites first and write a post as short as possible that summarizes everything. Use the websites in "On Writing" to figure out how to write it. I really want this to be as condensed as possible because I know there's a lot I'll need to add in terms of examples and more information from the books. 
 
 ## Reading list 
 
@@ -13,13 +15,13 @@ This is a reminder to myself of how I should structure my learning.
 - [SuperMemo wiki](https://supermemo.guru/wiki/SuperMemo_Guru)
 - Alan Kay's [recommended reading](http://www.squeakland.org/resources/books/readingList.jsp) - look at "Learning and Creativity" section
 - [Guide to Anki for math](https://www.reddit.com/r/Anki/comments/43mf83/guide_how_to_anki_maths_the_right_way/)
-- [20 rules for learning](https://www.supermemo.com/en/archives1990-2015/articles/20rules)
 - *Art of Doing Science and Engineering: Learning to Learn* by Richard Hamming
 - Tim Ferriss' [guide to reading faster](https://tim.blog/2009/07/30/speed-reading-and-accelerated-learning/)
 - Farnam Street's [guide to reading better](https://fs.blog/reading/)
 - *Moonwalking with Einstein* by Joshua Foer 
 - *How to Read a Book: The Classic Guide to Intelligent Reading* by Mortimer Adler and Charles van Doren
 - *Understanding Media* by Marshall McLuhan after I finish everything else. Mostly to see if, as Nielsen suspects, our methods of learning haven't evolved with the new media by which we learn. I can even look into whether the common ways we read are remnants of a way of consuming some older media. 
+- "On Reading and Books" by Arthur Schopenhauer
 
 ## Ideas 
 
@@ -55,8 +57,26 @@ Speed of learning depends on how you formulate the material. Optimizing the latt
 
 10. **Avoid enumerations.** 
 
-11. 
+11. **Combat interference.** Make items as unambigiuos as possible so no two cards have similar answers. 
+
+12. **Optimize wording.** Optimize wording of cards so that the right part of your brain lights up in minimum time. This reduces errors, increases specificity, reduces response time, and helps concentration. 
+
+13. **Refer to other memories.** 
 
 ### Farnam Street 
 
 Treat the book as a conversation with the author. You can't talk directly to them but writing in the margins gets pretty close. This provides another heuristic to decide when to stop reading a book: if you're talking to the author, and the author is boring or isn't saying anything new, stop listening. 
+
+At the end of each chapter, write bullet points to summarize. Make it personal if you can. After doing this for each chapter and finishing the book, leave the book and come back in a week. Then go through all the notes again. Write the ones you think are good on the inside cover along with the page number. 
+
+### "On Books and Reading" by Arthur Schopenhauer 
+
+Reading is just tracing in pen what the author has already written in pencil. There is no learning being done because there is no independent thinking occuring. Reading then can make you stupid: if you continuously let someone else think for you, you forget how to think yourself. 
+
+Similarly,, reading a lot means that you're less likely to remember what you've read. Your brain is being overwritten continuously. 
+
+Assume that the vast majority of books were written only to make money. Most of these are not worth your time. Never read a book because it is popular - ignore political, religious, or contemporary works. Bad books are intellectual poison; they destroy the mind. To read what is good, one must make it a condition never to read what is bad. 
+
+Popular books are popular with the foolish majority. Refuse these and seek the books written by the rarest of minds, of all times and countries. Read only books written by people who live *for* science or poetry. 
+
+Not even close to finishing reading this. 
