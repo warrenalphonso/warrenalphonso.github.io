@@ -18,4 +18,5 @@ gem "minima"
 group :jekyll_plugins do
     gem "jekyll-toc"
     gem "jekyll-youtube"
+    gem "jekyll-last-modified-at"
 end

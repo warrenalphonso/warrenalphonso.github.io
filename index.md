@@ -6,7 +6,7 @@ list_title: Projects
 display_projects: false
 ---
 
-# Welcome 
+# Welcome
 
 <img src="/images/pic2.jpg" style="display:block; margin-left:auto; margin-right: auto; width:80%;" title="pc: gulati :/">
 
