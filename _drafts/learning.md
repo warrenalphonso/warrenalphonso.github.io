@@ -15,23 +15,27 @@ This is meant for all learning, but I should think about how things I want to le
 
 This is useless if I just summarize things. Try to be as experimental as possible. 
 
-## Reading list 
+Focusing on getting a system for QC is an important first step, but I should also be looking for ways to decrease normal school studying time too. Otherwise, I'll keep lowering time on QC because of school. Also I shouldn't be learning despite school. 
 
-- Nielsen's [guide](http://cognitivemedium.com/srs-mathematics) to spaced repetition for math 
-- [SuperMemo wiki](https://supermemo.guru/wiki/SuperMemo_Guru)
-- [Guide to Anki for math](https://www.reddit.com/r/Anki/comments/43mf83/guide_how_to_anki_maths_the_right_way/)
-- [Using artificial intelligence to augment human intelligence](https://distill.pub/2017/aia/)
+Visualizing or some other method of intuitively understanding qubits is important, but maybe more important is developing a sense of intuition about quantum algorithms. The algorithms make sense but how the heck would I have devised them myself? I doubt anyone has intuition about them and if I could figure out a way to *think in quantum algorithms* when working on QC I bet I could make progress really fast. 
+
+## Reading list
+
 - [Spaced Repetition for Efficient Learning](https://www.gwern.net/Spaced-repetition)
-- Nielsen's [Augmenting long term memory](http://augmentingcognition.com/ltm.html)
+- Maybe look for Anki editors like [this one](https://github.com/louietan/anki-editor) though this is probably premature optimization at this point. 
+- Anki [MathJax tutorial](https://niklaskorz.de/2017/06/studying-mathematics-with-anki-and-mathjax.html)
+- ["You and Your Research"](https://www.cs.virginia.edu/~robins/YouAndYourResearch.html) by Richard Hamming
 - *Art of Doing Science and Engineering: Learning to Learn* by Richard Hamming
 - *Moonwalking with Einstein* by Joshua Foer 
 - *Spark* by John Ratey
 - *How to Read a Book: The Classic Guide to Intelligent Reading* by Mortimer Adler and Charles van Doren
-- *Understanding Media* by Marshall McLuhan after I finish everything else. Mostly to see if, as Nielsen suspects, our methods of learning haven't evolved with the new media by which we learn. I can even look into whether the common ways we read are remnants of a way of consuming some older media. 
-- *Toward a Theory of Instruction* by Jerome Bruner (from Alan Kay)
-- *The Act of Creation* by Arthur Koestler
+- *Understanding Media* by Marshall McLuhan. Mostly to see if, as Nielsen suspects, our methods of learning haven't evolved with the new media by which we learn. I wonder if the common ways we read are remnants of a way of consuming some older media. 
+- *Toward a Theory of Instruction* by Jerome Bruner (from Alan Kay). Not sure if this is worth it. 
+- *The Act of Creation* by Arthur Koestler. An attempt to generalize all human creativity including imagination and scientific discovery. 
 
 ## Ideas 
+
+### Stuff to Think About
 
 What's wrong with Anki? Why don't I use it? Would it be easier to just make my own that fixes these problems. Problems that I have with Anki: 
 - Making cards is annoying because it takes a long time, I don't know what to put on it, and I don't know how atomic to make cards. 
@@ -42,7 +46,76 @@ For reading faster, keep a set of steps I want to do and record how long I spend
 
 If I decide to do mnemonic essays for myself, I can export Anki decks to the webpage using [this article](https://tedpak.com/2013/10/30/exporting-anki-flashcards-to-the-web.html)
 
-## Notes 
+I should get into this and spend time creating a workflow using Linux - like castel.dev but for Anki.
+
+### Efficient Learning for Classes 
+
+I'll try Anki to study for finals for 170 and 126. In particular, 
+- I'll lower the bar for what's worth putting into Anki. Typically, I only enter something into Anki if I think it's worth 10 minutes of my time and I'm emotionally invested. For classes, I'll enter anything I think is important or a key idea or approach I should remember. I'll have to let my enthusiasm for the subject provide a strong enough emotional motivation to want to learn the cards. 
+- Keep a school deck separate from other decks. Only copy the cards I actually think are super important to main deck. 
+- Spend time **reviewing** every day. Review for `max(time to finish reviewing everything due, 30 minutes)` so that I'm not incentivized to go through cards quickly instead of taking time to understand and update them. Add new cards if I'm finishing what's due quickly. 
+
+## Notes for Reading 
+
+### Farnam Street 
+
+Treat the book as a conversation with the author. You can't talk directly to them but writing in the margins gets pretty close. This provides another heuristic to decide when to stop reading a book: if you're talking to the author, and the author is boring or isn't saying anything new, stop listening. 
+
+At the end of each chapter, write bullet points to summarize. Make it personal if you can. After doing this for each chapter and finishing the book, leave the book and come back in a week. Then go through all the notes again. Write the ones you think are good on the inside cover along with the page number. 
+
+The best note-taking system is the blank sheet: take out a blank sheet before starting a book, write everything you know about the subject, and after every reading sessions take a few minutes to add to the map. Periodically review the map. 
+
+If you read 30 pages a day, you read 10,000 pages a year. However, if you're not diligent in note-taking, this can cause you to miss the point of many big books. Sometimes, reading well requires cancelling your plans to stay in and read. 
+
+Most books' central wisdom can be gleaned from other books, so don't ever push through a book you hate. If you're bored, your understanding of the book will diminish anyway. 
+
+### "On Books and Reading" by Arthur Schopenhauer 
+
+Reading is just tracing in pen what the author has already written in pencil. There is no learning being done because there is no independent thinking occuring. Reading then can make you stupid: if you continuously let someone else think for you, you forget how to think yourself. 
+
+Similarly, reading a lot means that you're less likely to remember what you've read. Your brain is being overwritten continuously. 
+
+Assume that the vast majority of books were written only to make money. Most of these are not worth your time. Never read a book because it is popular - ignore political, religious, or contemporary works. Bad books are intellectual poison; they destroy the mind. To read what is good, one must make it a condition never to read what is bad. 
+
+Popular books are popular with the foolish majority. Refuse these and seek the books written by the rarest of minds, of all times and countries. Read only books written by people who live *for* science or poetry. There will rarely be more than a dozen great book per century. Read these many times over and avoid the others. 
+
+People are quick to read works about great thinkers but rarely read the works of great thinkers. This is because it is easier to let someone modern take over your thinking than it is to work hard at translating an ancient's thoughts. Refuse this compromise at all costs. Read *Essays* by Montaigne not *A Life of Montaigne* by Bakewell. 
+
+Immediately read an important book twice. You can only really understand the beginning after you know the end. Your mood will be different the second time through so you'll definitely pick up a different perspecitve. 
+
+### Reading Faster by Tim Ferriss 
+
+Everytime I do this procedure, write down my results. I need to do it regularly and have goals to hit. 
+
+**Key Goals**: 
+1. Minimize the number and duration of fixations per line. Reading left to right doesn't result in a continuous movement of the eye but a series of jumps. Usually, each fixation lasts about 1/4 of a second. 
+2. Reduce back-skipping. People normally spend about 30% of reading time on subconscious rereading. 
+3. Increase horizontal peripheral vision and number of words processed per fixation. Untrained readers miss out on 50% of words per fixation because they don't use their peripheral vision. 
+
+Practice the following at 3x your desired reading speed. 
+
+**The Procedure**: 
+
+Baseline: Figure out the average number of words per page. Read normally for exactly 1 minute and determine baseline words-per-minute. 
+
+Trackers and Pacers: We can achieve all our key goals by using a tracker and pacer. Hold a pen in your dominant hand and underline each word with the cap on, ensuring your eyes follow the tip of the pen. 
+
+1. Without regard for comprehension, read for 2 minutes using the pen, keeping each line to a maximum of 1 second. Increase the speed with each subsequent page. 
+2. Repeat the above for 3 minutes, reading 2 lines in a maximum of 1 second. This is an exercise. Give it your full attention and don't daydream. 
+
+Perceptual Expansion: Training peripheral vision can result in a 300% increase in speed. 
+
+1. For 1 minute, read each line starting with the second word, and ending on the second-to-last. Stay on each line for 1 second at most. 
+2. Repeat the above, but start and end each line three words from the margin. 
+3. Reapeat the above for 3 minutes now, starting and ending each line four words from the margin. Read 2 lines in 1 second.
+
+*Don't worry if you don't comprehend anything!* We are trying to condition ourselves and you want to be at three times your desired speed anyway. 
+
+Calculate New Speed: Read for 1 minute and determine new words-per-minute. 
+
+
+
+## Notes for Spaced Repetition
 
 ### Misc Anki Notes from Around the Web
 
@@ -50,7 +123,13 @@ If I decide to do mnemonic essays for myself, I can export Anki decks to the web
 2. Ask 'why' questions instead of yes/no questions. 
 3. Style each card by prefacing it with (Subject): (Math) What's the square root of 4? 
 
-### 20 rules of formulating knowledge by Piotr Wozniak 
+### Shamim Ahmed's Anki Tutorials for Med School 
+
+Good add-ons: Hierarchical Tags, Pop-Up Dictionary, Image Occlusion, Load Balancer, [Frozen Fields](https://ankiweb.net/shared/info/516643804), Handy Answer Key Shortcuts, [Field History](https://ankiweb.net/shared/info/1247884413), [Tag Selector V2](https://www.youtube.com/redirect?v=2FjWkWEA2Ug&event=video_description&q=https%3A%2F%2Fankiweb.net%2Fshared%2Finfo%2F1022577188&redir_token=atSgLZhiBvVT0bCYRPZBzi4DJqd8MTU3MzUzMjk0NEAxNTczNDQ2NTQ0), [Editor Tag Hotkeys](https://www.youtube.com/redirect?v=2FjWkWEA2Ug&event=video_description&q=https%3A%2F%2Fankiweb.net%2Fshared%2Finfo%2F785582333&redir_token=atSgLZhiBvVT0bCYRPZBzi4DJqd8MTU3MzUzMjk0NEAxNTczNDQ2NTQ0), [Tag Entry Enhancements](https://www.youtube.com/redirect?v=2FjWkWEA2Ug&event=video_description&q=https%3A%2F%2Fankiweb.net%2Fshared%2Finfo%2F1348430474&redir_token=atSgLZhiBvVT0bCYRPZBzi4DJqd8MTU3MzUzMjk0NEAxNTczNDQ2NTQ0), [Quick Note and Deck Buttons](https://www.youtube.com/redirect?redir_token=4asQSO2KEQcEYo9mJUkBP8ZdESx8MTU3MzUzMjk0NkAxNTczNDQ2NTQ2&event=video_description&v=aG2Vf-wZLu8&q=https%3A%2F%2Fankiweb.net%2Fshared%2Finfo%2F2181333594), [Quick Field Navigation](https://www.youtube.com/redirect?redir_token=4asQSO2KEQcEYo9mJUkBP8ZdESx8MTU3MzUzMjk0NkAxNTczNDQ2NTQ2&event=video_description&v=aG2Vf-wZLu8&q=https%3A%2F%2Fankiweb.net%2Fshared%2Finfo%2F734297936), [Image Resizer](https://www.youtube.com/redirect?q=https%3A%2F%2Fankiweb.net%2Fshared%2Finfo%2F1214357311&event=video_description&redir_token=8NE0iCsV9QEdAB413hCi62rfQSt8MTU3MzUzMjk0OEAxNTczNDQ2NTQ4&v=FPQxGz61C-o), [Maximum Image Height in Card Editor](https://www.youtube.com/redirect?q=https%3A%2F%2Fankiweb.net%2Fshared%2Finfo%2F229181581&event=video_description&redir_token=8NE0iCsV9QEdAB413hCi62rfQSt8MTU3MzUzMjk0OEAxNTczNDQ2NTQ4&v=FPQxGz61C-o), [Refresh Media References](https://www.youtube.com/redirect?q=https%3A%2F%2Fankiweb.net%2Fshared%2Finfo%2F162278717&event=video_description&redir_token=8NE0iCsV9QEdAB413hCi62rfQSt8MTU3MzUzMjk0OEAxNTczNDQ2NTQ4&v=FPQxGz61C-o), [Power Format Pack](https://www.youtube.com/redirect?redir_token=-dyy0I9yiSRow3r5lNTUFKMmzox8MTU3MzUzMjk0OUAxNTczNDQ2NTQ5&event=video_description&v=e6HMD32hngQ&q=https%3A%2F%2Fankiweb.net%2Fshared%2Finfo%2F162313389), [Power Create Lists](https://www.youtube.com/redirect?redir_token=-dyy0I9yiSRow3r5lNTUFKMmzox8MTU3MzUzMjk0OUAxNTczNDQ2NTQ5&event=video_description&v=e6HMD32hngQ&q=https%3A%2F%2Fankiweb.net%2Fshared%2Finfo%2F1524262201), [Better HTML Table](https://www.youtube.com/redirect?redir_token=-dyy0I9yiSRow3r5lNTUFKMmzox8MTU3MzUzMjk0OUAxNTczNDQ2NTQ5&event=video_description&v=e6HMD32hngQ&q=https%3A%2F%2Fankiweb.net%2Fshared%2Finfo%2F2139514828), [Advanced Previewer](https://ankiweb.net/shared/info/544521385), [Batch Editing](https://ankiweb.net/shared/info/291119185), [Review Heatmap](https://www.youtube.com/redirect?v=3Hk5TYdvKnM&event=video_description&q=https%3A%2F%2Fankiweb.net%2Fshared%2Finfo%2F1771074083&redir_token=xdHpd5DQZRrxVo4pYDY7IJqG2DV8MTU3MzUzMzE4NkAxNTczNDQ2Nzg2), 
+
+[Amazing Card Design](https://medshamim.com/med/how-to-design-beautiful-anki-cards)
+
+### 20 Rules of Formulating Knowledge by Piotr Wozniak 
 
 Speed of learning depends on how you formulate the material. Optimizing the latter means you'll learn faster. Keep in mind the following are arranged in order of importance: those listed first are most often violated and bring the most benefit. 
 
@@ -80,61 +159,31 @@ Speed of learning depends on how you formulate the material. Optimizing the latt
 
 13. **Refer to other memories.** 
 
-### Farnam Street 
+### Reddit Anki for Math 
 
-Treat the book as a conversation with the author. You can't talk directly to them but writing in the margins gets pretty close. This provides another heuristic to decide when to stop reading a book: if you're talking to the author, and the author is boring or isn't saying anything new, stop listening. 
+Ignore Minimum Information Principle for math. Keep long proofs in your cards so you understand their flow. Because we're ditching the Minimum Information Principle, you have to grade cards ruthlessly - if you forget a single line of a long card, mark it as again. [Example card](http://i.imgur.com/B6MnBLp.png). Be armed with a pen and paper when doing Anki for math. 
 
-At the end of each chapter, write bullet points to summarize. Make it personal if you can. After doing this for each chapter and finishing the book, leave the book and come back in a week. Then go through all the notes again. Write the ones you think are good on the inside cover along with the page number. 
+Use images and colors to emphasize certain points as much as you can. These two tips so far mean you should invest a **lot** of time into making cards. 
 
-The best note-taking system is the blank sheet: take out a blank sheet before starting a book, write everything you know about the subject, and after every reading sessions take a few minutes to add to the map. Periodically review the map. 
+Use MathJax: you can zoom in, vertical inline alignment is much better than LaTeX, faster rendering, renders on mobile devices. Main drawback is that only math mode and basic packages are supported out of the box. I'll need to do a lot of research on this. 
 
-If you read 30 pages a day, you read 10,000 pages a year. However, if you're not diligent in note-taking, this can cause you to miss the point of many big books. Sometimes, reading well requires cancelling your plans to stay in and read. 
+Use a better font than Arial - recommends Open Sans for text and Source Code Pro for code. 
 
-Most books' central wisdom can be gleaned from other books, so don't ever push through a book you hate. If you're bored, your understanding of the book will diminish anyway. 
+### Spaced Repetition for Math by Michael Nielsen 
 
-### "On Books and Reading" by Arthur Schopenhauer 
+It's always possible to deepen one's understanding of any piece of math - the common understanding that you don't understand, then spend time learning, then emerge on the other side with a full understanding is wrong. This is especially true for simple mathematical ideas so spend a LOT of time revisiting your cards because they'll largely be ideas you think are easy since you already learned them. 
 
-Reading is just tracing in pen what the author has already written in pencil. There is no learning being done because there is no independent thinking occuring. Reading then can make you stupid: if you continuously let someone else think for you, you forget how to think yourself. 
+Once you have something **important** that you want to **actually memorize forever**, there are two phases: 
 
-Similarly, reading a lot means that you're less likely to remember what you've read. Your brain is being overwritten continuously. 
+One, understand the idea/proof by going over it multiple times, each time in increasing detail, and picking out single elements to convert to cards. Make sure you restate these multiple ways. Take time to gradually trim each card down to its minimal parts that allow you to focus on the key takeaways. Inexperienced people think of proofs as linear lists of statements, but a better way to think of them is as interconnected networks of simple observations. Things are never true for only one reason and the more reasons you discover and articulate, the better your intuition will be. This seems inefficient but certainly worth it. The way to do this is to explore minor variations of the idea: What does normalcy mean for the *jk*th component of MM\* = M\*M?
 
-Assume that the vast majority of books were written only to make money. Most of these are not worth your time. Never read a book because it is popular - ignore political, religious, or contemporary works. Bad books are intellectual poison; they destroy the mind. To read what is good, one must make it a condition never to read what is bad. 
+Two, after you familiarize yourself with every element of the idea, distill the entire idea into a single question and answer. You will certainly need to refactor your cards several times over to make them crisp and representative of your constantly updating knowledge and perspective. Try to test the assumptions to a theorem by asking why each is necessary or when they can be weakened. 
 
-Popular books are popular with the foolish majority. Refuse these and seek the books written by the rarest of minds, of all times and countries. Read only books written by people who live *for* science or poetry. There will rarely be more than a dozen great book per century. Read these many times over and avoid the others. 
+Einstein wrote a letter to Hadamard explaining that when he thought about physics, he didn't think in words. Rather he had messed around and experimented with the ways different concepts work and come together that he reasoned about them as entities of their own in his mind. The goal *even before you Ankify an idea* is to develop this level of understanding by taking time to mess around with a concept. But even after, make sure to let yourself update cards whenever you think of a better way to phrase the objects and their interactions. The goal with Anki is to develop this sort of "chunking" - chess champs are good because they've memorized thousands of "chunks" - I need to shoot for that. {% annotate Read Herbert Simon paper %}
 
-People are quick to read works about great thinkers but rarely read the works of great thinkers. This is because it is easier to let someone modern take over your thinking than it is to work hard at translating an ancient's thoughts. Refuse this compromise at all costs. Read *Essays* by Montaigne not *A Life of Montaigne* by Bakewell. 
+The problem with asking so many questions about a single topic is that you need to find a way to set the context since the cards will get shuffled up eventually. **Find a way to do this.** 
 
-Immediately read an important book twice. You can only really understand the beginning after you know the end. Your mood will be different the second time through so you'll definitely pick up a different perspecitve. 
-
-### Reading faster by Tim Ferriss 
-
-Everytime I do this procedure, write down my results. I need to do it regularly and have goals to hit. 
-
-**Key Goals**: 
-1. Minimize the number and duration of fixations per line. Reading left to right doesn't result in a continuous movement of the eye but a series of jumps. Usually, each fixation lasts about 1/4 of a second. 
-2. Reduce back-skipping. People normally spend about 30% of reading time on subconscious rereading. 
-3. Increase horizontal peripheral vision and number of words processed per fixation. Untrained readers miss out on 50% of words per fixation because they don't use their peripheral vision. 
-
-Practice the following at 3x your desired reading speed. 
-
-**The Procedure**: 
-
-Baseline: Figure out the average number of words per page. Read normally for exactly 1 minute and determine baseline words-per-minute. 
-
-Trackers and Pacers: We can achieve all our key goals by using a tracker and pacer. Hold a pen in your dominant hand and underline each word with the cap on, ensuring your eyes follow the tip of the pen. 
-
-1. Without regard for comprehension, read for 2 minutes using the pen, keeping each line to a maximum of 1 second. Increase the speed with each subsequent page. 
-2. Repeat the above for 3 minutes, reading 2 lines in a maximum of 1 second. This is an exercise. Give it your full attention and don't daydream. 
-
-Perceptual Expansion: Training peripheral vision can result in a 300% increase in speed. 
-
-1. For 1 minute, read each line starting with the second word, and ending on the second-to-last. Stay on each line for 1 second at most. 
-2. Repeat the above, but start and end each line three words from the margin. 
-3. Reapeat the above for 3 minutes now, starting and ending each line four words from the margin. Read 2 lines in 1 second.
-
-*Don't worry if you don't comprehend anything!* We are trying to condition ourselves and you want to be at three times your desired speed anyway. 
-
-Calculate New Speed: Read for 1 minute and determine new words-per-minute. 
+At time of writing the post, Nielsen had only done this method on three theorems - that's how time-intensive it is. It takes him a few hours and he usually uses dozens of cards per theorem. 
 
 ### Tools for Thought by Michael Nielsen and Andy Matuschak 
 
@@ -184,3 +233,61 @@ The most powerful tools for thought express deep insights into the underlying su
 A downside of a mnemonic essay is that there's less emphasis on emotion, unlike in videos like the ones by 3Blue1Brown. In those videos, you can empathize with the author's love for the beauty of math. Emotion is critical in maintaining interest in a subject and it's something we should try to incorporate. Try to focus on the bigger picture, urgency, and beauty of anything I write a mnemonic essay on. 
 
 To discover new tools for thought, you need to keep attacking the basics and returning to fundamentals. Think about how other revolutionary tools for thought were invented. The computer was invented after Turing and Church were exploring extremeley basic questions and even then they arrived at the concept for a computer after years of work. We also can't just improve some existing medium into a new medium of thought: imagine someone before the invention of language trying to come up with the concept of a verb... it's simply not possible. Again, a new medium of thought won't be expressable at all - not in writing, speech, or even our current ways of thinking. 
+
+### Augmenting Long-Term Memory by Michael Nielsen 
+
+#### Using Anki to Remember Almost Anything 
+
+To decide what goes into Anki: 
+1. If a fact seems worth 10 minutes of my time (that's the average total review time per card), then it goes into Anki. 
+2. Superceding the first, if a fact seems striking, it goes into Anki. (This is because most of the important things we know are things wer're not sure are going to be important.)
+
+It's tempting to use Anki to stockpile knowledge but it only really works if you're learning something you're emotionally invested in, maybe towards a creative project. Otherwise, the questions turn out cold and lifeless and hard to connect to other things you know. 
+
+To really grok a field, you need to deeply engage with key papers. Instead of just getting key facts, this will help you understand the standards and norms of the field and how to put techniques together. You get to understand what makes a breakthrough a breakthrough. Anki works great for this. For QC, I can Ankifiy Mike and Ike and then go toward papers or other subfields. But grokking Mike and Ike is a prereq to appreciating the other stuff. This is what Mortimer Adler calls syntopic reading. 
+
+Be confident that you'll remember what you're reading as long as you're diligent with Anki. 
+
+#### More Patterns of Anki Use
+
+Practicing making all your questions atomic has the added benefit of crystallizing the distinct things you've learned. 
+
+The higher level of Anki occurs when you are able to use it as a mechanism for understanding instead of just memorizing: break things up into atomic facts, then build rich hierarchies of interconnections. 
+
+95% of Anki's value comes from 5% of its features. Don't give up because you can't figure out how everything works. This is programmer's efficiency disease. 
+
+Remembering something declaratively and knowing when to use that thing procedurally are two different things. Thus, reviewing Anki cards isn't enough. You need to carry out the process you're trying to learn (using Anki to learn Unix for example). You need to solve real problems. This is easy for something you're already using heavily, but there's room to make it better and integrate more procedural learning into SRS. 
+
+It's best to Ankify things in real time while reading or learning. 
+
+What you Ankify is not a trivial choice: Ankify things that serve your long-term goals. 
+
+Avoid yes/no questions. 
+
+#### Personal Memory Systems More Broadly 
+
+In QC especially, memory is a bottle-neck to cognition. People think they're stuck on hard, esoteric concepts but are really not truly understanding basic notation or terminology. I should be especially mindful of this. 
+
+### Spaced Repetition for Efficient Learning by Gwern
+
+The testing effect is the observation that testing someone's memory will strengthen it. It is well-established in psychology. 
+
+The most common mistakes with SRS are: 1. formulating poor questions and answers, and 2. assuming they will help you learn, as opposed to maintain and preserve what you already learned. There's evidence {% annotate Son, Lisa. <a href="http://www.columbia.edu/cu/psychology/metcalfe/PDFs/Son2010.pdf">"Metacognitive Control and the Spacing Effect."</a> 2010. %} that people naturally choose to cram/mass study when they don't yet know the material. 
+
+The hardest part is persisting until the benefits are clear. The second hardest part is deciding what's valuable enough to add in. 
+
+Add in words from A Word A Day, personal information like birthdays, memorable quotes, etc. This little diversity will keep daily review interesting. 
+
+On average, Gwern adds 3-20 questions a day when learning a new topic. Reviewing 90-100 items a day takes abobut 20 minutes. 
+
+Something that is underappreciated is our recognition memory which applies to things like *recognizing* images or text or music. Standing{% annotate Standing, Lionel. <a href="https://www.gwern.net/docs/spacedrepetition/1973-standing.pdf">"Learning 10000 pictures."</a> 1973. %} showed participants 10,000 images over 5 days with 5 seconds per photo. He discovered the participants had an 83% success rate in identifying whether or not they saw a photo. 
+
+Register whenever is most convenient. If you want to go further, review before bed. Long-term memory consolidation seems to be releated to sleep.{% annotate In Gwern's article, find Stahl article excerpts and read the article including the annotations within. Also, Philips 2013. %} 
+
+### How Flashcards Fail by Bill Powell 
+
+Spaced repetition is uneven - some days you only have a few reviews and others you'll have hundreds. This can be extremely demoralizing. Even if you're excited about every card in your deck, this is hard to do because of the variance in amount of time it takes up. One way to solve this is to add fewer cards and keep only those that are necessary. Another solution is to limit the number of new cards you see a day to like 10 or 20. That means you never get lumps of new information from the day before. 
+
+The more boring a card is, the more likely you'll get it wrong, the more likely you'll see it often, the more likely you'll hate SRS. Anki labels a card as a "leech" and then deletes it after you miss it a bunch of times but this can take a while. One way to avoid this is to think carefully about every card you add and make sure it's something you're actually excited to learn about. 
+
+Atomized knowledge can be boring especially when it's randomized so you're dealing with random facts rather than the atomic pieces of a larger idea in the correct sequence. 
