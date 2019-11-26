@@ -7,6 +7,7 @@ header_pages:
   - qc.md
   - courses.html
   - reading.html
+  - learning.md
   - posts.md
 
 collections: 

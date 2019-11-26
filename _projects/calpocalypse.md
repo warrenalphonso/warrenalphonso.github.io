@@ -13,7 +13,7 @@ Calpocalypse is based on a project from CS 61B, Cal's data structures course, an
 
 Come up with a unique theme for this project page. Preferably have information all over the screen to convey how much work went into this. 
 
-Describe my idea for this project: I want to learn to think in algorithms - to not just be able to derive them and memorize when to use what - but to intuitively understand how we can *reduce* real problems to algorithms I know or ones I can see how to develop. I want to be able to understand the limits of reductions to certain algorithms and *feel* for when my tools aren't enough. There's no one-size-fits-all approach to learning (at least not for me) so this is also an experiment in learning algorithms through tinkering with their implementations. 
+Describe my idea for this project: I want to learn to think in algorithms - to not just be able to derive them and memorize when to use what - but to intuitively understand how we can *reduce* real problems to algorithms I know or ones I can see how to develop. I want to be able to understand the limits of reductions to certain algorithms and *feel* for when my tools aren't enough. There's no one-size-fits-all approach to learning (at least not for me) so this is also an experiment in learning algorithms by tinkering with their implementations. 
 
 Get a crude version 1 of the game going and show pictures of it. At this point, basic Express, SocketIO, and Heroku set up, as well as some basic core tests with Jest. 
 

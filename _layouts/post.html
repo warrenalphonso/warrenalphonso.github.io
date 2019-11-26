@@ -2,7 +2,7 @@
 
 
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}" style="zoom: 90%;">
+<html lang="{{ page.lang | default: site.lang | default: "en" }}" >
 
   {%- include head.html -%}
 
@@ -12,23 +12,25 @@
 
     <main class="page-content" aria-label="Content">
         <article class="writing">
-            <div class="writing-map">
-              {% toc %}
-            </div>  
-            <div class="writing-content">
-                <p class="post-meta">
-                    <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-                      {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-                      <!-- {{ page.date | date: date_format }} -->
-                      <!-- Only works with posts and breaks for drafts I think. It's showing Oct 26, 2019 for drafts. -->
-                      Last updated: {{ page.last_modified_at | date: date_format  }}
-                    </time>
-                    {%- if page.author -%}
-                      • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
-                    {%- endif -%}
-                </p>
-              {{ content }}
-            </div>
+          <div class="writing-map">
+            <!-- {% toc %} only works for posts collection and {{ content | toc_only }} works for everything else. -->
+            {% toc %} 
+            {{ content | toc_only }}
+          </div>  
+          <div class="writing-content">
+            <p class="post-meta">
+                <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+                  {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+                  <!-- {{ page.date | date: date_format }} -->
+                  <!-- Only works with posts and breaks for drafts I think. It's showing Oct 26, 2019 for drafts. -->
+                  Last updated: {{ page.last_modified_at | date: date_format  }}
+                </time>
+                {%- if page.author -%}
+                  • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
+                {%- endif -%}
+            </p>
+            {{ content }}
+          </div>
         </article>
     </main>
 

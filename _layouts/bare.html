@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body>
+
+    {%- include header.html -%}
+
+    <main class="bare-content" aria-label="Content">
+        {{ content }}
+    </main>
+
+
+    <footer class="site-footer h-card">
+            <data class="u-url" href="{{ "/" | relative_url }}"></data>
+          
+            <div style="text-align: right; margin-bottom: 0;">
+              <div class="footer-col-wrapper">
+                <div class="footer-col footer-col-2">
+                  <p>{{ site.description }} </p>
+                </div>
+              </div>
+            </div>
+          </footer>
+              
+  </body>
+
+</html>

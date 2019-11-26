@@ -1,27 +1,10 @@
 ---
-title: Experiments in Learning 
-permalink: posts/learning
+title: Notes for Learning 
+permalink: posts/learning-notes
 --- 
-
-# Experiments in Learning
-
-This is a reminder to myself of how I should structure my learning. This doesn't mean I'm allowed to write something dull with the obvious stuff for the sake of writing a blog post. What surprising things can I discover about learning? I should write in a way that the obvious basics *are* obvious after reading the surprising things. Dig! Work fast but remember that this will take months to finish. That's good because then I'll be conditioned to look for more material in everything I read. 
-
-Read the websites first and write a post as short as possible that summarizes everything. Use the websites in "On Writing" to figure out how to write it. I really want this to be as condensed as possible because I know there's a lot I'll need to add in terms of examples and more information from the books. 
-
-Wow. I'm collapsing back into the state of doing this for the sake of doing it. I'm never going to write anything interesting if I don't spend time thinking deeply about a topic. I keep opening this out of boredom and then closing it not even 5 minutes later. **Sit down and think.**
-
-This is meant for all learning, but I should think about how things I want to learn will differ. Reading for fun (ie not technical books/papers), reading quantum computing papers, reading quantum computing books, Berkeley CS classes, APIs/other technologies I want to learn (Lisp, React, QC APIs) are all categories I should think about often. 
-
-This is useless if I just summarize things. Try to be as experimental as possible. 
-
-Focusing on getting a system for QC is an important first step, but I should also be looking for ways to decrease normal school studying time too. Otherwise, I'll keep lowering time on QC because of school. Also I shouldn't be learning despite school. 
-
-Visualizing or some other method of intuitively understanding qubits is important, but maybe more important is developing a sense of intuition about quantum algorithms. The algorithms make sense but how the heck would I have devised them myself? I doubt anyone has intuition about them and if I could figure out a way to *think in quantum algorithms* when working on QC I bet I could make progress really fast. 
 
 ## Reading list
 
-- [Spaced Repetition for Efficient Learning](https://www.gwern.net/Spaced-repetition)
 - Maybe look for Anki editors like [this one](https://github.com/louietan/anki-editor) though this is probably premature optimization at this point. 
 - Anki [MathJax tutorial](https://niklaskorz.de/2017/06/studying-mathematics-with-anki-and-mathjax.html)
 - ["You and Your Research"](https://www.cs.virginia.edu/~robins/YouAndYourResearch.html) by Richard Hamming
@@ -33,85 +16,47 @@ Visualizing or some other method of intuitively understanding qubits is importan
 - *Toward a Theory of Instruction* by Jerome Bruner (from Alan Kay). Not sure if this is worth it. 
 - *The Act of Creation* by Arthur Koestler. An attempt to generalize all human creativity including imagination and scientific discovery. 
 
-## Ideas 
+## Spaced Repetition 
 
-### Stuff to Think About
+Link the best srs overviews in annotation. why memorize?
 
-What's wrong with Anki? Why don't I use it? Would it be easier to just make my own that fixes these problems. Problems that I have with Anki: 
-- Making cards is annoying because it takes a long time, I don't know what to put on it, and I don't know how atomic to make cards. 
-    - Well if I want to remember something for a long time, clearly it will require some work and planning ahead. Nielsen says err toward making cards too atomic so there aren't parts in a card you gloss over. 
-- Latex is weird. I don't know how to do QC ket notation, etc. 
-    - Use MathJax because it works better with Anki apparently. Still not sure how to incorporate QC notation. 
-For reading faster, keep a set of steps I want to do and record how long I spend at each step until moving on
+Spaced Repetition is a sledgehammer of memory. I won't cover the extent of the research on its effectiveness here. {% annotate For comprehensive explanations of spaced repetition, see ["Spaced Repetition for Efficient Learning"](https://www.gwern.net/Spaced-repetition) by Gwern and ["Augmenting Long-Term Memory"](http://augmentingcognition.com/ltm.html) by Michael Nielsen. %} It seems to be clearly effective, so I'll attempt to integrate it into most of my learning. There are a few things I'd like to talk about: Gwern stuff 
+
+The testing effect is the observation that testing someone's memory will strengthen it. It is well-established in psychology. 
+
+The most common mistakes with SRS are: 1. formulating poor questions and answers, and 2. assuming they will help you learn, as opposed to maintain and preserve what you already learned. There's evidence {% annotate Son, Lisa. <a href="http://www.columbia.edu/cu/psychology/metcalfe/PDFs/Son2010.pdf">"Metacognitive Control and the Spacing Effect."</a> 2010. %} that people naturally choose to cram/mass study when they don't yet know the material. 
+
+The hardest part is persisting until the benefits are clear. The second hardest part is deciding what's valuable enough to add in. 
+
+Add in words from A Word A Day, personal information like birthdays, memorable quotes, etc. This little diversity will keep daily review interesting. 
+
+On average, Gwern adds 3-20 questions a day when learning a new topic. Reviewing 90-100 items a day takes abobut 20 minutes. 
+
+Something that is underappreciated is our recognition memory which applies to things like *recognizing* images or text or music. Standing{% annotate Standing, Lionel. <a href="https://www.gwern.net/docs/spacedrepetition/1973-standing.pdf">"Learning 10000 pictures."</a> 1973. %} showed participants 10,000 images over 5 days with 5 seconds per photo. He discovered the participants had an 83% success rate in identifying whether or not they saw a photo. 
+
+Register whenever is most convenient. If you want to go further, review before bed. Long-term memory consolidation seems to be releated to sleep.
+
+<a href="https://pdfs.semanticscholar.org/be1a/70be5a6f990cd86804ccc1be29331556ddfc.pdf">Kornell et al 2010</a> is useful for misconceptions about spaced repetition. So is <a href="https://sites.williams.edu/nk2/files/2011/08/Kornell.2009b.pdf">Kornell 2009</a> I think. 
+
+Stahl's "Play it Again: The Master Psychopharmacology Program as an Example of Interval Learning in Bite-Sized Portions" is supposed to be important. 
+
+<a href="https://www.gwern.net/docs/spacedrepetition/2013-philips.pdf">Philips 13</a> is a good overview of science of memory formation. 
+
+<a href="https://web.archive.org/web/20090430093950/http://chronicle.com/free/v55/i34/34a00101.htm">"Close the Book. Recall. Write It Down"</a> is supposed to be good. 
+
+<a href="http://memory.psych.purdue.edu/downloads/2007_Karpicke_Roediger_JEPLMC.pdf">Karpicke and Roediger 2006</a> has a bit about SRS for abstract learning. 
+
+## Compartmentalizing Classes with Anki
+
+I'll try the "typical" Anki workflow for my classes. Right now we've finished midterms and have about a month until finals. I'll only use Anki for two of my classes: 170 and 126. In particular, 
+- I'll lower the bar for what's worth putting into Anki for 170 but keep a high bar for 126. This isn't exactly a fair experiment because I've done better in 170 so far. I think if I keep a high bar for 126 then I'll be able to understand the ideas more deeply and not resort to pure memorization instead of thinking each card through. If I do better on 126 final then 170 final, I'll guess that a high bar with fewer cards is better. Make sure to note how deeply I'm thinking about cards for 170 vs 126. 
+- Review for `max(time to review everything due, 30 minutes)` each day so I'm not incentivized to burn through cards quickly. I want to capture the most benefits so I need to take the time to understand and update the cards. 
+
+## Mnemonic Media for Learning Quantum Computing 
 
 If I decide to do mnemonic essays for myself, I can export Anki decks to the webpage using [this article](https://tedpak.com/2013/10/30/exporting-anki-flashcards-to-the-web.html)
 
-I should get into this and spend time creating a workflow using Linux - like castel.dev but for Anki.
-
-### Efficient Learning for Classes 
-
-I'll try Anki to study for finals for 170 and 126. In particular, 
-- I'll lower the bar for what's worth putting into Anki. Typically, I only enter something into Anki if I think it's worth 10 minutes of my time and I'm emotionally invested. For classes, I'll enter anything I think is important or a key idea or approach I should remember. I'll have to let my enthusiasm for the subject provide a strong enough emotional motivation to want to learn the cards. 
-- Keep a school deck separate from other decks. Only copy the cards I actually think are super important to main deck. 
-- Spend time **reviewing** every day. Review for `max(time to finish reviewing everything due, 30 minutes)` so that I'm not incentivized to go through cards quickly instead of taking time to understand and update them. Add new cards if I'm finishing what's due quickly. 
-
-## Notes for Reading 
-
-### Farnam Street 
-
-Treat the book as a conversation with the author. You can't talk directly to them but writing in the margins gets pretty close. This provides another heuristic to decide when to stop reading a book: if you're talking to the author, and the author is boring or isn't saying anything new, stop listening. 
-
-At the end of each chapter, write bullet points to summarize. Make it personal if you can. After doing this for each chapter and finishing the book, leave the book and come back in a week. Then go through all the notes again. Write the ones you think are good on the inside cover along with the page number. 
-
-The best note-taking system is the blank sheet: take out a blank sheet before starting a book, write everything you know about the subject, and after every reading sessions take a few minutes to add to the map. Periodically review the map. 
-
-If you read 30 pages a day, you read 10,000 pages a year. However, if you're not diligent in note-taking, this can cause you to miss the point of many big books. Sometimes, reading well requires cancelling your plans to stay in and read. 
-
-Most books' central wisdom can be gleaned from other books, so don't ever push through a book you hate. If you're bored, your understanding of the book will diminish anyway. 
-
-### "On Books and Reading" by Arthur Schopenhauer 
-
-Reading is just tracing in pen what the author has already written in pencil. There is no learning being done because there is no independent thinking occuring. Reading then can make you stupid: if you continuously let someone else think for you, you forget how to think yourself. 
-
-Similarly, reading a lot means that you're less likely to remember what you've read. Your brain is being overwritten continuously. 
-
-Assume that the vast majority of books were written only to make money. Most of these are not worth your time. Never read a book because it is popular - ignore political, religious, or contemporary works. Bad books are intellectual poison; they destroy the mind. To read what is good, one must make it a condition never to read what is bad. 
-
-Popular books are popular with the foolish majority. Refuse these and seek the books written by the rarest of minds, of all times and countries. Read only books written by people who live *for* science or poetry. There will rarely be more than a dozen great book per century. Read these many times over and avoid the others. 
-
-People are quick to read works about great thinkers but rarely read the works of great thinkers. This is because it is easier to let someone modern take over your thinking than it is to work hard at translating an ancient's thoughts. Refuse this compromise at all costs. Read *Essays* by Montaigne not *A Life of Montaigne* by Bakewell. 
-
-Immediately read an important book twice. You can only really understand the beginning after you know the end. Your mood will be different the second time through so you'll definitely pick up a different perspecitve. 
-
-### Reading Faster by Tim Ferriss 
-
-Everytime I do this procedure, write down my results. I need to do it regularly and have goals to hit. 
-
-**Key Goals**: 
-1. Minimize the number and duration of fixations per line. Reading left to right doesn't result in a continuous movement of the eye but a series of jumps. Usually, each fixation lasts about 1/4 of a second. 
-2. Reduce back-skipping. People normally spend about 30% of reading time on subconscious rereading. 
-3. Increase horizontal peripheral vision and number of words processed per fixation. Untrained readers miss out on 50% of words per fixation because they don't use their peripheral vision. 
-
-Practice the following at 3x your desired reading speed. 
-
-**The Procedure**: 
-
-Baseline: Figure out the average number of words per page. Read normally for exactly 1 minute and determine baseline words-per-minute. 
-
-Trackers and Pacers: We can achieve all our key goals by using a tracker and pacer. Hold a pen in your dominant hand and underline each word with the cap on, ensuring your eyes follow the tip of the pen. 
-
-1. Without regard for comprehension, read for 2 minutes using the pen, keeping each line to a maximum of 1 second. Increase the speed with each subsequent page. 
-2. Repeat the above for 3 minutes, reading 2 lines in a maximum of 1 second. This is an exercise. Give it your full attention and don't daydream. 
-
-Perceptual Expansion: Training peripheral vision can result in a 300% increase in speed. 
-
-1. For 1 minute, read each line starting with the second word, and ending on the second-to-last. Stay on each line for 1 second at most. 
-2. Repeat the above, but start and end each line three words from the margin. 
-3. Reapeat the above for 3 minutes now, starting and ending each line four words from the margin. Read 2 lines in 1 second.
-
-*Don't worry if you don't comprehend anything!* We are trying to condition ourselves and you want to be at three times your desired speed anyway. 
-
-Calculate New Speed: Read for 1 minute and determine new words-per-minute. 
+Visualizing or some other method of intuitively understanding qubits is important, but maybe more important is developing a sense of intuition about quantum algorithms. The algorithms make sense but how the heck would I have devised them myself? I doubt anyone has intuition about them and if I could figure out a way to *think in quantum algorithms* when working on QC I bet I could make progress really fast. 
 
 
 
@@ -122,6 +67,22 @@ Calculate New Speed: Read for 1 minute and determine new words-per-minute.
 1. Make questions two-way. 
 2. Ask 'why' questions instead of yes/no questions. 
 3. Style each card by prefacing it with (Subject): (Math) What's the square root of 4? 
+
+### Anki Docs 
+
+#### Notes & Fields 
+
+Use fields to never write the same information twice. I need to have a field for the subject for example. Anki's fields were created for making it easy to make multiple cards for the same question to switch up context. For fields I want to persist, use Frozen Fields add-on. 
+
+A card type is just a blueprint for which fields should appear on the front and backs of a card. Being proactive about creating card types is one of the best ways to save time adding and managing information. 
+
+Note types are similar to card types (not sure how they're different) but Basic has Front and Back fields and creates one card. Basic and Reversed creates two cards at a time. 
+
+In Anki, we add notes and then the program creates cards for us. 
+
+#### Browser 
+
+The Browser is the tab when you press *Browse* in the main window. Lots of search functionality and checking for review data. 
 
 ### Shamim Ahmed's Anki Tutorials for Med School 
 
@@ -137,7 +98,7 @@ Speed of learning depends on how you formulate the material. Optimizing the latt
 
 2. **Learn before you memorize.** Build a picture of the whole of what you're trying to learn. Learning time is reduced greatly when every piece fits one cohesive structure. One *single* piece that doesn't seem to fit the puzzle is like coming across a word in another language in a textbook and memorizing it hastily. 
 
-3. **Build upon the basics.** Still, the picture of what you're trying to learn doesn't have to be complete. Rather, make it simple - simple things are easy to understand and can easily be built upon. This mean the basics are crucial. Keep memorizing the basics. It has negligible cost because people usually spend 50% of their time repeating 3-5% of the learned material {% annotate <a href="https://www.supermemo.com/en/archives1990-2015/articles/theory">"Theoretical aspects of spaced repetition in learning."</a> Piotr Wozniak. 1990-2000. %}. 
+3. **Build upon the basics.** Still, the picture of what you're trying to learn doesn't have to be complete. Rather, make it simple - simple things are easy to understand and can easily be built upon. This mean the basics are crucial. Keep memorizing the basics. It has negligible cost because people usually spend 50% of their time repeating 3-5% of the learned material {% annotate ["Theoretical aspects of spaced repetition in learning."](https://www.supermemo.com/en/archives1990-2015/articles/theory) Piotr Wozniak. 1990-2000. %}. 
 
 4. **Stick to the minimum information principle.** Make cards as simple as possible. Typically, beginners make cards that should be split into *ten or more* items! Simpler cards are better because simple, atomic information can be processed by the brain in the same way everytime you go over it which strengthens your ability to memorize it, as opposed to processing a complicated card a different way each time you encounter it, which interferes with the previous attempts at memorizing the card. Atomic cards also mean you repeat the cards you have trouble remembering more often rather than wasting time on the cards you already know. For these same reasons, it is better to make the answer *as short as possible*. 
 
@@ -191,7 +152,7 @@ Alan Kay wanted to create a new *medium* of thought, not just tools for thought.
 
 #### Memory Systems
 
-Though cognitive scientists know a lot about how people form long-term memories, current mediums for learning don't support these easier memorization techniques {% annotate <a href="https://andymatuschak.org/books/">Why books don't work</a>. Andy Matuschak. %}. If we could create a medium that takes advantage of this, then instead of memory being a random event, it would be a choice.  
+Though cognitive scientists know a lot about how people form long-term memories, current mediums for learning don't support these easier memorization techniques {% annotate ["Why books don't work"](https://andymatuschak.org/books) by Andy Matuschak. %}. If we could create a medium that takes advantage of this, then instead of memory being a random event, it would be a choice.  
 
 The counterintuitive advantage of spaced repetition is that you get exponential returns for increased effort. On average, every extra minute spent reviewing gives more and more benefit. Notice the stark contrast with most things in life where we run into diminishing returns. Ordinarily, if you spend 50% more time reading and reviewing, you can expect to get no more than 50% more information cached again in your brain. If you spend 50% more time reviewing with a spaced repetition system, you can remember 10x the amount of information. Unlike most online platforms, spaced repetition is more like meditation because the benefits are delayed and require constant effort. 
 
@@ -221,7 +182,7 @@ Nielsen and Matauschak also noticed the following problems with their cards:
 
 Spaced repetition isn't the only powerful memory idea we can use. Elaborative encoding says that the richer our associations to a concept, the better we'll remember it. This is obvious, but it's not supported well by existing media. We've already done a little to incorporate this (avoiding orphan cards) but here are three more ideas:
 1. Provide multiple forms of both questions and answers. The dual-coding theory says that pictures-words are recalled better than words alone. What if we incorporated different pictures for different versions of questions and answers? 
-2. Studying material in two different places instead of twice in one place increased recall by 40% {% annotate Steven M. Smith, Arthur Glenberg, and Robert A. Bjork. <a href="https://numinous.productions/ttft/assets/Smith1978.pdf">Environmental context and human memory</a>. 1978. %}. What happens if we change the contexts in different ways like changing time of day, background sound, location, etc? We also need a way to isolate the effects on improvement because this is a situation where uncontrolled effects might have an impact. 
+2. Studying material in two different places instead of twice in one place increased recall by 40% {% annotate Steven M. Smith, Arthur Glenberg, and Robert A. Bjork. [Environmental context and human memory](https://numinous.productions/ttft/assets/Smith1978.pdf). 1978. %}. What happens if we change the contexts in different ways like changing time of day, background sound, location, etc? We also need a way to isolate the effects on improvement because this is a situation where uncontrolled effects might have an impact. 
 3. Experiment on the relationship between cards to discover the most powerful ways to represent knowledge. The example they provide: "Suppose you have cards: 'Who was George Washington’s Vice President?' (Answer: 'John Adams', with a picture of Adams); 'What did John Adams look like?' (Answer: a picture of Adams); perhaps a question involving a sketch of Adams and Washington together at some key moment." What happens to understanding when you remove a card? Is there a lynchpin card that holds everything together? 
 
 When working to create cards to memorize/internalize something, you should make sure it's something for which spaced repetition is best for. When learning a programming language, for example, it's a bad idea to make cards because you'll learn the language through natural repetition while coding in it. An ideal memory system for this would prompt you as you work instead of in an artificial card-based environment. Similarly, it's actively bad to try to memorize something you won't have any long-term use for like an API you're going to use for only one project or a subject you're learning for only a semester. You need to find good heuristic for what is worth committing to memory. I should look into what Nielsen uses as his heuristic because he says he has tens of thousands of cards, but maybe that's just because he actually wants to learn everything and devotes all his time to learning. Quantum computing definitely warrants a spaced repetition system because the vocabulary required is huge and it seems a certain intuition is required for tasks like developing algorithms. For now, be extremely conservative when choosing what to memorize - investing in memorizing the wrong thing is a huge time sink and trades off with time to memorize something more useful. 
@@ -267,22 +228,6 @@ Avoid yes/no questions.
 #### Personal Memory Systems More Broadly 
 
 In QC especially, memory is a bottle-neck to cognition. People think they're stuck on hard, esoteric concepts but are really not truly understanding basic notation or terminology. I should be especially mindful of this. 
-
-### Spaced Repetition for Efficient Learning by Gwern
-
-The testing effect is the observation that testing someone's memory will strengthen it. It is well-established in psychology. 
-
-The most common mistakes with SRS are: 1. formulating poor questions and answers, and 2. assuming they will help you learn, as opposed to maintain and preserve what you already learned. There's evidence {% annotate Son, Lisa. <a href="http://www.columbia.edu/cu/psychology/metcalfe/PDFs/Son2010.pdf">"Metacognitive Control and the Spacing Effect."</a> 2010. %} that people naturally choose to cram/mass study when they don't yet know the material. 
-
-The hardest part is persisting until the benefits are clear. The second hardest part is deciding what's valuable enough to add in. 
-
-Add in words from A Word A Day, personal information like birthdays, memorable quotes, etc. This little diversity will keep daily review interesting. 
-
-On average, Gwern adds 3-20 questions a day when learning a new topic. Reviewing 90-100 items a day takes abobut 20 minutes. 
-
-Something that is underappreciated is our recognition memory which applies to things like *recognizing* images or text or music. Standing{% annotate Standing, Lionel. <a href="https://www.gwern.net/docs/spacedrepetition/1973-standing.pdf">"Learning 10000 pictures."</a> 1973. %} showed participants 10,000 images over 5 days with 5 seconds per photo. He discovered the participants had an 83% success rate in identifying whether or not they saw a photo. 
-
-Register whenever is most convenient. If you want to go further, review before bed. Long-term memory consolidation seems to be releated to sleep.{% annotate In Gwern's article, find Stahl article excerpts and read the article including the annotations within. Also, Philips 2013. %} 
 
 ### How Flashcards Fail by Bill Powell 
 
