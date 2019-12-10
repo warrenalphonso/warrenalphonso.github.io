@@ -6,7 +6,7 @@ h1 {
 }
 
 h2 {
-  @include relative-font-size(2.15);
+  @include relative-font-size(2);
 
   // @include media-query($on-laptop) {
   //   @include relative-font-size(1.75);
@@ -384,6 +384,23 @@ h5 {
   float: right;
   width: 100px;
   height: 500px;
+}
+
+// Responsive layout 
+@media screen and (max-width: 1500px) {
+//  .writing-map {
+//      display: none; 
+//  }
+  .writing-annotations {
+      display: none;
+  }
+//  .writing-content {
+//      width: 100%;
+//  }
+  .writing-content > * {
+      width: 100%;
+  }
+  
 }
 
 /**

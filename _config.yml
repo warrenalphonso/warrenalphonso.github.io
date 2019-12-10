@@ -1,6 +1,7 @@
 title: Warren Alphonso
 theme: minima 
 description: Built with Jekyll. 
+markdown: kramdown
 
 header_pages: 
   - index.md
@@ -15,6 +16,9 @@ collections:
     sequence: true
     output: true
     permalink: /projects/:name
+  qc: 
+    output: true
+    permalink: /qc/:name
 
 google_analytics: UA-147966026-1
 
@@ -33,6 +37,13 @@ defaults:
       type: "projects"
     values: 
       layout: "page"
+  - 
+    scope: 
+      path: ""
+      type: "qc"
+    values: 
+      layout: "post"
+      toc: "true"
 
 toc:
   min_level: 1

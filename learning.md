@@ -1,7 +1,6 @@
 ---
 layout: post 
 title: Learning
-permalink: /learning/
 toc: true
 publish: false
 --- 
