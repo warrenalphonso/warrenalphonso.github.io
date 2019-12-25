@@ -4,6 +4,8 @@ source "https://rubygems.org"
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
+#jekyll: "jekyll serve --drafts"
+
 # We'll need rake to build our site in TravisCI
 gem "rake", "~> 12"
 gem "jekyll"

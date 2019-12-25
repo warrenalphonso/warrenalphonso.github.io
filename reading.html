@@ -5,22 +5,27 @@ publish: true
 --- 
 
 <h1>Reading</h1> 
-<p>A collection of things I might want to reread someday. Experiment with reading multiple books or one book. </p>
+<p>A collection of things I might want to reread someday.</p>
+
+<div id="favorites">Favorites</div> 
+<ol class="reading-list">
+    <li><em>When Breath Becomes Air</em> by Paul Kalanithi</li>
+    <li><em>Shoe Dog</em> by Phil Knight</li>
+    <li><em>The Way to Love</em> by Anthony De Mello {% notes way_to_love %}</li>
+</ol>
 
 <div id="now-reading">Now Reading</div>
-
 <ol class="reading-list">
     <li><em>Zero to One</em> by Peter Thiel</li>
-    <li><em>The Way to Love</em> by Anthony De Mello</li>
     <li><em>ANSI Common Lisp</em> by Paul Graham</li>
     <li><em>Sum: Forty Tales from the Afterlives</em> by David Eagleman</li>
+    <li><em>Lifespan: Why We Age and Why We Don't Have To</em> by David Sinclair {% notes lifespan %}</li>
+    <li><em>How to Take Smart Notes</em> by Sönke Ahrens</li>
 </ol>
 
 <div id="finished">Finished</div>
-
 <ol class="reading-list">
     <li>"When We Build" by Wilson Miner</li>
-    <li><em>When Breath Becomes Air</em> by Paul Kalanithi</li>
     <li><em>The Lessons of History</em> by Will and Ariel Durant</li>
     <li><em>Hackers and Painters</em> by Paul Graham</li>
     <li><em>The Innovators</em> by Walter Isaacson</li>
@@ -28,13 +33,14 @@ publish: true
     <li><em>Harry Potter and the Methods of Rationality</em> by Eliezer Yudkowsky</li>
     <li>"Violence and the Sacred: College as an incubator of Girardian terror" by Dan Wang</li>
     <li>"On Reading and Books" by Arthur Schopenhauer</li>
-    <li>"Shut up and do the impossible!" by Eliezer Yudkowsky</li>
+    <li>"Shut up and do the impossible!" by Eliezer Yudkowsky {% notes shut_up_do_impossible %}</li>
     <li>"Apologia Pro Vita Sua" by Scott Alexander</li>
-    <li><em>Shoe Dog</em> by Phil Knight</li>
+    <li>"I Wasn't Prepared to Work" by Robert Smith</li>
+    <li>"Becoming a magician" by Autotranslucence</li>
+    <li>"The Fable of the Dragon-Tyrant" by Nick Bostrom</li>
 </ol>
 
 <div id="anti-library">Anti-Library <a href="https://fs.blog/2013/06/the-antilibrary/">[?]</a></div>
-
 <ol class="reading-list">
     <li><em>Thinking Fast and Slow</em> by Daniel Kahneman</li>
     <li><em>Ideas and Opinions</em> by Albert Einstein</li>
@@ -68,7 +74,7 @@ publish: true
     <li><em>How Buildings Learn</em> by Stewart Brand</li>
     <li><em>How to Read a Book: The Classic Guide to Intelligent Reading</em> by Mortimer Adler and Charles van Doren</li> 
     <li><em>Art of Doing Science and Engineering: Learning to Learn</em> by Richard Hamming</li>
-    <li><em>Draft No. 4: On the Writing Process</em> by John McPhee</li>
+    <li><em>Draft No.4: On the Writing Process</em> by John McPhee</li>
     <li><em>The Elements of Style [Illustrated]</em> by William Strunk Jr., E.B. White, and Maira Kalman</li>
     <li><em>Toward a Theory of Instruction</em> by Jerome Bruner</li>
     <li><em>The Act of Creation</em> by Arthur Koestler</li>
@@ -77,4 +83,26 @@ publish: true
     <li><em>The Adapted Mind</em> by Barkow, Cosmides, and Tooby</li>
     <li><em>Inward Bound: Of Matter and Forces in the Physical World</em> by Abraham Pais</li>
     <li><em>Picturing Quantum Processes</em> by Bob Coecke and Aleks Kissinger</li>
+    <li><em>The Book of Five Rings</em> by Miyamoto Musashi</li>
 </ol>
+
+<!-- This script is for notes expand/collapse functionality -->
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].innerHTML = "[+]";
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.maxHeight){
+          content.style.maxHeight = null;
+          this.innerHTML = "[+]";
+        } else {
+          content.style.maxHeight = content.scrollHeight + "px";
+          this.innerHTML = "[–]";
+        }
+      });
+    }
+</script>

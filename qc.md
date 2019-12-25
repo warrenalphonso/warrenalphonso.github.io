@@ -12,13 +12,11 @@ publish: false
 - My Linear Algebra [notes](https://drive.google.com/file/d/1jj_jUxL1pDjReAikCL0u1XOhm8HZpcx2/view). 
 - [Advice](http://www.mit.edu/~aram/advice/quantum.html) from someone more qualified. 
 
-Nielsen and Chuang's *Quantum Computation and Quantum Information* is a standard introductory text. I'm working on a solution set to the exercises [here](https://github.com/warrenalphonso/qc-latex/tree/master/nielsen-and-chuang-notes). 
-
 ## Ideas 
 
 I want to develop a strong intuition and feel for how the gears of quantum computing turn. These notes are an attempt at a "exploratory medium" for attacking QC until something gives. To ensure I'm honest, the only intended audience of these notes is me. This way I'm less likely to refrain from exploring a topic in order to appear smarter than I am. 
 
-- Web posts are usually written with lots of planning and are time-intensive to create. A better post usually means it's more aesthetic and written well. On the other hand, handwritten notes (or at least the best, most personally helpful handwritten notes) are often messy, asymmetric, careless, and hastily written. Despite all of that, there's a sense of beauty which comes mostlymostly from the notes being written by someone who knows the subject exceptionally well. [Richard Feynman's handwritten notes](https://www.feynmanlectures.caltech.edu/Notes.html) are a perfect example. So the medium must be **messy, asymmetric, careless, hastily yet thoughtfully written to extract deep ideas**. 
+- Web posts are usually written with lots of planning and are time-intensive to create. A better post usually means it's more aesthetic and written well. On the other hand, handwritten notes (or at least the best, most personally helpful handwritten notes) are often messy, asymmetric, careless, and hastily written. Despite all of that, there's a sense of beauty which comes mostly from the notes being written by someone who knows the subject exceptionally well. [Richard Feynman's handwritten notes](https://www.feynmanlectures.caltech.edu/Notes.html) are a perfect example. So the medium must be **messy, asymmetric, careless, hastily yet thoughtfully written to extract deep ideas**. 
 
 - I notice I don't read my handwritten course notes very often though - there's too much stuff and it's annoying to reread stuff I already know. This means the medium should **organize ideas in a very modular way**. Have different posts whenever possible. 
 

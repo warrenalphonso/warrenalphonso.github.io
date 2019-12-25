@@ -248,6 +248,18 @@ h5 {
 /**
  * Reading stuff
  */
+
+#favorites {
+  // background-color: darken(#DEFDE0, 5%);
+  background-color: lighten(#B0E57C, 12%);
+  padding: 14px;
+  text-align: left;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 110%;
+}
+
 #now-reading {
   background-color: lighten(lightblue, 2%);
   padding: 14px;
@@ -284,6 +296,39 @@ h5 {
   padding-bottom: 10px;
 }
 
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+//  background-color: #eee;
+//  color: #444;
+  cursor: pointer;
+  //padding: 18px;
+  //width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  //font-size: 15px;
+}
+
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+//.active, .collapsible:hover {
+//  background-color: #ccc;
+//  content: 'Hello';
+//}
+
+/* Style the collapsible content. Note: hidden by default */
+.note-content {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  color: #444;
+}
+
+.note-content > * {
+    margin: 5px 10px;
+}
 
 
 /**
