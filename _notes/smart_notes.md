@@ -1,0 +1,7 @@
+Taking notes is the invisible medium which allows great writing. Few notice that taking notes is something that can be improved because, unlike the finished written product, there is rarely any feedback for the quality of notes. 
+
+There is no correlation between academic success and a high IQ (at least not north of 120). Rather, the most important predictor of success seems to be strong discipline when approaching one's daily work. Trying to achieve strong discipline through willpower is a losing battle; studies indicate willpower is depleted quickly and has little potential for improvement. Luckily, if we can make a task interesting, meaningful, and well-defined, we won't *need* willpower to achieve discipline to complete the task. Taking notes are key to achieving this criteria. Put another way, taking smart notes is what makes a lot of academic endeavors possible. 
+
+Success isn't the result of strong willpower but rather the result of smart working conditions to avoid resistance in the first place. 
+
+Luhmann used two slip-boxes. After reading something, Luhmann wrote the bibliographic information on one side of an index card along with notes on the other side. He put this in the first slip-box, the bibliographic slip-box. Then, after he finished reading, he looked at his bibliographic notes and wrote his own thoughts on another index card. He only wrote on one side for this step so it would be easier to read the cards without removing them from the slip-box. 
