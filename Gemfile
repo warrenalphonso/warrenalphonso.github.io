@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-#ruby RUBY_VERSION
+ruby RUBY_VERSION
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
@@ -11,6 +11,8 @@ git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 gem "rake", "~> 12"
 gem 'jekyll'
 gem "minima"
+gem "nokogiri", ">= 1.10.4"
+
 
 # gem "rails"
 # gem "jekyll"

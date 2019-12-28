@@ -27,3 +27,12 @@ Start with a notebook. When reading or trying to learn something, paraphrase wha
 Then, process these paper notes into Zotero as a bullet-point list under the source. Don't copy the handwritten notes exactly but try to paraphrase and simplify once more. 
 
 Finally, at the end of the day, go through the lists in Zotero. For each idea: think about how it is related to other notes in the Zettelkasten and then create an atomic card with the essence of the idea and links to other notes. 
+
+Okay so I need something where it is 
+- easy to find context of notes (like long alphanumeric strings)
+- easy to link other notes
+- easy to modify (this necessitates computers) 
+- easy to back-up 
+- atomic
+
+Now that I have MathJax working, I think gollum can serve all my needs. Definitely read the [wiki](https://github.com/gollum/gollum/wiki). Check out macros. 
