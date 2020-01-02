@@ -10,7 +10,7 @@ People tend to have similar goals, desires, fears, hopes, and dreams. Most want 
 
 Yet none of these are innate or fixed, though some come close. I think people will always want to be respected. But the other goals are valuable because they are linked to something deeper. Being rich → status → respect. Being rich → meeting basic needs and being prepared for emergencies → security → self-preservation.
 
-The problem is that these are link chains. No link implies the next with certainty. Maybe there's an 80% chance being rich implies meeting needs, but already this means attaining security is capped at 80% if we chase it through the "being rich" path. Humans suck at interpreting probability so this is hard to correct.
+The problem is that these are link chains. No link implies the next with certainty. Maybe there's an 80% chance being rich implies meeting needs, but already this means attaining security is capped at 80% if we chase it through the "being rich" path. Humans are terrible at interpreting probability so this is hard to correct.
 
 But there are billions of people with similar goals; surely we must have converged on the optimal means of meeting our needs? I don't think so, precisely *because* we have similar goals. This is just supply and demand. If donuts grant 100 utils and donutholes grant 1 util, and we have a lot more donutholes than donuts, the optimal solution isn't for everyone to go for donuts. Having the same goals doesn't mean we should all achieve them the same way. In fact, that's the worst way to go about it.
 

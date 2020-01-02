@@ -236,3 +236,27 @@ Spaced repetition is uneven - some days you only have a few reviews and others y
 The more boring a card is, the more likely you'll get it wrong, the more likely you'll see it often, the more likely you'll hate SRS. Anki labels a card as a "leech" and then deletes it after you miss it a bunch of times but this can take a while. One way to avoid this is to think carefully about every card you add and make sure it's something you're actually excited to learn about. 
 
 Atomized knowledge can be boring especially when it's randomized so you're dealing with random facts rather than the atomic pieces of a larger idea in the correct sequence. 
+
+# Notes from "You and Your Research" 
+
+Hamming is answering the question "Why do so few scientists make significant contributions and so many are forgotten in the long run?" 
+
+Something many great scientists have in common is that when they are young they had independent thoughts and the courage to pursue them. Einstein asked himself "What would a light wave look like if I went with the velocity of light to look at it?"
+
+One of the characteristics of successful scientists is having courage. Once you get your courage up and believe that you can do important problems, then you can. Courage is one of the things that Shannon had supremely. 
+
+Observe that most great scientists have tremendous drive. Knowledge and productivity are like compound interest.'' Given two people of approximately the same ability and one person who works ten percent more than the other, the latter will more than twice outproduce the former. The more you know, the more you learn; the more you learn, the more you can do. 
+
+I don't like to say it in front of my wife, but I did sort of neglect her sometimes; I needed to study. You have to neglect things if you intend to get what you want done. There's no question about this.
+
+The steady application of effort with a little bit more work, intelligently applied is what does it. That's the trouble; drive, misapplied, doesn't get you anywhere. The misapplication of effort is a very serious matter. Just hard work is not enough - it must be applied sensibly.
+
+Creativity seems to come from your subconscious. Dreams also come from your subconscious. We know dreams are a reworking of the experiences of the day. So if you're deeply immersed in a subject, day after day, your subconscious will have nothing else to think about, and you'll eventually come up with creative thoughts about it. You'll wake up one morning with the answer already formulated. 
+
+Great scientists have thought through a number of important problems in their field and keep an eye on them, waiting for a way to attack. When they hear of a result that could affect a problem they've thought about, they drop everything and go to attack it. 
+
+If you work with the door closed, you'll be maximally productive. But 10 years later you won't know what problems are worth working on. 
+
+Never attack an isolated problem. It gets depressing to solve one problem after another. Pick some huge goal and attack it iteratively. 
+
+It is a poor workman who blames his tools - the good man gets on with the job given what he's got and gets the best answer he can. 

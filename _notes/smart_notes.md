@@ -1,38 +1,33 @@
-Taking notes is the invisible medium which allows great writing. Few notice that taking notes is something that can be improved because, unlike the finished written product, there is rarely any feedback for the quality of notes. 
+**An External Brain.** 
 
-There is no correlation between academic success and a high IQ (at least not north of 120). Rather, the most important predictor of success seems to be strong discipline when approaching one's daily work. Trying to achieve strong discipline through willpower is a losing battle; studies indicate willpower is depleted quickly and has little potential for improvement. Luckily, if we can make a task interesting, meaningful, and well-defined, we won't *need* willpower to achieve discipline to complete the task. Taking notes are key to achieving this criteria. Put another way, taking smart notes is what makes a lot of academic endeavors possible. 
+The Zettelkasten is a note-taking system that attempts to build a better brain. Notes are distilled into their individual ideas, and each idea is paraphrased on one side of an index card. Index cards are placed in a container so that related cards are located next to each other. 
 
-Success isn't the result of strong willpower but rather the result of smart working conditions to avoid resistance in the first place. 
+<br />
 
-Luhmann used two slip-boxes. After reading something, Luhmann wrote the bibliographic information on one side of an index card along with notes on the other side. He put this in the first slip-box, the bibliographic slip-box. Then, after he finished reading, he looked at his bibliographic notes and wrote his own thoughts on another index card. He only wrote on one side for this step so it would be easier to read the cards without removing them from the slip-box. 
+Our brains are unpredictable and mysterious. Suppose we wanted to build a better brain. Here's an attempt at creating a communicating partner with the Zettelkasten that has brain-like features:
 
-Software to check out: 
-- zotero.org 
-- [gollum](https://github.com/gollum/gollum) 
-- [this guy's ideas](https://clerestory.netlify.com/zk1/). this is the second of two posts. 
+*Linking of ideas*: We want to strengthen ideas by relating them to other ideas. The Zettelkasten accomplishes this by giving each zettel (index card) its own *unique, permanent* ID. This allows any zettel to reference another related zettel just by writing down the ID. 
 
-I need to really give this a shot because I'm 95% sure this will be the way to self-learn stuff and also 99% sure I'll struggle for the first month or so with it. Stick with it! 
+*Arbitrary branching*: Ideas are most valuable when surrounded by the proper context, which isn't always the source you first encountered in. The Zettelkasten achieves this by making the ID of each card alphanumeric: to place a new card behind a related existing card with the ID 22, give the new card an ID of 23. If 23 already exists, use 22a. This allows for arbitrarily deep dives into any topic without premeditation on how to organize the information in a useful way. 
 
-**The 4 main principles**
+*Non-linear and unordered*: Any sort of system with an order is doomed because it necessarily loses its functionaly once it becomes very dense. There's no way to predict which topics or how intensly we'll study years down the road so any organizational structure which imposes a hierarchy of folders and dividers eventually gets to a point where choosing where to put information is harder than actually learning the information. 
 
-1. Focusing on writing as if nothing else matters does not mean that you should do everything else less well, but it certainly makes you do everything else differently. Having a clear, tangible purpose when you attend lecture, or read, or listen to a conversation will make you more engaged and sharpen your focus. Don't waste time wondering about what you "should" learn. Rather, try to learn as efficiently as possible. 
+*Complexity only on the content level*: Our brains store an unfathomable expanse of knowledge without getting wrapped up in organizational details. The Zettelkasten's simple structure accomplishes this: if we think something is important, we can defer to putting it in the Zettelkasten. If it's important, other zettels will link to and from it. It it isn't important, it'll get lost in isolation. Both scenarios are fine (as long as the latter occurs in minority) which prevents paralysis of indecision of whether/where to add information. 
 
-2. With the usual systems, the question is: under which topic do I store this note? With this system, the question is: in which context will I want to stumble upon it again? Don't sort notes by semester or class! That's stupid; it's like storing purchases by date. Where did you buy your pants from? Maybe it'll be with the bleach or oranges. Rather, put it with the other pant purchases. The problem with categories is that you will probably not know if a note is fleeting, permanent, or part of some project note. This system solves this. You shouldn't worry about the category of note because you cannot know what category it belongs to. Rather just insert the note into the slip-box; if it's important you'll have more notes close to it eventually, and if it's not important, it'll get lost by itself. This allows you to build a critical mass of notes and allows the system to become better as it becomes larger. Notice that most other systems get crowded with too many notes that you forget how to move around it. 
+*Higher-level thinking*: The Zettelkasten has economies of scale unlike other note-taking systems which become exponentially more cumbersome with the number of notes. At first, the Zettelkasten will just be a repository of information, but after several months, once it develops a critical mass of information, the Zettelkasten develops arguments and ideas on its own through the interconnectivity and new contexts of ideas inputted. This requires a lot of effort, especially at first, to avoid the system from just becoming an archive of notes. 
 
+<br />
 
-**Workflow**
+It would help if our external brain could also help us get work done: 
 
-Start with a notebook. When reading or trying to learn something, paraphrase what you want to learn in the notebook. 
+*Easy to work in*: We shouldn't have to force ourselves to be productive or work harder. Self-control is a finite resource that is depleting when used on tasks we're conflicted on doing [1]. Tasks are easiest to get done when they're well-defined, meaningful, and interesting. A way to monitor resistance and avoid it: count the number of zettels you write in a day. This is a reliable metric of productivity since each zettel represents a distilled idea. 
 
-Then, process these paper notes into Zotero as a bullet-point list under the source. Don't copy the handwritten notes exactly but try to paraphrase and simplify once more. 
+*Trust*: System needs to be trusted to hold what it's important in an easily accessible way. The Zettelkasten ensures important ideas have many branches and a high volume of cards. To get rid of junk, write it down somewhere. It's even benefician to not commit everything in the Zettelkasten to memory: if you memorize a zettel, when you come across it you'll not truly read the zettel but just think of what you remember it saying. Instead if you haven't memorized, when you come across a zettel you'll read the full card and organically think of new thoughts that relate to it based on some other information you've read. 
 
-Finally, at the end of the day, go through the lists in Zotero. For each idea: think about how it is related to other notes in the Zettelkasten and then create an atomic card with the essence of the idea and links to other notes. 
+*Atomic*: Generalizable ideas are where breakthroughs come from. Being able to truly explain the essence of an idea or proof demonstrates mastery of the topic and increases its usefulness because now you can try to apply that model of thinking to other topics. This means we should write notes so we can understand even after forgetting exact original context. 
 
-Okay so I need something where it is 
-- easy to find context of notes (like long alphanumeric strings)
-- easy to link other notes
-- easy to modify (this necessitates computers) 
-- easy to back-up 
-- atomic
+*Quick, reliable feedback*: Feynman: "The first principle is that you must not fool yourself – and you are the easiest person to fool." We need accurate and quick feedback to keep us motivated and to accurately depict our current level of understanding. One way to achieve this is to use the following method for learning: write fleeting notes in a common notebook, then rewrite the important notes while keeping track of bibliographical information, and at the end of the day condensing the important ideas into zettels to insert into the Zettelkasten. The key point is to paraphrase information in your own words at each step: multiple passes makes it more likely we'll catch ourselves when we're bullshitting understanding. Making the Zettelkasten the final step ensures that only the truly important ideas we can explain ourselves are inserted. 
 
-Now that I have MathJax working, I think gollum can serve all my needs. Definitely read the [wiki](https://github.com/gollum/gollum/wiki). Check out macros. 
+*Backed up*: The problem with a physical system is that we can't easily back up our work. One solution is to append another step to the process stated above: once a month, go through the Zettelkasten and write up an article of ideas from one big cluster within the Zettelkasten. 
+
+\[1\] Moller, Deci, and Ryan. 2006. ["Choice and Ego-Depletion: The Moderating Role of Autonomy."](http://selfdeterminationtheory.org/SDT/documents/2006_Moller%20Deci%20Ryan_Choice%20and%20Ego-Depletion.pdf) updates and clarifies findings from Baumesiter, Bratslavsky, Muraven, and Tice. 1998. ["Ego Depletion: Is the Active Self a Limited Resource?"](https://faculty.washington.edu/jdb/345/345%20Articles/Baumeister%20et%20al.%20(1998).pdf)

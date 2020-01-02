@@ -5,6 +5,8 @@ permalink: posts/writing
 
 # On Writing 
 
+I'm thinking of incorporating this into "Learning"
+
 ## Reading list
 
 - Paul Graham's [The Age of the Essay](http://www.paulgraham.com/essay.html)
