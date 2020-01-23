@@ -1,21 +1,46 @@
-We've been able to successfully clone several different animals in recent years. The fact that most cloned animals live normal lifespans provides strong evidence against the "aging is caused by mutations" theory. Old animals shouldn't be able to clone new ones if they aged *by losing crucial genetic information*. If that theory of aging was true, all clones would be the same age as their "parent." Older animals must retain the genetic information to create a younger, healthier version of themselves. 
+**What's the Epigenome?**
 
-About a decade ago, scientists began to agree that aging is caused by many different factors. 
+The genome is the complete collection of all DNA base pairs. It holds the instructions to manufacture all the proteins we might need. Almost every cell in your body contains a copy of the full genome. The [epigenome](https://www.genome.gov/about-genomics/fact-sheets/Epigenomics-Fact-Sheet) is the collection of compounds that can turn parts of the genome on and off. This is what allows cells to differentiate. Some of these changes can be inherited during cell division. 
 
-Stem cells, if harnessed correctly, have the potential to mitigate many of these factors. We've been making ground on the rates of rates of acceptance for bone marrow transplants, which is a common method of infusing stem cells. 
+There are [2 (I think?) methods the epigenome uses to mark the genome](https://www.genome.gov/about-genomics/fact-sheets/Epigenomics-Fact-Sheet): 
 
-But we don't really have an explanation of *why* these hallmarks cause aging? Could there be something deeper of which the hallmarks are only a byproduct? 
+1. DNA methylation: Proteins attach methyl groups to DNA. ***What do methyl groups do?***
+2. Histone modification: Histones are proteins that bind DNA into loops [p51]. Proteins can modify histones by attaching chemical tags to them. These tags will tell the cell whether or not to use the DNA that's packaged by the histone. 
 
-The author believes aging is due to a deterioration of the epigenome, which is kdjf 
+The genome is to hardware what the epigenome is to software. 
 
-Epigenetic information is stored in chromatin, unlike genetic information which is stored in DNA. The epigenome is crucial to any complex organism; it controls the way cells interact with each other (make more precise). 
+Sinclair compares the genome to digital information: it's made up of 4 base pairs and incredibly robust (DNA can survive in boiling water for hours and is recoverable from 40,000 year old Neanderthal remains) and compares the epigenome to analog information: it's complex and hard to copy. 
 
-"If the genome were a computer, the epigenome would be the software." Without the epigenome, neurons could decide one day to turn into a skin cell. 
+**Epigenetic Noise Theory of Aging.**
 
-But the epigenome is analog information, and its storage naturally degrades over time. To reverse aging, the author believes we need to recover and maintain the epigenome. 
+Sinclair believes *aging is due to a loss of epigenetic information.*
 
-We know of at least 24 "longevity genes" that can extend lifespans. Based on food, exercise, time of day, and more, these genes choose when to tell our cells to repair and when to reproduce. 
+A popular theory of aging is that it's due to genetic mutations. The success of cloning efforts indicate this is false. If old cells lost important information, we shouldn't be able to create young cells by cloning them. A cloned animal should be born old. This was first attempted in 1958 when we replaced chromosomes in a frog egg with chromosomes from an adult frog and obtained tadpoles. So far, [cloned goats, dog, sheep, mice, cats, and pigs have been able to reach their normal lifespan](https://www.karger.com/Article/FullText/452444). This means the genetic mutations we acquire as we age isn't the cause of aging; somehow, all the information needed to create a young animal is present in the cells of an old one. 
 
-The author works with sirtuins, which are longevity genes found in nearly every cell. Sirtuin is based on the yeast SIR2 gene, which was the first longevity gene to be discovered. "Sirtuins are enzymes that remove acetyl tags from histones and other proteins and change the packaging of the DNA, turning genes off and on when needed... They have evolved to require a molecule called NAD... the loss of NAD as we age, and the resulting decrease in sirtuin activity, is thought to be a primary reason our bodies develop diseases when we are old but not when we are young." 
+**Longevity Genes.** 
 
-Two other similar longevity genes are mTOR and AMPK. Sirtuin, mTOR, and AMPK have proven easy to control. We can trigger these longevity genes without actually putting our lives in danger (discussed later). 
+**Early Evidence.** 
+
+**Calorie Restriction and Intermittent Fasting.** 
+
+**Exercise.**
+
+**Temperature.**
+
+**NAD.**
+
+**Rapamycin.**
+
+**Metformin.**
+
+**Senescence.**
+
+**Reversing Aging.**
+
+**The Regimen.**
+
+
+
+**Ethics.** 
+
+A fair chunk of the book was spent persuading the reader that aging is worth attacking. I won't cover much of that here, except for the following argument for the importance of fighting aging. In the US, [23.4% of deaths in 2017 were caused by heart disease](https://www.cdc.gov/heartdisease/facts.htm) and [22% of deaths in 2016 were caused by cancer](https://www.cancer.org/latest-news/facts-and-figures-2019.html). However, because as we age, the risk of contracting diseases increases exponentially, stopping all heart disease would increase the average lifespan by only 1.5 years while curing cancer would increase it by 2.1 years [p111] ***SOURCE?***. Preventing our bodies from weakening is a prerequisite to any meaningful benefit from curing many diseases. 

@@ -4,7 +4,7 @@
 
 "Look into the very real possibiliy that the reason why this person's defects or so-called defects annoy you is that you have them yourself. But you have repressed them and so are projecting them unconsciously into the other. This is almost always true but hardly anyone recognizes it." (87)
 
-**Know thyself.** 
+**Know Thyself.** 
 
 People tend to have similar goals, desires, fears, hopes, and dreams. Most want to be rich, successful, do meaningful work, be admired, loved, respected, happy.
 

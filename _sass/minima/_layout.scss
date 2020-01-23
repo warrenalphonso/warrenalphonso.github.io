@@ -298,15 +298,10 @@ h5 {
 
 /* Style the button that is used to open and close the collapsible content */
 .collapsible {
-//  background-color: #eee;
-//  color: #444;
   cursor: pointer;
-  //padding: 18px;
-  //width: 100%;
   border: none;
   text-align: left;
   outline: none;
-  //font-size: 15px;
 }
 
 
@@ -328,6 +323,11 @@ h5 {
 
 .note-content > * {
     margin: 5px 10px;
+}
+
+.note-content > ol,ul {
+    //list-style-position: inside;
+    padding-left: 36px;
 }
 
 
