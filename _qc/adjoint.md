@@ -29,6 +29,8 @@ TODO
 
 TODO  
 
+<p>Hello <span class="math display">\[3x = 3\]</span></p>
+
 ### Why does the adjoint always exist?
 
 ## Unitarity $\Leftrightarrow$ Rotation

@@ -13,11 +13,17 @@ Sinclair compares the genome to digital information: it's made up of 4 base pair
 
 **Epigenetic Noise Theory of Aging.**
 
+***NEED A LOT MORE PROOF HERE***
+
 Sinclair believes *aging is due to a loss of epigenetic information.*
 
-A popular theory of aging is that it's due to genetic mutations. The success of cloning efforts indicate this is false. If old cells lost important information, we shouldn't be able to create young cells by cloning them. A cloned animal should be born old. This was first attempted in 1958 when we replaced chromosomes in a frog egg with chromosomes from an adult frog and obtained tadpoles. So far, [cloned goats, dog, sheep, mice, cats, and pigs have been able to reach their normal lifespan](https://www.karger.com/Article/FullText/452444). This means the genetic mutations we acquire as we age isn't the cause of aging; somehow, all the information needed to create a young animal is present in the cells of an old one. 
+A popular theory of aging is that it's due to genetic mutations. The success of cloning efforts indicate this is false. If old cells lost important information, we shouldn't be able to create young cells by cloning them. A cloned animal should be born old. This was first attempted in 1958 when we replaced chromosomes in a frog egg with chromosomes from an adult frog and obtained tadpoles. So far, [cloned goats, dog, sheep, mice, cats, and pigs have been able to reach their normal lifespan](https://www.karger.com/Article/FullText/452444). This means the genetic mutations we acquire as we age probably isn't the cause of aging; somehow, all the information needed to create a young animal is present in the cells of an old one. 
 
 **Longevity Genes.** 
+
+Sirtuins (a class of proteins) are an example of longevity genes. There are 7 in mammals: *SIRT1, SIRT6, SIRT7* control the epigenome and DNA repair, *SIRT3, SIRT4, SIRT5* control metabolism in the mitochondria, and *SIRT2* resides in the cytoplasm and controls cell division (p78). Yeast has 5 sirtuins. Sirtuins work by removing acetyl tags from histones and other proteins, turning genes on and off (p55). 
+
+Sirtuins seem to do what Gene B did in *M. superstes*: activating sirtuins in mice causes DNA repair, boosts memory, increases endurance, and helps mice stay thin (p53). 
 
 **Early Evidence.** 
 
@@ -28,6 +34,8 @@ A popular theory of aging is that it's due to genetic mutations. The success of 
 **Temperature.**
 
 **NAD.**
+
+Sirtuins evolved to require the molecule nicotinamide adenine dinucleotide, called NAD (p53).  
 
 **Rapamycin.**
 

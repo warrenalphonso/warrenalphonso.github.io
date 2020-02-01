@@ -6,6 +6,12 @@ publish: false
 
 # Quantum Computing 
 
+## How Will QC Be Important? 
+
+[DWave QC being used for some DNA/protein analysis or something](https://www.technologynetworks.com/informatics/news/the-power-of-quantum-computing-harnessed-for-dna-study-298183) 
+
+Quantum Country's motivation for studying QC: Will alien civilizations have computers? If yes, it means computers are the answer to some fundamental question about the universe, not some human fad. Hilbert wanted to know the ultimate limits of mathematical knowledge. Turing answered by formalizing an algorithm as something a universal Turing machine could be programmed to do. Deutsch noticed that every algorithm is carried out by a physical system (mathematician with paper and pencil or a physical computer etc) and asked: **Is there a single universal computing device which can efficiently simulate any other physical system?** This question is something fundamental to the nature of the universe; a motivating question we can expect alien civilizations to ask and one which would lead them to building quantum computers.  
+
 ## Useful Links 
 - Jeremy Kun's [introduction to quantum computing](https://jeremykun.com/2014/12/08/a-motivation-for-quantum-computing). 
 - Lucien Hardy's [intuitive derivation of quantum mechanics](https://arxiv.org/pdf/quant-ph/0101012.pdf). 
