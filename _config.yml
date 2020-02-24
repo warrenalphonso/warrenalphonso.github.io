@@ -5,11 +5,7 @@ markdown: kramdown
 
 header_pages: 
   - index.md
-  - qc.md
   - courses.html
-  - reading.html
-  - learning.md
-  - posts.md
 
 collections: 
   projects:
@@ -63,4 +59,3 @@ exclude:
   - LICENSE
   - README.md
   - Rakefile
-  - _includes/html_notes # This prevents Jekyll serve from refreshing indefinitely because everytime it refreshes it generates new files in html_notes
