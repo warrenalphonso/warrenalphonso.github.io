@@ -1,0 +1,5 @@
+In "Quantum Computing for the Very Curious," Matuschak and Nielsen argue that if aliens have computers, it will be because computers answer a question that occurs to both human and alien civilizations; Deutsch thinks this question is "is there a single universal device which can efficiently simulate any other physical system?" If aliens also try to answer this question, they'll come up with quantum computers: our computers have trouble simulating quantum mechanics so we'd need a computer built upon quantum mechanics to simulate everything. 
+
+Forget about aliens for a second. Let's imagine a future where humanity is able to cure any disease: they've got some machine which is able to pop out a cure to any given disease, or virus, or whatever. What would that device look like? I'd guess it'd be able to simulate *efficiently* multiple proteins or molecules and determine what best seems to fix the problem. Simulating these tiny things is hard to do with our computers because they obey the laws of quantum mechanics. 
+
+

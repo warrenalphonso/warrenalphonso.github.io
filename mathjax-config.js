@@ -13,7 +13,7 @@ window.MathJax = {
     macros: {
       bra: ["{\\langle #1 \\rvert}", 1],
       ket: ["{\\lvert #1 \\rangle}", 1], 
-      braket: ["\\langle #1 \\vert #2 \\rangle", 2] 
+      braket: ["\\langle #1 \\rangle", 1] 
     }
   },
   svg: {
