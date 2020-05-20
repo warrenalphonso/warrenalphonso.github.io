@@ -3,6 +3,7 @@ rvm:
 - 2.3.1
 before_install: 
 - pip install markdown --user
+- sudo apt-get install pandoc
 install: 
 - bundle install 
 deploy: 
