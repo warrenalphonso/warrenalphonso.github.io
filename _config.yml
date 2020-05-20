@@ -1,7 +1,7 @@
 title: Warren Alphonso
 theme: minima 
 description: Built with Jekyll. Hosted on Github Pages. 
-markdown: kramdown
+markdown: Pandoc
 
 header_pages: 
   - index.md
@@ -44,10 +44,16 @@ defaults:
 toc:
   min_level: 1
 
+pandoc: 
+    extensions: 
+        - mathjax 
+        - from: markdown+fancy_lists+strikeout+tex_math_dollars+pipe_tables+raw_html+markdown_in_html_blocks+fenced_divs
+
 plugins: 
   - jekyll-toc
   - jekyll-youtube
   - jekyll-last-modified-at
+  - jekyll-pandoc
 
 
 # Exclude these files from the build process results.
