@@ -43,7 +43,7 @@ size of the system ($d$). In thermal equilibrium at (Kelvin) temperature $T$,
 the average kinetic energy of a particle is 
 $$\frac{p^2}{2m} = \frac{3}{2} k_B T$$ 
 (where $k_B$ is Boltzmann's constant $1.380 \times 10^{-23} \mathrm{J \cdot 
-K^{-1}}$), so the typical de Broglie wavelength ($\lambda = h / p$)is 
+K^{-1}}$), so the typical de Broglie wavelength ($\lambda = h / p$) is 
 $$\lambda = \frac{h}{\sqrt{3m k_B T}}$$ 
 where $h$ is Planck's constant $6.626 \times 10^{-34} \mathrm{J \cdot s}$. 
 
@@ -162,8 +162,9 @@ with each other if on the same site.
 
 Here, I introduce a concept that isn't motivated but extremely useful: the 
 creation and annihilation operators. These arise from studying the quantum 
-harmonic oscillator. I recommend MIT OCW Lectures X and Y; they're a great 
-exposition. 
+harmonic oscillator. {% annotate I recommend [Lecture 8](
+https://www.youtube.com/watch?v=qu-jyrwW6hw) and [Lecture 9](
+https://www.youtube.com/watch?v=jJX_1zT73U0) of MIT OCW 8.04 Spring 2013. %}
 
 Since we're describing electrons, the creation and annihilation operators have 
 *fermionic anticommutation relations*. In other words, for two fermions on 
@@ -205,6 +206,16 @@ I use this to denote we're summing over adjacent sites $j$ and $k$. The second
 term represents the potential energy. Notice it's nonlinear - we only add $U$ if 
 there are 2 electrons on a site. {% annotate I need to introduce the number 
 operator. %}
+
+**I need to introduce chemical potential here.**
+
+{% annotate I don't have a good explanation of why the chemical potential is 
+important. It seems to be how "accepting" the system is of additional 
+particles. It adds a linear potential term, so that we don't have a potential 
+*only* if we have 2 electrons, but we also keep the nonlinear potential on top 
+of the chemical potential. Suppose I have a system that's not at half-filling 
+yet. If I add an electron, does the total energy change without this chemical 
+potential term? I think so... %}
 
 ## The Jordan-Wigner transformation 
 - maybe write out the Hubbard Hamiltonian then explain the dimension of the 
@@ -282,20 +293,99 @@ a^\dagger_{2n} &= Z \otimes Z \otimes Z \otimes ... \otimes \frac{X -iY}{2}
 $$
 
 ## Mott gap
-- I have to intoduce partition function, etc 
 - rewrite Hamiltonian so half-filling at $\mu = 0$
 
-<iframe src="https://www.desmos.com/calculator/gsnu5nprox?embed" width="1000px" 
-height="500px" style="border: 1px solid #ccc" frameborder=0></iframe>
+Most chemistry problems are concerned with finding the eigenstates and 
+eigenvalues of the Hamiltonian. The most important eigenstate is the state 
+corresponding to the lowest eigenvalue. We call this eigenstate the 
+*ground state* and its corresponding eigenvalue the *ground state energy*. 
+This name indicates that the eigenstates are configurations of the system that 
+have a particular energy, namely their corresponding eigenvalues. Why is the 
+ground state so important? Because the system will tend toward its lowest 
+energy state over time. Most systems spend the vast majority of their time in 
+their ground state, so if we can understand its properties well, we can 
+understand most of the behavior of the system. {% annotate Rewrite this 
+because I'm rambling and I feel I don't know most of it. %}
 
-<iframe src="https://www.desmos.com/calculator/ghjzdozrbn" style="border:0px #ffffff none;" name="myiFrame" scrolling="no" frameborder="1" marginheight="0px" marginwidth="0px" height="800px" width="1400px" allowfullscreen></iframe>
+Before we decide to use a quantum computer to figure out some properties of the 
+Hubbard model, let's try to make some progress with paper-and-pencil. 
 
-{% include example_plot.html %}
+Some 
+materials that were predicted to conduct electricity turn out to be insulators, 
+especially at low temperatures. These are called [Mott insulators](
+https://en.wikipedia.org/wiki/Mott_insulator), and their behavior is due to 
+electron-electron interactions (like $U$ in the Hubbard model) that classical 
+theories don't account for. We'll use the Hubbard model to understand this! 
 
+Let's do a simple version: the one-site case. Since there's only one site, we have 
+no hopping terms. Since electrons aren't moving, it's easy to see that we have 
+4 eigenstates: $\ket{0}, \ket{\uparrow}, \ket{\downarrow}, \ket{\uparrow 
+\downarrow}$, where $\ket{0}$ indicates we have no electrons, and the arrows 
+indicate the existence of an electron with that particular spin. By plugging in 
+these eigenstates 
+into the Hamiltonian, we can see that their eigenvalues are $0, -\mu, -\mu, 
+U - 2\mu$, respectively. 
+
+With this, we can calculate the *partition function* of the system. {% annotate 
+Motivate the partition function more. %} 
+
+It's defined as $$Z = \mathrm{Tr } (e^{-\beta H}) = \sum_i \bra{i} e^{-\beta H} \ket{i} = \sum_{i= 0, 
+\uparrow, \downarrow, \uparrow \downarrow} e^{-\beta E_i} \braket{i \vert i} 
+= 1 + 2e^{\beta \mu} + e^{-\beta U + 2 \beta \mu} $$
+
+The partition function lets us calculate expectations easily. For any observable 
+$m$, $\braket{m} = Z^{-1} \mathrm{Tr } (m e^{-\beta H})$. We will find the 
+*density* $\rho = \braket{n}$ for number operator $n$. Using the previous 
+formula, we have 
+$$\rho = \braket{n} = Z^{-1} \mathrm{Tr } (ne^{-\beta E_i}) = Z^{-1} \sum_i 
+e^{-\beta E_i} \braket{i \vert n \vert i} = Z^{-1} (0 + e^{\beta \mu} + 
+e^{\beta \mu} + 2 e^{-\beta (U - 2 \mu)} ) = 2 \cdot Z^{-1} ( e^{\beta \mu} + 
+e^{2 \beta \mu - \beta U}) $$
+
+{% annotate What is $\beta$? I need to explain this somewhere. %}
+
+I graphed the density $\rho$ for temperatures $T = 0.5$ and $T = 2$ K. Try 
+changing the potential energy $U$. Can you explain the result based on the 
+Hubbard Hamiltonian? 
+
+[//]: # 'I have to surround the `include` tag with this to remove the 
+whitespace. Otherwise, Pandoc thinks it is syntax highlighting.'
 {% capture includeGuts %}
-{% include second_figure.html %}
+{% include mott.html %}
 {% endcapture %}
 {{ includeGuts | replace: '    ', ''}}
+
+Clearly there is some plateau when $\rho$ becomes 1 at low temperatures when 
+$U$ becomes large. Upon reflection, this isn't all that mysterious. Up until we 
+have *half-filling* (1 electron on every site), $U$ doesn't affect the energy 
+calculation at all because it's only relevant if there are 2 electrons on a 
+site. But once we hit this limit, the cost to add an additional electron is 
+exactly $U - \mu$. Unless $\mu$ is about equal to $U$, we're stuck at 
+half-filling. This is the exact behavior we see in the graph. 
+
+What's harder to explain is why this *doesn't occur at high temperatures*. 
+Indeed, the effect is almost completely gone when the temperature increases by 
+1.5 Kelvin! {% annotate Do I have an answer for this? %} I don't have an answer to this 
+yet. 
+
+Earlier, I motivated this by telling you about the Mott insulator. Let's see if 
+our graph gets us closer to a solution. We can think of a solid that conducts 
+electricity as one in which electrons are able to move freely. Mott insulators, 
+then, are materials in which electrons *stop moving* freely at low temperatures. 
+
+Our graph tells us that at low temperatures the Hubbard model is stuck at 
+half-filling. Does this mean electrons can't move? *Yes*, if every site has one 
+electron then an electron hopping to a nearby site would incur a penalty of $U$. 
+Electrons don't move around, and the material stops conducting electricity. 
+
+But wait, this is just a guess! Our graph is only for a *single site* Hubbard 
+model. Having to account for tunneling terms and more sites would make finding 
+the eigenvalues/vectors (and thus calculating $\rho$) much harder. 
+
+This is the first problem we'll try solving with a quantum computer. All we need 
+to do is calculate $\rho = \braket{n}$. In the Jordan-Wigner transformation, we 
+encode each spin-orbital in a qubit, so all we have to do to find $\rho$ is 
+measure each qubit. 
 
 # Exploring the Variational Quantum Eigensolver (VQE) 
 
