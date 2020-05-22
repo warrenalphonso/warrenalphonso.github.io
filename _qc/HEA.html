@@ -13340,9 +13340,17 @@ Value of objective with default initial params is -0.011280000000000012
 </div>
     </div>
   </div>
+
+~~~~ {#mycode .haskell .numberLines startFrom="100"}
+qsort []     = []
+qsort (x:xs) = qsort (filter (< x) xs) ++ [x] ++
+               qsort (filter (>= x) xs)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 </body>
 
  
 
 
 </html>
+

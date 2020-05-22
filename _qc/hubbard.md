@@ -207,6 +207,19 @@ term represents the potential energy. Notice it's nonlinear - we only add $U$ if
 there are 2 electrons on a site. {% annotate I need to introduce the number 
 operator. %}
 
+This notation should seem weird. We almost *never* add unitary matrices in 
+quantum 
+computing. The resulting sum isn't generally unitary. But Hamiltonians just 
+have to 
+be Hermitian, and it's easy to see that the sum of Hermitian matrices is also 
+Hermitian. Still, what does a sum of matrices *physically mean*? If we multiply 
+some vector by this matrix, we're acting on it with the kinetic and potential 
+energy matrices and our result is a sum of the results. So maybe we can 
+intuitively think of a sum of Hermitian matrices as two *processes* happening 
+simultaneously to our state. {% annotate This answer is in Scott Aaronson's 
+recenly-published [lecture notes](https://www.scottaaronson.com/qclec.pdf) on 
+Quantum Information Science. %}
+
 **I need to introduce chemical potential here.**
 
 {% annotate I don't have a good explanation of why the chemical potential is 
@@ -355,7 +368,7 @@ whitespace. Otherwise, Pandoc thinks it is syntax highlighting.'
 {% endcapture %}
 {{ includeGuts | replace: '    ', ''}}
 
-Clearly there is some plateau when $\rho$ becomes 1 at low temperatures when 
+Clearly there is some plateau where $\rho$ becomes 1 at low temperatures when 
 $U$ becomes large. Upon reflection, this isn't all that mysterious. Up until we 
 have *half-filling* (1 electron on every site), $U$ doesn't affect the energy 
 calculation at all because it's only relevant if there are 2 electrons on a 
@@ -389,12 +402,95 @@ measure each qubit.
 
 # Exploring the Variational Quantum Eigensolver (VQE) 
 
+We'll start by finding the ground state and ground state energy of the 
+$2 \times 2$ Hubbard model 
+using VQE. To be clear, I haven't explained *why* finding the ground state 
+energy is important or useful. That's because I honestly don't know. Once we 
+find the ground state, we can get to work uncovering its properties, but I 
+don't really have a use for the ground state energy. We'll proceed anyway 
+because it'll give us a working example of VQE and the parameters we need to 
+get the ground state. 
+
+> In this section we will discuss the measurement of interesting physical 
+> observables. The total energy... is the least interesting quantity. 
+> [The authors of 1506.05135(https://arxiv.org/abs/1506.05135)]{.blockquote-footer}
+
+## Representing the $2 \times 2$ Hubbard model 
+
+I'll be using the [OpenFermion](https://github.com/quantumlib/OpenFermion)
+software package for most of this post. OpenFermion 
+is an open-source project that makes working with quantum chemistry much easier. 
+{% annotate I originally planned to write my own code for representing and 
+simulating the Hamiltonian for the Hubbard model, but it was wildly inefficient. 
+My computer couldn't handle anything more than a $2 \times 2$ Hubbard 
+Hamiltonian, probably because I was storing the entire matrix. For the $2 \times 2$
+case, we have $8$ spin-orbitals which translates to a $2^8 = 256$ dimension 
+Hilbert space. OpenFermion doesn't use this approach, opting to store strings 
+of creation and annihilation operators or scipy.sparse matrices. %} OpenFermion 
+is built by Google, so they've made it easy to integrate with their own quantum 
+computing library [Cirq](https://github.com/quantumlib/cirq). We'll be using 
+Cirq as well later on. 
+
+For now, let's create a $2 \times 2$ Hubbard lattice in OpenFermion. 
+
+![](/images/22hubbard.png)
+
+{% highlight python %}
+from openfermion.utils import HubbardSquareLattice
+
+# HubbardSquareLattice parameters
+x_n = 2
+y_n = 2
+n_dofs = 1 # 1 degree of freedom for spin 
+periodic = 0 # Don't want tunneling terms to loop back around 
+spinless = 0 # Has spin
+
+lattice = HubbardSquareLattice(x_n, y_n, n_dofs=n_dofs, periodic=periodic, spinless=spinless)
+{% endhighlight %}
+
+Next, we'll want to create a `FermiHubbardModel` instance from our lattice. 
+The format for the tunneling and interaction coefficients is a little weird - 
+check out the [documentation](
+https://openfermion.readthedocs.io/en/latest/openfermion.html#openfermion.hamiltonians.FermiHubbardModel)
+for an explanation. 
+
+{% highlight python %} 
+from openfermion.hamiltonians import FermiHubbardModel
+from openfermion.utils import SpinPairs
+
+tunneling = [('neighbor', (0, 0), 1.)] 
+interaction = [('onsite', (0, 0), 2., SpinPairs.DIFF)] 
+# potential = [(0, 1.)]
+potential = None
+mag_field = 0. 
+particle_hole_sym = False
+
+hubbard = FermiHubbardModel(lattice , tunneling_parameters=tunneling, interaction_parameters=interaction, 
+                            potential_parameters=potential, magnetic_field=mag_field, 
+                            particle_hole_symmetry=particle_hole_sym)
+{% endhighlight %} 
+
+And that's it. We can access the actual Hamiltonian with `hubbard.hamiltonian()`. 
+
+## VQE Primer 
+
+VQE requires us to specify 3 things: 
+
+#. An ansatz 
+#. An initial state 
+#. Some initial parameters
+
 ## The Variational Hamiltonian Ansatz 
 - Haar measure
 
+
 ## Choosing an initial state 
 
+
+
 ## Finding the ground state 
+- do for a 2x6 lattice like page 5 of Wecker 2 and show how with few parameters 
+we can explore a huge Hilbert space to get large overlap
 
 ## Analyzing the ground state 
 
