@@ -678,7 +678,7 @@ for initial parameters if we don't specify one. Here's the docstring that
 explains it: 
 
 {% highlight python %} 
-SwapNetworkTrotterHubbardAnsatz.default_initial_params?? # ?? in Jupyter Notebook showws the source code 
+SwapNetworkTrotterHubbardAnsatz.default_initial_params?? # Typing "??" after an API call in Jupyter Notebook shows you the source code
 
 def default_initial_params(self) -> numpy.ndarray:
     """Approximate evolution by H(t) = T + (t/A)V.
@@ -714,7 +714,187 @@ state be constant and then I need
 - Read Wecker 2 Section 2C - something about how horizontal and veritcal commute 
 because they're diagonal in same basis? 
 
+We've got an ansatz and initial parameters. The final requirement for VQE is an 
+initial state. Since our ansatz is inspired by adiabatic evolution, our initial 
+state needs to be the ground state of $H_A$. Since we've set $H_A$ to be the 
+tunneling term, we're going to find its ground state. 
 
+This section has a lot of math. While working through ["Elementary Introduction 
+to the Hubbard Model"](http://quest.ucdavis.edu/tutorial/hubbard7.pdf), I found 
+the appearance of the following ideas remarkable, so I'm including them. 
+
+I highly recommend you do the math with me, but if you find that tedious, the 
+last subsection goes over code that can just find the ground state for us. This 
+is cheating, but since I told you quadratic Hamiltonians ground states are 
+efficiently solvable it's an okay place to cheat. 
+
+![Here's a picture for the $3$-rd roots of unity from Wikipedia. Convince 
+yourself that these 3 vectors sum to 0.](
+https://upload.wikimedia.org/wikipedia/commons/3/39/3rd_roots_of_unity.svg)
+
+### Position to momentum transformation 
+
+We can apply a Fourier transform to our creation operators to change from 
+position to momentum basis: {% annotate I need to understand why this works. 
+Maybe [this](https://physics.stackexchange.com/questions/39442/intuitive-explanation-of-why-momentum-is-the-fourier-transform-variable-of-posit) 
+and [this](https://physics.stackexchange.com/questions/35746/is-there-a-relation-between-quantum-theory-and-fourier-analysis/50060#50060) 
+will help. Also the [Wikipedia page](https://en.wikipedia.org/wiki/Position_and_momentum_space#Relation_between_space_and_reciprocal_space)
+is helpful. %}
+
+$$a_{k\sigma}^\dagger = \frac{1}{\sqrt{N}} \sum_l e^{i k \cdot l} 
+a_{l \sigma}^\dagger$$ 
+where $k$ is a discrete momentum and $l$ is a discrete position eigenstate. In 
+$1$D, $k \cdot l = kl$. 
+
+If you're not familiar with the Fourier transorm, you don't lose much right now 
+by thinking of this as defining *new* operators as linear combinations of the 
+old ones. 
+
+**Lemma 1**: $\frac{1}{N} \sum_l e^{i (k_n - k_m) \cdot l} = \delta_{n, m}$
+where $k_n = 2 \pi n/N$. 
+
+*Proof*: $$
+\begin{align}
+\frac{1}{N} \sum_l e^{i (k_n - k_m) \cdot l} &= \frac{1}{N} \sum_l 
+e^{i 2 \pi \frac{n-m}{N} \cdot l} \\ 
+&= \frac{1}{N} \sum_l \omega^l \qquad \text{ which follows from setting 
+$\omega = e^{i 2 \pi \frac{n-m}{N}}$} \\
+&= \frac{1}{N} \frac{1 - \omega^N}{1 - \omega} \qquad \text{ by definition of 
+finite geometric series} \\
+&= 0 \qquad \text{ since $w^N = 1$}
+\end{align}
+$$
+
+Of course, here we asssumed $\omega \neq 1$, otherwise we can't use the finite 
+geometric series formula. In that case, $\frac{1}{N} \sum_l 1^l = 1$. Hence, 
+$\frac{1}{N} \sum_l e^{i (k_n - k_m) \cdot l} = \delta_{n, m}$.
+
+QED. 
+
+**Lemma 2**: $\frac{1}{N} \sum_n e^{i k_n (l - j)} = \delta_{l, j}$. 
+
+This uses the same strategy as the previous proof, so I'll skip this proof. 
+
+These two lemmas rely on our definition of momentum as $k_n = 2 \pi n/N$. From 
+now on, when summing over $k_n$ I'll write summing over $k$, ie 
+$\sum_{k_n} = \sum_k$. 
+
+**Lemma 3**: 
+$a_{l \sigma}^\dagger = \frac{1}{\sqrt{N}} \sum_k e^{-i k \cdot l} a_{k \sigma}^\dagger$
+
+*Proof*: 
+$$
+\begin{align}
+\frac{1}{\sqrt{N}} \sum_k e^{-i k \cdot l} a_{k \sigma}^\dagger &= \frac{1}{N} 
+\sum_{kj} e^{-i k \cdot l} e^{i k \cdot j} a_{j \sigma}^\dagger \qquad \text{
+ which follows by converting $a_{k \sigma}^\dagger$ to position basis} \\ 
+&= \frac{1}{N} \sum_j a_{j \sigma}^\dagger \sum_k e^{i k \cdot (j - l)} \\ 
+&= \sum_j a_{l \sigma}^\dagger \delta_{l, j} \qquad \text{ by Lemma 2} \\ 
+&= a_{l \sigma}^\dagger
+\end{align}
+$$
+
+QED. 
+
+Using these relations, it's easy to verify that the creation and annihilation 
+operators in the momentum basis obey the fermionic anticommutation relations. 
+I won't do that here; most of the proof is mechanical. 
+
+**Lemma 4**: 
+$\sum_{k \sigma} a_{k \sigma}^\dagger a_{k \sigma} = \sum_{l \sigma} a_{l \sigma}^\dagger a_{l \sigma}$
+for momentum $k$ and position $l$. 
+
+*Proof*: 
+
+$$ 
+\begin{align}
+\sum_{k \sigma} a_{k \sigma}^\dagger a_{k \sigma} &= \frac{1}{N} \sum_{klm \sigma}
+e^{i k(l-m)} a_{l \sigma}^\dagger a_{m \sigma} \qquad \text{ by transforming 
+both operators to position basis} \\ 
+&= \frac{1}{N} \sum_{lm \sigma} a_{l \sigma}^\dagger a_{m \sigma} \sum_k 
+e^{i k (l -m)} = \sum_{lm\sigma} a_{l \sigma}^\dagger a_{m \sigma} \delta_{l, m}
+\qquad \text{ by Lemma 2} \\ 
+&= \sum_{l \sigma} a_{l \sigma}^\dagger a_{l \sigma}
+\end{align}
+$$
+
+QED. 
+
+Take a moment to make sense of this result. The sum of number operators over 
+position is equal to the sum of number operators over momentum. Every fermion 
+has its own position and momentum, so these are just two ways of counting up 
+the total number of fermions. We could have predicted this property without 
+doing the math. 
+
+### The 1D tunneling term 
+
+**Theorem 1**: Show that for $U = 0$, the $1$D Hubbard model in momentum basis 
+is 
+$$ H = \sum_{k \sigma} (\epsilon_k - \mu) a_{k \sigma}^\dagger a_{k \sigma}$$
+where $\epsilon_k = -2t \cos k$. 
+
+*Proof*: Our strategy will be to convert 
+$\sum_{k \sigma} \epsilon_k a_{k \sigma}^\dagger a_{k \sigma}$ 
+to position basis, and then use Lemma 4 to 
+convert $\mu \sum_{k \sigma} a_{k \sigma}^\dagger a_{k \sigma}$ to position 
+basis. 
+
+$$
+\begin{align}
+\sum_{k \sigma} \epsilon_k a_{k \sigma}^\dagger a_{k \sigma} &= \frac{-2t}{N} 
+\sum_{klm\sigma} \cos (k) e^{ik(l-m)} a_{l \sigma}^\dagger a_{m \sigma} 
+\qquad \text{ by transfoming both operators to position basis} \\
+&= \frac{-2t}{N} \sum_{lm\sigma} a_{l\sigma}^\dagger a_{m \sigma} \sum_k 
+\cos (k) e^{ik(l-m)} \\ 
+\end{align}
+$$
+
+It's not clear where to go from here. Let's try considering 2 cases: either 
+$l = m$ or $l \neq m$. If $l = m$, then 
+$$ \sum_k \cos (k) e^{ik(l-m)} = \sum_k \cos (k) = \sum_n \cos (2 \pi n /N) $$ 
+
+I claim this equals 0. Why? Notice that $\cos (n)$ is the real coordinate of 
+$e^{i 2 \pi n /N}$. We already know this latter term is 0 when summed over all 
+$n$ from Lemma 1, so it follows that its real coordinate must also be 0. This 
+means we only have to consider sites $l \neq m$. Hey, this is starting to look 
+like our tunneling term, which only considers adjacent sites...
+
+Back to the proof. I'm using $(l, m)$ to denote indices $l,m: l \neq m$.
+
+$$
+\begin{align}
+\frac{-2t}{N} \sum_{lm\sigma} a_{l\sigma}^\dagger a_{m \sigma} \sum_k 
+\cos (k) e^{ik(l-m)} 
+&= \frac{-2t}{N} \sum_{(l, m) \sigma} a_{l \sigma}^\dagger a_{m \sigma} \sum_k 
+\cos (k) e^{ik (l-m)} \\
+&= \frac{-2t}{N} a_{l \sigma}^\dagger a_{m \sigma} \sum_k \frac{1}{2} 
+(e^{ik} + e^{-ik}) e^{ik (l-m)} \qquad \text{ by using the identity 
+$\cos (x) = (e^{ix} + e^{-ix})/2$} \\
+&= \frac{-t}{N} \sum_{(l, m) \sigma} a_{l \sigma}^\dagger a_{m \sigma} \sum_k 
+e^{ik(l-m+1)} + e^{ik(l-m-1)}
+\end{align}
+$$
+
+Notice that by Lemma 2, $\sum_k e^{ik(l-m \pm 1)} = 0$ if $l-m \pm 1 \neq 0$, 
+otherwise it's $N$. Thus, we simplify to only the adjacent terms! 
+$$\sum_{k \sigma} \epsilon_k a_{k\sigma}^\dagger a_{k \sigma} = -t 
+\sum_{\braket{l, m} \sigma} a_{l \sigma}^\dagger a_{m \sigma} $$
+
+{% annotate Not done yet. Need to combine $\mu$ term. %}
+
+This took me by complete surprise. The tunneling term in the position basis 
+looks strange because we have this 
+awkward behavior of summing over *neighbors* with $\braket{l, m}$. It's crazy 
+that summing over all momentum number operators and multiplying by some cosine 
+somehow *equals* this awkward summation in the position basis. 
+
+This means that by switching to the momentum basis we diagonalize our tunneling 
+term. In this basis, its eigenvectors are just $[1, 0, 0, ...], [0, 1, 0, ...]$
+and its eigenvaluesu are $\cos (k) - \mu$. 
+
+### The 2D tunneling term 
+
+### Choosing the states with best overlap 
 
 ## Finding the ground state 
 - do for a 2x6 lattice like page 5 of Wecker 2 and show how with few parameters 

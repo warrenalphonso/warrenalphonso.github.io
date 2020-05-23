@@ -11,9 +11,9 @@ window.MathJax = {
 //      '[+]': ['physics']
 //    }
     macros: {
-      bra: ["{\\langle #1 \\rvert}", 1],
-      ket: ["{\\lvert #1 \\rangle}", 1], 
-      braket: ["\\langle #1 \\rangle", 1] 
+      bra: ["\\langle #1 \\rvert", 1],
+      ket: ["\\lvert #1 \\rangle", 1], 
+      braket: ["\\langle #1 \\rangle", 1]
     }
   },
   svg: {
