@@ -165,6 +165,11 @@ creation and annihilation operators. These arise from studying the quantum
 harmonic oscillator. {% annotate I recommend [Lecture 8](
 https://www.youtube.com/watch?v=qu-jyrwW6hw) and [Lecture 9](
 https://www.youtube.com/watch?v=jJX_1zT73U0) of MIT OCW 8.04 Spring 2013. %}
+I don't have a good explanation for the mathemetical ddifferences between 
+bosons and fermions, but we'll still try to apply our derived tools from the 
+quantum harmonic oscillator to fermions. Even [Feynman admits](
+https://www.feynmanlectures.caltech.edu/III_04.html) he doesn't have a good 
+explanation for these differences. 
 
 Since we're describing electrons, the creation and annihilation operators have 
 *fermionic anticommutation relations*. In other words, for two fermions on 
@@ -190,6 +195,28 @@ We call $a^\dagger$ the *creation* operator and $a$ the *annihilation* operator.
 Their names reflect that $a^\dagger_{j \sigma}$ creates a fermion on site $j$ 
 with spin $\sigma$ while $a_{j \sigma}$ destroys a fermion on site $j$ with 
 spin $\sigma$. 
+
+I said I don't know why these relations hold, but we can try to think about how 
+we could have derived them by ourselves. We want some relation that makes it 
+clear that $a^2$ and $a^{\dagger^{2}}$ are both nonsense, since we can't have two 
+fermions of the same spin in the same place. Since we're working in a vector 
+space, we can set these both equal to $0$, which means that doing either of 
+these operations destroys our whole vector space. Notice another way of writing 
+$a^2 = 0$ is $2a^2 = \{ a, a \} = 0$ which is the exact anticommutation 
+relation we have. The same logic works for $a^\dagger$. 
+
+Okay but how could we have come up with the first relation? 
+
+Recall from the quantum harmonic oscillator that $a \ket{n} = \sqrt{n} \ket{n-1}$ 
+and $a^\dagger \ket{n} = \sqrt{n+1} \ket{n+1}$. Let's enforce the rule that $n$ 
+can only be $0$ or $1$. Notice that if $n$ is constrained to those values, then 
+$\sqrt{n} = n$ and $\ket{n-1} = \ket{1-n}$. With this we can write 
+$$ a \ket{n} = n \ket{1-n} \qquad a^\dagger \ket{n} = (1 -n) \ket{1-n}$$
+
+Now what is $(aa^\dagger + a^\dagger a) \ket{n}$? It simplifies to 
+$(2n^2 -2n + 1)\ket{n}$. Plugging in $n=0$ and $n=1$ results in the same thing: 
+$2n^2 -2n+1 = 1$, which means we can write that $\{ a, a^\dagger \} = 1$ always, 
+and we get our first commutation relation!
 
 ## The Hubbard Hamiltonian 
 
@@ -350,10 +377,14 @@ The partition function lets us calculate expectations easily. For any observable
 $m$, $\braket{m} = Z^{-1} \mathrm{Tr } (m e^{-\beta H})$. We will find the 
 *density* $\rho = \braket{n}$ for number operator $n$. Using the previous 
 formula, we have 
-$$\rho = \braket{n} = Z^{-1} \mathrm{Tr } (ne^{-\beta E_i}) = Z^{-1} \sum_i 
+$$
+\begin{align}
+\rho &= \braket{n} = Z^{-1} \mathrm{Tr } (ne^{-\beta E_i}) = Z^{-1} \sum_i 
 e^{-\beta E_i} \braket{i \vert n \vert i} = Z^{-1} (0 + e^{\beta \mu} + 
-e^{\beta \mu} + 2 e^{-\beta (U - 2 \mu)} ) = 2 \cdot Z^{-1} ( e^{\beta \mu} + 
-e^{2 \beta \mu - \beta U}) $$
+e^{\beta \mu} + 2 e^{-\beta (U - 2 \mu)} ) \\ 
+&= 2 \cdot Z^{-1} ( e^{\beta \mu} + e^{2 \beta \mu - \beta U}) 
+\end{align}
+$$
 
 {% annotate What is $\beta$? I need to explain this somewhere. %}
 
@@ -483,6 +514,114 @@ VQE requires us to specify 3 things:
 ## The Variational Hamiltonian Ansatz 
 - Haar measure
 
+### Adiabatic evolution 
+
+{% annotate How do I learn this myself and explain it well? Scott Aaronson's 
+textbook has an explanation and I have a few bookmarked. Also I can try using 
+the lecture in C191. %}
+
+A mysterious result in quantum mechanics is the *adiabatic theorem*. To quote 
+[Wikipedia](https://en.wikipedia.org/wiki/Adiabatic_theorem): "A physical 
+system remains in its instantaneous eigenstate if a given *pertubation* is 
+acted on it *slowly* enough and if there is a gap between the eigenvalue and 
+the rest of the Hamiltonian's spectrum." 
+
+Suppose we have two Hamiltonians $H_A$ and $H_B$, and we know an eigenstate of 
+$H_A$ to be $\ket{\psi_A}$. Then we can define a new Hamiltonian 
+$H(s) = (1 - s) H_A + s H_B$. Notice that as $s$ goes from $0$ to $1$ our 
+time-dependent Hamiltonian goes from $H_A$ to $H_B$. 
+
+The adiabatic theorem tell us that if we *evolve* $\ket{\psi_A}$ by $e^{-itH(s)}$
+while slowly changing $s$, the final resulting state will be the *corresponding*
+eigenvector of $H_B$. 
+{% annotate Show what I mean by slowly change evolution as a series of matrix 
+multiplications. Also, explain what corresponding eigenvector means. One thing 
+I don't understand is why the two Hamiltonians $H_A$ and $H_B$ have to be 
+related. Maybe they don't have to, but it would be helpful? I can get a better 
+intuition for this by plotting the lowest eigenvalues of $H(s)$. %} 
+This is useful if one Hamiltonian is diagonal, or at least easy to diagonalize, 
+because then we can easily find its ground state. Then we adiabatically evolve 
+this ground state to get the ground state of another Hamiltonian that is perhaps 
+harder to diagonalize. 
+
+I haven't proven the adiabatic theorem because I don't know how to (yet). We're 
+just assuming it's true for now. Regardless, let me try to make things more 
+concrete with an example. 
+
+The Schrodinger equation is 
+$$ i \frac{d \ket{\psi}}{dt} = H \ket{\psi} $$ 
+which means, for *time-independent* $H$, the solution is 
+$$ \ket{\psi(t)} = e^{-i H t} \ket{\psi(0)} $$
+where we evolve for time $t$. 
+
+Suppose we choose $5$ discrete times: $H(0), H(.25), H(.50), H(.75), H(1)$. At 
+each time step, we'll simulate for $t=1$. Then, if the ground state of $H_A$ is 
+$\ket{\psi_A}$, the ground state of $H_B$ is: 
+$$\ket{\psi_B} = e^{-i H(1)} e^{-i H(0.75)} e^{-i H(0.50)} e^{-i H(0.25)} 
+e^{-i H(0)} \ket{\psi_A}$$
+
+Of course, this only works if we choose sufficiently many discrete values for 
+$s$ and a short enough time $t$. {% annotate Give an 
+estimate for values for number of steps and $t$. %} 
+
+Here's an example with $2 \times 2$ Hamiltonians. We'll choose $H_A = Z$ and 
+$H_B = X$. 
+
+{% highlight python %} 
+import numpy as np
+import scipy.linalg as sp
+import matplotlib.pyplot as plt
+
+H_A = np.array( [[1, 0], [0, -1]] )
+H_B = np.array( [[0, 1], [1, 0]] ) 
+H = lambda s: (1-s)*H_A + s*H_B
+psi_A = np.array([0, 1]) # The ground state of H_A 
+
+# If n=5, then we do 5 steps: H(0), H(0.25), H(0.5), H(0.75), H(1)
+n = 5
+t = 1
+res = psi_A
+for i in range(n): 
+    s = i / (n-1)
+    res = np.dot(sp.expm(-1j * H(s) * t), res)
+{% endhighlight %}
+
+With `n = 5`, we get <samp>res = [0.29916787+0.66776416j, 
+-0.13667712-0.66776416j]</samp>
+and `np.dot(H_B, res)` gives us <samp>res = [-0.13667712-0.66776416j, 
+0.29916787+0.66776416j]</samp>, which isn't quite an eigenvector. 
+
+However, if we set `n = 50`, we get <samp>res = [ 0.71332125-0.04347244j, 
+-0.69813543+0.04347244j]</samp>, which is very close to the eigenvector of the 
+Pauli $X$ matrix with eigenvalue $-1$. We started with the ground state of $H_A$ 
+and ended in the ground state of $H_B$, just like the adiabatic theorem predicts! 
+
+Let's try one last example. This time we'll use 
+`H_B = np.array( [[-5, 0], [0, 4]] )`. When we use the same parameters as 
+before (`n = 50, t = 1`), we get <samp>res = [0, 0.92175127+0.38778164j]</samp>. 
+This is very close to <samp>[0, 1]</samp> which is the eigenvector with 
+eigenvalue $4$. We *didn't* get the ground state! What went wrong? 
+
+We can get some intuition by plotting the eigenvalues of $H(s)$ as we increase 
+$s$: 
+
+![](/images/adiabatic_X.png){ float="left" }
+![](/images/adiabatic_crossing.png){ float="right" }
+
+In the first graph, there is no *crossing* of the eigenvalues. We started with 
+the lowest eigenstate of $Z$ and ended in the lowest eigenstate of $X$. In the 
+second graph, however, there is a crossing! Though we started in the lowest 
+eigenstate of $Z$, we didn't end up in the lowest eigenstate of the final 
+matrix. Instead, it's almost like we "followed the line" that shows up in the 
+graph. If we wanted to get the ground state of the final matrix, we would have 
+had to start in the $+1$ eigenstate of $Z$. 
+
+Keep this in mind! It means we have to *choose which state we start in 
+carefully*. We cannot simply start in the ground state everytime. 
+
+### An ansatz based on adiabatic evolution 
+
+### How *good* is this ansatz? 
 
 ## Choosing an initial state 
 

@@ -47,7 +47,7 @@ toc:
 pandoc: 
     extensions: 
         - mathjax 
-        - from: markdown+fancy_lists+strikeout+tex_math_dollars+pipe_tables+raw_html+markdown_in_html_blocks+fenced_divs
+        - from: markdown+fancy_lists+strikeout+tex_math_dollars+pipe_tables+raw_html+markdown_in_html_blocks+fenced_divs+implicit_figures+link_attributes
 
 plugins: 
   - jekyll-toc
