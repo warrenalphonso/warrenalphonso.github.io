@@ -849,14 +849,72 @@ $$
 
 The final step follows from extending the dot product for 2 dimensions. I wrote 
 $\pm 1$ for the two exponentials; this means there are 4 exponentials: one with 
-a $+1$ in the $x$ direction, one with a $-1$ in the $x$ direction, a $+1$ in $y$, 
-and a $-1$ in $y$. Notice that these 4 terms correspond to a difference of $1$ 
+$+1$ in the $x$ direction, one with $-1$ in the $x$ direction, $+1$ in $y$, 
+and $-1$ in $y$. Notice that these 4 terms correspond to a difference of $1$ 
 in a single dimension, and by Lemma 2, we get the hopping term over neighbors 
 again. {% annotate Not done yet, need to combine $\mu$ term. %}
 
-
-
 ### Choosing the states with best overlap 
+
+We found a change of basis that makes it easy to find ground states of the 
+tunneling term and their corresponding ground state energies. Earlier we 
+noticed that adiabatic evolution doesn't always work if we input the ground 
+state as our initial state. This means that we typically have to try many 
+different eigenvectors until we find one that converges. Instead of doing this, 
+we'll cheat and do the following: 
+
+1. Find the ground state of the Hubbard term by diagonalizing 
+2. Find the ground state of the tunneling term by diagonalizing 
+3. Perturb the tunneling term with the interaction term 
+4. Find the ground states of the perturbed Hamiltonian 
+5. Find the state with maximum fidelity with Hubbard ground state 
+6. Find the corresponding eigenvector of tunneling term that's closest to this 
+
+Since our $H_A$ and $H_B$ are pretty similar, $H_B$ is $H_A$ with the 
+interaction term, the *correct* starting state in $H_A$ will already have large 
+overlap with the ground state of $H_B$. 
+
+<script src="https://gist.github.com/warrenalphonso/a7b1a4bb337b1be6684a0eaf06801083.js"></script>
+
+<ul class="list-unstyled">
+<samp>
+<li>Eigenvector v_tun[:, 30] has ovelap 0.17136660881799165.</li>
+<li>Eigenvector v_tun[:, 34] has ovelap 0.19207310209956632.</li>
+<li>Eigenvector v_tun[:, 48] has ovelap 0.17799458524888018.</li>
+<li>Eigenvector v_tun[:, 53] has ovelap 0.12642028444816675.</li>
+</samp>
+</ul>
+
+The highest overlap is about 18%, but this doesn't look too promising. Here's a 
+trick we can use: if we *perturb* the tunneling term with the interaction term 
+and then get the ground state, we'll find it has maximum overlap with the 
+Hubbard model as the perturbation goes to 0. Here's what that looks like in 
+code: 
+
+<script src="https://gist.github.com/warrenalphonso/b47d1ad39cd12a0ad6c7ef5baa722391.js"></script>
+
+<ul class="list-unstyled">
+<samp>
+<li>Eigenvector v_per[:, 0] has overlap 0.9770315592604043.</li>
+<li>Eigenvector v_per[:, 1] has overlap 3.831828765839691e-20.</li>
+<li>Eigenvector v_per[:, 2] has overlap 4.420004116654121e-26.</li>
+<li>Eigenvector v_per[:, 3] has overlap 7.542958924631367e-26.</li>
+<li>Eigenvector v_per[:, 4] has overlap 5.180144829300806e-26.</li>
+</samp>
+</ul>
+
+We should use the eigenvector `w_per[:, 0]` because it had a 97% overlap with 
+the Hubbard ground state. In reality, we wouldn't have been able to efficiently 
+find this state because it's perturbed with the interaction term and therefore 
+not quadratic. Instead, we'll find the tunneling eigenvector that's closest to 
+`v_per[:, 0]` and use that instead. 
+
+<script src="https://gist.github.com/warrenalphonso/4c4a0063f88955d56c985e4e3f73d4be.js"></script>
+
+<samp>Eigenvector v_tun[:, 34] had the maximum overlap of 0.19658956206777584 
+with the best perturbed state.</samp>
+
+Now we just need to get it in OpenFermion circuit form. 
 
 ## Finding the ground state 
 - do for a 2x6 lattice like page 5 of Wecker 2 and show how with few parameters 
