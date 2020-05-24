@@ -470,18 +470,7 @@ For now, let's create a $2 \times 2$ Hubbard lattice in OpenFermion.
 {% annotate I need to make this diagram more informative - it'll be easy to 
 add info since I'm just drawing it so do something more. %}
 
-{% highlight python %}
-from openfermion.utils import HubbardSquareLattice
-
-# HubbardSquareLattice parameters
-x_n = 2
-y_n = 2
-n_dofs = 1 # 1 degree of freedom for spin 
-periodic = 0 # Don't want tunneling terms to loop back around 
-spinless = 0 # Has spin
-
-lattice = HubbardSquareLattice(x_n, y_n, n_dofs=n_dofs, periodic=periodic, spinless=spinless)
-{% endhighlight %}
+<script src="https://gist.github.com/warrenalphonso/aeac8e5265281fa838b566051ca7b88f.js"></script>
 
 Next, we'll want to create a `FermiHubbardModel` instance from our lattice. 
 The format for the tunneling and interaction coefficients is a little weird - 
@@ -489,21 +478,7 @@ check out the [documentation](
 https://openfermion.readthedocs.io/en/latest/openfermion.html#openfermion.hamiltonians.FermiHubbardModel)
 for an explanation. 
 
-{% highlight python %} 
-from openfermion.hamiltonians import FermiHubbardModel
-from openfermion.utils import SpinPairs
-
-tunneling = [('neighbor', (0, 0), 1.)] 
-interaction = [('onsite', (0, 0), 2., SpinPairs.DIFF)] 
-# potential = [(0, 1.)]
-potential = None
-mag_field = 0. 
-particle_hole_sym = False
-
-hubbard = FermiHubbardModel(lattice , tunneling_parameters=tunneling, interaction_parameters=interaction, 
-                            potential_parameters=potential, magnetic_field=mag_field, 
-                            particle_hole_symmetry=particle_hole_sym)
-{% endhighlight %} 
+<script src="https://gist.github.com/warrenalphonso/96fcbefce44a520a928e347f358c1171.js"></script>
 
 And that's it. We can access the actual Hamiltonian with `hubbard.hamiltonian()`. 
 
@@ -568,24 +543,7 @@ estimate for values for number of steps and $t$. %}
 Here's an example with $2 \times 2$ Hamiltonians. We'll choose $H_A = Z$ and 
 $H_B = X$. 
 
-{% highlight python %} 
-import numpy as np
-import scipy.linalg as sp
-import matplotlib.pyplot as plt
-
-H_A = np.array( [[1, 0], [0, -1]] )
-H_B = np.array( [[0, 1], [1, 0]] ) 
-H = lambda s: (1-s)*H_A + s*H_B
-psi_A = np.array([0, 1]) # The ground state of H_A 
-
-# If n=5, then we do 5 steps: H(0), H(0.25), H(0.5), H(0.75), H(1)
-n = 5
-t = 1
-res = psi_A
-for i in range(n): 
-    s = i / (n-1)
-    res = np.dot(sp.expm(-1j * H(s) * t), res)
-{% endhighlight %}
+<script src="https://gist.github.com/warrenalphonso/2b22bf3418e301b28f33e675b995402c.js"></script>
 
 With `n = 5`, we get <samp>res = [0.29916787+0.66776416j, 
 -0.13667712-0.66776416j]</samp>
@@ -658,12 +616,7 @@ the *full* Hamiltonian! %}
 
 Creating this ansatz is easy with OpenFermion: 
 
-{% highlight python %} 
-from openfermioncirq import SwapNetworkTrotterHubbardAnsatz
-
-steps = 5 
-ansatz = SwapNetworkTrotterHubbardAnsatz(x_n, y_n, 1., 2., periodic=False, iterations=steps)
-{% endhighlight %}
+<script src="https://gist.github.com/warrenalphonso/9343ca296b524c9bdbdca7c2292ca796.js"></script>
 
 This class takes care of a bunch of messy ansatz instantiation for us. We'll be 
 customizing it later in this post to try some more strategies, but for now we 
@@ -677,33 +630,7 @@ Turns out the `SwapNetworkTrotterHubbardAnsatz` class has a good default strateg
 for initial parameters if we don't specify one. Here's the docstring that 
 explains it: 
 
-{% highlight python %} 
-SwapNetworkTrotterHubbardAnsatz.default_initial_params?? # Typing "??" after an API call in Jupyter Notebook shows you the source code
-
-def default_initial_params(self) -> numpy.ndarray:
-    """Approximate evolution by H(t) = T + (t/A)V.
-
-    Sets the parameters so that the ansatz circuit consists of a sequence
-    of second-order Trotter steps approximating the dynamics of the
-    time-dependent Hamiltonian H(t) = T + (t/A)V, where T is the one-body
-    term and V is the two-body term of the Hamiltonian used to generate the
-    ansatz circuit, and t ranges from 0 to A, where A is equal to
-    `self.adibatic_evolution_time`. The number of Trotter steps
-    is equal to the number of iterations in the ansatz. This choice is
-    motivated by the idea of state preparation via adiabatic evolution.
-
-    The dynamics of H(t) are approximated as follows. First, the total
-    evolution time of A is split into segments of length A / r, where r
-    is the number of Trotter steps. Then, each Trotter step simulates H(t)
-    for a time length of A / r, where t is the midpoint of the
-    corresponding time segment. As an example, suppose A is 100 and the
-    ansatz has two iterations. Then the approximation is achieved with two
-    Trotter steps. The first Trotter step simulates H(25) for a time length
-    of 50, and the second Trotter step simulates H(75) for a time length
-    of 50.
-    """
-
-{% endhighlight %}
+<script src="https://gist.github.com/warrenalphonso/4e6ce0b1bca5a58537a3b3082f3e2c13.js"></script>
 
 ### How *good* is this ansatz? 
 - not sure if I can answer this in a meaningful way - I need to have an initial 
@@ -828,7 +755,7 @@ doing the math.
 
 ### The 1D tunneling term 
 
-**Theorem 1**: Show that for $U = 0$, the $1$D Hubbard model in momentum basis 
+**Theorem 1**: For $U = 0$, the $1$D Hubbard Hamiltonian in momentum basis 
 is 
 $$ H = \sum_{k \sigma} (\epsilon_k - \mu) a_{k \sigma}^\dagger a_{k \sigma}$$
 where $\epsilon_k = -2t \cos k$. 
@@ -848,6 +775,9 @@ $$
 \cos (k) e^{ik(l-m)} \\ 
 \end{align}
 $$
+
+**This break is unnecessary - we'll stop considering it when the difference 
+must be 1 anyway.**
 
 It's not clear where to go from here. Let's try considering 2 cases: either 
 $l = m$ or $l \neq m$. If $l = m$, then 
@@ -893,6 +823,38 @@ term. In this basis, its eigenvectors are just $[1, 0, 0, ...], [0, 1, 0, ...]$
 and its eigenvaluesu are $\cos (k) - \mu$. 
 
 ### The 2D tunneling term 
+
+Extending the previous result to 2 dimensions isn't that hard. 
+
+**Theorem 2**: For $U=0$, the 2D Hubbard Hamiltonian is 
+$$H = \sum_{k \sigma} (\epsilon_k - \mu) a_{k \sigma}^\dagger a_{k \sigma}$$ 
+where $\epsilon_k = -2t( \cos k_k + \cos k_y)$. 
+
+*Proof*: The proof follows many of the same steps in the Theorem 1. Again, we'll 
+consider the $\mu$ coefficient separately. 
+
+$$
+\begin{align}
+\sum_{k \sigma} \epsilon_k a_{k \sigma}^\dagger a_{k \sigma} &= \frac{1}{N} 
+\sum_{lm \sigma} a_{l \sigma}^\dagger a_{m \sigma} \sum_k \epsilon_k 
+e^{i k \cdot (l-m)} \\
+&= \frac{-2t}{N} \sum_{lm \sigma} a_{l \sigma}^\dagger a_{m \sigma} 
+\sum_{k_x, k_y} e^{i k \cdot (l-m)} (\frac{1}{2}) \Big( e^{ik_x} + e^{-ik_x} + e^{ik_y} 
++ e^{-ik_y} \Big) \\
+&= \frac{-t}{N} \sum_{lm\sigma} a_{l \sigma}^\dagger a_{m \sigma} \sum_{k_x, k_y}
+e^{i k_x (l_x - m_x \pm 1)} e^{i k_y (l_y - m_y)} + 
+e^{i k_x (l_x - m_x)} e^{i k_y (l_y - m_y \pm 1)} 
+\end{align}
+$$
+
+The final step follows from extending the dot product for 2 dimensions. I wrote 
+$\pm 1$ for the two exponentials; this means there are 4 exponentials: one with 
+a $+1$ in the $x$ direction, one with a $-1$ in the $x$ direction, a $+1$ in $y$, 
+and a $-1$ in $y$. Notice that these 4 terms correspond to a difference of $1$ 
+in a single dimension, and by Lemma 2, we get the hopping term over neighbors 
+again. {% annotate Not done yet, need to combine $\mu$ term. %}
+
+
 
 ### Choosing the states with best overlap 
 
