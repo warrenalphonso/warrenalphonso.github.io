@@ -916,6 +916,60 @@ with the best perturbed state.</samp>
 
 Now we just need to get it in OpenFermion circuit form. 
 
+We need a way to specify the circuit for this initial state, so that we can 
+start from the computational all-zero state $\ket{0...0}$ and then apply a 
+cicuit to take us to `v_tun[:, 34]`. 
+
+OpenFermion provides us with the function `prepare_gaussian_state(qubits, 
+quadratic_hamiltonian, occupied_obritals=None)` which returns the `Circuit` 
+object to prepare an eigenvector of a quadratic Hamiltonian. Of course, there 
+could be many eigenvectors (our Hamiltonian matrix has 2^8^ = 256 dimensions so 
+256 eigenvectors). We need some way of specifying which one we want. That's 
+what the `occupied_orbitals` parameter is for. 
+
+{% annotate Read [this issue](https://github.com/quantumlib/OpenFermion/issues/284) 
+for a similar explanation of how to specify eigenvectors. %}
+Since we diagonalized our tunneling term, we can write it as 
+$\sum_k \epsilon_k a_k^\dagger a_k$, which indicates that the eigenvalues will 
+be subsets of $\epsilon_k$. One way to specify an eigenvector is to specify its 
+eigenvalue. But this doesns't work because there might be more than one 
+eigenvector for a specific eigenvalue! We call these *degenerate* states. Suppose 
+our $\epsilon_k$ were [-2, -2, 0, 0]. Then we have 4 different eigenvectors for 
+the eigenvalue -4 because wee can choose both -2's and then decide to pick some 
+of the 0's to yield a sum of -4. There are 4 ways to choose the 0's so we have 
+4 eigenvaectors for the the same eigenvalue. 
+
+Well instead of specifying the eigenvalue, we can instead specify the indices of 
+which energies in `orbital_energies` we want to include. This gives us a unique 
+way to choose any eigenvector. 
+
+In OpenFermion we can get this array of $\epsilon_k$ with 
+`orbital_energies, constant = quadratic_hamiltonian.orbital_energies()`. Then we 
+specify which of these we want by passing an array into `prepare_gaussian_state`. 
+
+First, we should find what eigenvalue our desired eigenvector has so that we 
+don't have to search through all 256 eigenvectors. We used `v_tun[:, 34]` so 
+our eigenvalue is `w_tun[34]` which is <samp>-3.9999999</samp>. Looks like this 
+was one of the ground states since -4 is the minimum eigenvalue. Now we just have 
+to try all the `orbital_energies` subsets that have a sum of -4. 
+
+<script src="https://gist.github.com/warrenalphonso/991d74e7b9a54b8846fa7ff3a6be4a54.js"></script>
+<samp>[-2.0, -2.0, -0.0, 0.0, 0.0, 0.0, 2.0, 2.0]</samp>
+
+We need to use both -2's and then we can pick any combination of the four 0's. 
+We'll try all of them and then calculate which yields the maximum overlap with 
+our desired state `v_tun[:, 34]`. 
+
+<script src="https://gist.github.com/warrenalphonso/9bcb34c33cd10ef0830e5d118c2153ba.js"></script>
+<samp>Orbital energies [0, 1] resulted in a state with 0.17255741661035914 overlap with our desired state.</samp>
+
+It's odd that the overlap is so low. I thought it would be close to 1. What's 
+really weird is that if I instead made the `overlaps` array the overlap between 
+state and `per_state_most_overlap`, the best overlap is <samp>0.99999</samp>. 
+Perhaps `preepare_gaussian_state` adds a perturbation? Regardless, this state 
+with <samp>0.99999</samp> overlap is the same as the state we got with overlap 
+<samp>0.17225</samp> so it shouldn't matter for our results. 
+
 ## Finding the ground state 
 - do for a 2x6 lattice like page 5 of Wecker 2 and show how with few parameters 
 we can explore a huge Hilbert space to get large overlap
