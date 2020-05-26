@@ -974,6 +974,22 @@ with <samp>0.99999</samp> overlap is the same as the state we got with overlap
 - do for a 2x6 lattice like page 5 of Wecker 2 and show how with few parameters 
 we can explore a huge Hilbert space to get large overlap
 
+<script src="https://gist.github.com/warrenalphonso/4b6d88c241146b19b34f2b64143084a8.js"></script>
+<samp>Optimal ground state energy is -3.49999</samp>
+
+If we check the true ground state energy, we get `w_hub[0] = -3.62721`, so our 
+energy is off by about 0.13. We'll dig deeper to try to fix this error in the 
+next few sections. 
+
+For now, let's see how much overlap the ground *state* that VHA outputted has 
+with the true ground state. 
+
+<script src="https://gist.github.com/warrenalphonso/9ddf4db6308c8bc0598173f85287b4b7.js"></script>
+<samp>VHA ground state and true ground state have an overlap of 0.977026</samp>
+
+97.7% overlap is pretty great, but it's not even close to achieving chemical 
+accuracy on our ground state energy. 
+
 ## Analyzing the ground state 
 - show that parameters don't follow adiabatic evolution path
 
