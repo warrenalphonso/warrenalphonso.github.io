@@ -632,6 +632,10 @@ explains it:
 
 <script src="https://gist.github.com/warrenalphonso/4e6ce0b1bca5a58537a3b3082f3e2c13.js"></script>
 
+Explain how the ansatz is created with a circuit. Explain how the number of 
+parameters stays constant, so we can explore an exponential space with constant 
+parameters that need to be optimized. 
+
 ### How *good* is this ansatz? 
 - not sure if I can answer this in a meaningful way - I need to have an initial 
 state be constant and then I need
@@ -992,6 +996,85 @@ accuracy on our ground state energy.
 
 ## Analyzing the ground state 
 - show that parameters don't follow adiabatic evolution path
+
+First, let's see how many non-zero elements the state vector of the ground 
+state has: 
+
+<script src="https://gist.github.com/warrenalphonso/1a5a2903cc7731b570fcd96b36ce1c53.js"></script>
+<samp>The 256-dimensionsal ground state vector has 16 non-zero elements.</samp>
+
+Great! It's very sparse. If there was only 1 non-zero element, then we could 
+decompose it into tensor products in the computational basis easily. Let's see 
+what the individual elements are: 
+
+<script src="https://gist.github.com/warrenalphonso/dff6e0d4c177662b8900374f62b0c002.js"></script>
+<samp>Norm is 1.000000238418579</samp>
+
+<samp>The distinct elements in the ground state vector along with their counts 
+are: </samp>
+
+<samp>{'0j': 240, '(0.10403669-0.22732446j)': 10,
+'(-0.10403668+0.22732443j)': 6}</samp>
+
+Interesting, 10 of the non-zero elements have the same value, let's call this 
+$a$. And the other 6 have the value $-a$. I guess I could decompose this into 
+a sum of 16 pure states, but I don't think we'll get much insight into the 
+system with that. 
+
+Let's just get the average measurement for each of the qubits: 
+
+<script src="https://gist.github.com/warrenalphonso/211772c59450db809f6f7fceeeb6ebc6.js"></script>
+<samp>[0.24854, 0.25112, 0.25269, 0.24896, 0.24897, 0.24906, 0.2498 , 0.25086]
+</samp>
+
+Well that's boring! Each qubit has an average value of 0.25. They're uniform. 
+
+Let's think about what this means. We used the Jordan-Wigner encoding which 
+means the qubit corresponding to a spin-orbital is $\ket{1}$ if there's an 
+electron in that spin-orbital, and $\ket{0}$ if there isn't. If each qubit has 
+0.25 chance of being $\ket{1}$, we have an average of $0.25 \cdot 8 = 2$ 
+electrons. This is half-filling, which is what we expected. 
+
+We know the *average* was half-filling. Now let's check how many measurements 
+actually yielded half-filling: 
+
+<script src="https://gist.github.com/warrenalphonso/8e1adc3206d55c5c24ae7255050ea507.js"></script>
+
+Nothing printed, so we didn't get a *single measurement* where we didn't have 
+two $\ket{1}$'s. This means I was wrong. The ground state distribution *isn't* 
+random: it's entangled in some way to give us at most 2 electrons in the 4 site 
+model. 
+
+Well, this is more interesting. I wonder if the spin-up and spin-down results 
+are correlated in any way. Here's how we'll check this: I suspect (**but I need 
+to find out for sure**) that the first 4 qubits correspond to spin-up and the 
+last 4 qubits correspond to spin-down, so that indices $i$ and $i+4$ correspond 
+to the spin-up and spin-down electrons on the $i$th site. This means if there's 
+always a single $\ket{1}$ in the first 4 qubits and a single $\ket{1}$ in the 
+last 4 qubits, there's always one spin-up and one spin-down electron in every 
+ground state. We can also check how often they're on the same site, though I 
+suspepct we'll never find 2 electrons on the same site because of the 
+interaction energy $U$. 
+
+<script src="https://gist.github.com/warrenalphonso/9523074fa3689f1e08b691598f374240.js"></script>
+<samp>Number of trials with 2 spin-UPs or 2 spin-DOWNs: 50101</samp>
+
+<samp>Number of trials with 2 electrons on the same site: 0</samp>
+
+Huh. Looks like my first guess was wrong. In about half the trials, there were 
+2 spin-up or 2 spin-down electrons. *This means there's a chance for magnetism.* 
+
+Finally, let's see if the number of states with 2 spin-up electrons is the same 
+as the number of states with 2 spin-down electrons. This means *on average* 
+there's no magnetism in our model. 
+
+<script src="https://gist.github.com/warrenalphonso/f86b1e23b196a2f019364c71c5acd966.js"></script>
+
+<samp>Number of trials with 2 spin-UPs: 25116</samp> 
+
+<samp>Number of trials with 2 spin-DOWNs: 24985</samp>
+
+Yup, they're about the same, so on average, there's no magnetism. 
 
 # Uncovering magnetism from the Hubbard model 
 
