@@ -651,7 +651,7 @@ state needs to be the ground state of $H_A$. Since we've set $H_A$ to be the
 tunneling term, we're going to find its ground state. 
 
 This section has a lot of math. While working through ["Elementary Introduction 
-to the Hubbard Model"](http://quest.ucdavis.edu/tutorial/hubbard7.pdf), I found 
+to the Hubbard Model,"](http://quest.ucdavis.edu/tutorial/hubbard7.pdf) I found 
 the appearance of the following ideas remarkable, so I'm including them. 
 
 I highly recommend you do the math with me, but if you find that tedious, the 

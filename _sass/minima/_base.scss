@@ -138,13 +138,15 @@ blockquote {
 
 /**
  * Code formatting
+ * DONT USE ``` FOR CODE. I can't get it to work properly with Rouge, so I 
+ * have to use {% highlight python linenos %}...{% endhighlight %}
  */
 pre,
 code {
   @include relative-font-size(0.9375);
-  border: 1px solid $grey-color-light;
+  border: 0px solid $grey-color-light; // No border
   border-radius: 3px;
-  background-color: #eef;
+  // background-color: #eef;
 }
 
 code {
@@ -160,6 +162,21 @@ pre {
     padding-right: 0;
     padding-left: 0;
   }
+}
+
+/**
+ * TODO
+*/
+pre .lineno {
+  width: 10px;
+  // display: inline-block;
+  // white-space: pre-wrap;
+
+}
+
+td .gutter .gl {
+  background-color: black;
+  padding: 50px;
 }
 
 
