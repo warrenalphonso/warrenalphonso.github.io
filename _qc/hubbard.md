@@ -394,12 +394,12 @@ I graphed the density $\rho$ for temperatures $T = 0.5$ and $T = 2$ K. Try
 changing the potential energy $U$. Can you explain the result based on the 
 Hubbard Hamiltonian? 
 
-[//]: # 'I have to surround the `include` tag with this to remove the 
-whitespace. Otherwise, Pandoc thinks it is syntax highlighting.'
-{% capture includeGuts %}
+[//]: # "I have to surround the `include` tag with this to remove the 
+whitespace. Otherwise, Pandoc thinks it is syntax highlighting."
+{% capture includeGuts0 %}
 {% include mott.html %}
 {% endcapture %}
-{{ includeGuts | replace: '    ', ''}}
+{{ includeGuts0 | replace: '    ', ''}}
 
 Clearly there is some plateau where $\rho$ becomes 1 at low temperatures when 
 $U$ becomes large. Upon reflection, this isn't all that mysterious. Up until we 
@@ -1081,6 +1081,55 @@ Yup, they're about the same, so on average, there's no magnetism.
 ## Spin and magnetism 
 - Exercise 16, ..., all of Section 5,6
 - Section 10, 11
+
+Electron spin is deeply connected to magnetism. I don't yet understand the 
+physics behind this so we'll take it as a given. 
+
+When many electrons have the same spin, we get *ferromagnetism*, which means 
+all the magnetic moments are aligned and we get a strong magnetic moment. If 
+electron spins are balanced, they cancel each other out and we get 
+*antiferromagnetism*, which means the material doesn't have a strong magnetic 
+moment. 
+
+![Ferromagnetic material.](
+https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Ferromagnetic_ordering.svg/180px-Ferromagnetic_ordering.svg.png)
+
+![Antiferromagnetic material. Both images from Wikipedia. ](
+https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Antiferromagnetic_ordering.svg/220px-Antiferromagnetic_ordering.svg.png)
+
+So to figure out the magnetic properties of solids, we have to look at the spins 
+of its electrons. An important quantity we'll analyze is the *local moment*: 
+$\braket{m^2} = \braket{ (n_{\uparrow} - n_{\downarrow})^2 }$. The local moment 
+is 0 if the site is empty or has 2 spins, and 1 otherwise. We'll begin our 
+analysis with the simplest case: the single site Hubbard model at half-filling. 
+
+Recall that for this case we have the partition function: 
+$$Z = 1 + 2e^{\beta \mu} + e^{-\beta U + 2 \beta \mu} = 
+2 + 2e^{\beta \mu}$$
+where the last step follows from $\mu = \frac{U}{2}$ as the condition for 
+half-filling. We can write the expectation of the local moment as: 
+$$
+\begin{align}
+\braket{m^2} &= \braket{(n_{\uparrow} - n_{\downarrow})^2} = \braket{n_{\uparrow}} + \braket{n_{\downarrow}} - 
+2\braket{n_{\uparrow} n_{\downarrow}} \qquad \text{by linearity of expectation} 
+\\ 
+&= Z^{-1} \Big( \text{Tr } (n_\uparrow e^{-\beta H}) + \text{Tr } (n_\downarrow 
+e^{-\beta H}) - 2 \text{Tr } (n_\uparrow n_\downarrow e^{-\beta H}) \Big) \\ 
+&= 2 Z^{-1} e^{\beta \mu} \\
+&= \frac{e^{\beta \mu}}{1 + e^{\beta \mu}}   \qquad \text{Plugging in $Z^{-1}$}
+\end{align}
+$$
+
+Since $\beta = \frac{1}{T}$ and $\mu = \frac{U}{2}$, it's clear that as 
+$U \rightarrow \infty$, $\braket{m^2} \rightarrow 1$. The potential $U$ seems 
+to encourage local moments. 
+
+On the other hand, for finite $U$, as $T \rightarrow \infty$, 
+$\braket{m^2} \rightarrow \frac{1}{2}$. The temperature seems to prefer random 
+configurations and inhibits strong local moments. 
+
+What about the tunneling coefficient? Does it affect local moments? Let's 
+analyze the simplest case with a tunneling term: the two site Hubbard model. 
 
 ## The Stoner criterion 
 
