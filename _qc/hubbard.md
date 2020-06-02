@@ -3,35 +3,55 @@ layout: bootstrap
 title: Investigating the Hubbard model with variational algorithms
 ---
 
-::: display-4
+::: jumbotron
+
+:::: display-4
 Investigating the Hubbard model with variational algorithms 
+::::
 
-[A project done through the QC Mentorship program]{.text-muted .small}
-::::::
+::::: lead
+A project done through the QC Mentorship program.
+:::::
 
-> It is almost like Nature knows you are blatantly cheating, but she gives you 
-> a passing grade anyway. [Ntwali Bashige Toussaint]{.blockquote-footer}
+:::
 
-I assume readers have read the [4 essays at QuantumCountry](https://quantum.country/). 
-They really are a phenomenal introduction to quantum computing. 
+::: container-lg
+*Note to the prospective reader:* I've done my best to only assume you've read 
+the [four essays at QuantumCountry](https://quantum.country/). 
 
-A question I've been trying to answer since I started studying quantum 
-computing concerns its practicality: when do we *need* to use quantum mechanics 
-and what exactly can it tell us about the world that our classical heuristics 
-can't? 
+Once realized, quantum computers would be an intellectual and engineering 
+triumph, success in turning Nature's powerful and mysterious laws into 
+computational power. If our current understanding of quantum mechanics holds up, 
+it would mean the ability to efficiently simulate *any physical process*. 
 
-I don't have a great answer yet, but I tried to use this question as the 
-guiding principle for this project. Most near-term useful work in this field 
-will likely be concerned with *variational algorithms*. This post will explore 
-one of the more prominent variational algorithms, the Variational Quantum 
-Eigensolver (VQE). 
+But it might take decades to build a quantum computer powerful enough to catch 
+up to classical computers with their 50 year headstart. 
 
-I wanted to write this post to resemble the opposite structure of most research 
-papers. While research papers often present information as compactly as possible, 
-this post will favor a long-winded, wandering path on our way to discovering 
-useful ways to use a quantum computer. 
+A question I've been trying to answer since I started studying quantum computing 
+concerns its near-term usefulness: <u>what exactly can near-term quantum 
+computers tell us about the world that our classical physical heuristics 
+can't</u>? I don't have a great answer yet, but this question is the guiding 
+principle for the following post. 
+
+Most near-term useful work will probably use *variational algorithms*. This 
+project explores the most well-known of the variational algorithms: the 
+Variational Quantum Eigensolver (VQE). We'll use the VQE to analyze a fundamental 
+model in condensed matter physics, the Hubbard model. 
+
+You've noticed the length of this post by now. It is not for the windowshopper. 
+This is intentional; I've favored a long, winding, wandering, uncertain path 
+as the search for uses of a quantum computer. 
 
 # The Hubbard model 
+
+:::: {style="width: 50%; margin: 0 auto"}
+::::: {style="text-align: center;"}
+*It is almost like Nature knows you are blatantly cheating, but she gives you a 
+passing grade anyway.*
+:::::
+
+&mdash; Ntwali Toussaint
+::::
 
 ## A quantum mechanical solid! 
 - what if I actually use sodium? Then for Stoner, try others like iron to show 
@@ -1001,7 +1021,7 @@ First, let's see how many non-zero elements the state vector of the ground
 state has: 
 
 <script src="https://gist.github.com/warrenalphonso/1a5a2903cc7731b570fcd96b36ce1c53.js"></script>
-<samp>The 256-dimensionsal ground state vector has 16 non-zero elements.</samp>
+<samp>The 256-dimensionsal ground state vector has 26 non-zero elements.</samp>
 
 Great! It's very sparse. If there was only 1 non-zero element, then we could 
 decompose it into tensor products in the computational basis easily. Let's see 
@@ -1013,26 +1033,26 @@ what the individual elements are:
 <samp>The distinct elements in the ground state vector along with their counts 
 are: </samp>
 
-<samp>{'0j': 240, '(0.10403669-0.22732446j)': 10,
-'(-0.10403668+0.22732443j)': 6}</samp>
+<samp> {'0': 230, '(-0.075-0.050j)': 2,  '(0.0758+0.050j)': 2, '(0.129+0.086j)': 8, '(-0.129-0.086j)': 8, '(0.183+0.121j)': 4, '(-0.366-0.243j)': 2}</samp>
 
-Interesting, 10 of the non-zero elements have the same value, let's call this 
-$a$. And the other 6 have the value $-a$. I guess I could decompose this into 
+Interesting, there's some symmetry here. 
+I guess I could decompose this into 
 a sum of 16 pure states, but I don't think we'll get much insight into the 
 system with that. 
 
 Let's just get the average measurement for each of the qubits: 
 
 <script src="https://gist.github.com/warrenalphonso/211772c59450db809f6f7fceeeb6ebc6.js"></script>
-<samp>[0.24854, 0.25112, 0.25269, 0.24896, 0.24897, 0.24906, 0.2498 , 0.25086]
-</samp>
 
-Well that's boring! Each qubit has an average value of 0.25. They're uniform. 
+<samp>[0.49965, 0.50138, 0.49962, 0.49814, 0.50122, 0.50082, 0.49951, 
+0.49966]</samp>
+
+Well that's boring! Each qubit has an average value of 0.5. They're uniform. 
 
 Let's think about what this means. We used the Jordan-Wigner encoding which 
 means the qubit corresponding to a spin-orbital is $\ket{1}$ if there's an 
 electron in that spin-orbital, and $\ket{0}$ if there isn't. If each qubit has 
-0.25 chance of being $\ket{1}$, we have an average of $0.25 \cdot 8 = 2$ 
+0.5 chance of being $\ket{1}$, we have an average of $0.5 \cdot 8 = 4$ 
 electrons. This is half-filling, which is what we expected. 
 
 We know the *average* was half-filling. Now let's check how many measurements 
@@ -1041,40 +1061,43 @@ actually yielded half-filling:
 <script src="https://gist.github.com/warrenalphonso/8e1adc3206d55c5c24ae7255050ea507.js"></script>
 
 Nothing printed, so we didn't get a *single measurement* where we didn't have 
-two $\ket{1}$'s. This means I was wrong. The ground state distribution *isn't* 
-random: it's entangled in some way to give us at most 2 electrons in the 4 site 
-model. 
+four $\ket{1}$'s. This means I was wrong. The ground state distribution *isn't* 
+random: it's entangled in some way to give us at most 4 electrons in the 4 site 
+model. (Of course, we set $\mu$ in order to get this half-filling behavior but 
+it's nice to verify that it works 100% of the time.)
 
 Well, this is more interesting. I wonder if the spin-up and spin-down results 
-are correlated in any way. Here's how we'll check this: I suspect (**but I need 
-to find out for sure**) that the first 4 qubits correspond to spin-up and the 
-last 4 qubits correspond to spin-down, so that indices $i$ and $i+4$ correspond 
-to the spin-up and spin-down electrons on the $i$th site. This means if there's 
-always a single $\ket{1}$ in the first 4 qubits and a single $\ket{1}$ in the 
-last 4 qubits, there's always one spin-up and one spin-down electron in every 
-ground state. We can also check how often they're on the same site, though I 
-suspepct we'll never find 2 electrons on the same site because of the 
-interaction energy $U$. 
+are correlated in any way. Here's how we'll check this: the first 4 qubits 
+correspond to spin-up and the last 4 qubits correspond to spin-down so that 
+indices $i$ and $i+4$ correspond to the spin-up and spin-down electrons on the 
+$i$th site. This means if there're always two $\ket{1}$'s in the first 4 qubits 
+and two $\ket{1}$'s in the last 4 qubits, there're always 2 spin-up and 2 
+spin-down electrons in every ground state. 
+
+We can also check how often they're on the same site, though I suspect we'll 
+never find 2 electrons on the same site because of the interaction energy $U$. 
 
 <script src="https://gist.github.com/warrenalphonso/9523074fa3689f1e08b691598f374240.js"></script>
-<samp>Number of trials with 2 spin-UPs or 2 spin-DOWNs: 50101</samp>
 
-<samp>Number of trials with 2 electrons on the same site: 0</samp>
+<samp>Number of trials with unequal spin-up and spin-down electrons:  20917</samp>
 
-Huh. Looks like my first guess was wrong. In about half the trials, there were 
-2 spin-up or 2 spin-down electrons. *This means there's a chance for magnetism.* 
+<samp>Number of trials with at least 2 electrons on the same site:  30674</samp>
 
-Finally, let's see if the number of states with 2 spin-up electrons is the same 
-as the number of states with 2 spin-down electrons. This means *on average* 
-there's no magnetism in our model. 
+Huh, looks like both my guesses were wrong. In about 1/5 of the trials, we had 
+unequal spin-up and spin-down electrons. *This means there's a chance for 
+magnetism.* It also turns out that in about 1/3 of the trials, the ground state 
+had a fully occupied site, which I didn't expect because of the additional 
+interaction energy associated with it. 
 
-<script src="https://gist.github.com/warrenalphonso/f86b1e23b196a2f019364c71c5acd966.js"></script>
+Finally, let's look at the distribution of electron spins. We know that we 
+sometimes get a nonzero local moment, but I suspect the number of trials with 
+spin-up and spin-down local moments will be roughly equal. 
 
-<samp>Number of trials with 2 spin-UPs: 25116</samp> 
+![](/images/symmetric_spins.png)
 
-<samp>Number of trials with 2 spin-DOWNs: 24985</samp>
-
-Yup, they're about the same, so on average, there's no magnetism. 
+This is a plot of the number of spin-up electrons in our trials. The number of 
+spin-down electrons is 4 - \# spin-up electrons because we're at half-filling. 
+The symmetric nature of this histogram means on average, there's no magnetism. 
 
 # Uncovering magnetism from the Hubbard model 
 
@@ -1128,8 +1151,11 @@ On the other hand, for finite $U$, as $T \rightarrow \infty$,
 $\braket{m^2} \rightarrow \frac{1}{2}$. The temperature seems to prefer random 
 configurations and inhibits strong local moments. 
 
-What about the tunneling coefficient? Does it affect local moments? Let's 
-analyze the simplest case with a tunneling term: the two site Hubbard model. 
+What about the tunneling coefficient? Does it affect local moments? Turns out 
+this behaves like temperature: it inhibits local moments. I'll skip the math 
+here for the 2 site Hubbard model. 
+
+
 
 ## The Stoner criterion 
 
@@ -1140,3 +1166,5 @@ analyze the simplest case with a tunneling term: the two site Hubbard model.
 ## Nielsen fermionic anticommutation relations
 
 ## Adiabatic evolution 
+
+:::

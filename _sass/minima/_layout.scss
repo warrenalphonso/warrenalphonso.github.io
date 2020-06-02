@@ -419,7 +419,8 @@ h5 {
   position: absolute; 
   display: block;
   margin-top: -25px;
-  right: 10%;
+  //right: 10%; //Changed to 5% for qc/hubbard with Bootstrap
+  right: 4%;
   width: 20%;
   color: #797D82;
   font-size: 90%;
