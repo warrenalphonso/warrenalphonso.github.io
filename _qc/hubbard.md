@@ -203,28 +203,37 @@ the properties of the entire solid?
 We'll need some way to *model* this problem before we can start making progress. 
 Let's make some simplifying assumptions: 
 
-#. Assume the atoms aren't moving. We can model this as a lattice of fixed 
+#. Assume the atoms (nuclei) aren't moving. We can model this as a lattice of fixed 
 sites. 
+    #. The mass of an electron is more than a thousand times smaller than the 
+    mass of a proton. Since the nucleus is made up of protons and neutrons, we're 
+    justified in thinking only of movement *relative* to the nucleus, which 
+    treats it as stationary. 
 #. Assume the atoms only have *one* electron orbital. The Pauli exclusion 
 principle states that each atom can have a maximum of 2 electrons: an up electron 
 and a down electron. 
-    #. Why?
+    #. We've determined that the outer electrons *must* be treated quantum 
+    mechanically, so this restriction is justified if we only consider the outer 
+    electrons. We make the additional simplification of only considering *one 
+    orbital* of outer electrons. 
 #. Assume 2 electrons interact *with each other* only if they're in the same 
 orbital. 
+    #. Interaction strength is determined by proximity: two electrons interact 
+    very strongly if they're very close. We've decided to only consider the 
+    strongest interactions. 
 #. Assume electrons can only hop to another atom if that atom is directly 
 adjacent to their current atom. 
-
-{% annotate Read interactingelectrons.pdf for justifications %}
+    #. It's easiest and most common for electrons to hop to the nearest orbital, 
+    so we're only considering these hopping terms. 
 
 These 4 assumptions define the *Hubbard model* of solids. Pictorially, we can 
 represent the Hubbard model on a 2-dimensional lattice as: 
 
-![](/images/2d_hubbard.png)
+![[Image source](https://arxiv.org/abs/1811.04476).](
+/images/hubbard/2d_hubbard.png){ style="width: 50%; margin: auto;" }
 
-{% annotate This image is from [1811.04476](https://arxiv.org/abs/1811.04476). %}
-
-We're making good progress, but we need more than a purely visual understanding 
-of our model. 
+We're making good progress, but we'll need more than a purely visual 
+understanding of our model. 
 
 ### Defining creation and annihilation operators {#operators}
 
