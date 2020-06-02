@@ -3,6 +3,9 @@ layout: bootstrap
 title: Investigating the Hubbard model with variational algorithms
 ---
 
+[//]: # "Change the backticks to double quotes below!
+::: {.jumbotron style=`background-image: url('/images/quantumcountry.png'); background-size: cover;`}"
+
 ::: jumbotron
 
 :::: display-4
@@ -16,8 +19,6 @@ A project done through the QC Mentorship program.
 :::
 
 ::: container-lg
-*Note to the prospective reader:* I've done my best to only assume you've read 
-the [four essays at QuantumCountry](https://quantum.country/). 
 
 Once realized, quantum computers would be an intellectual and engineering 
 triumph, success in turning Nature's powerful and mysterious laws into 
@@ -25,7 +26,7 @@ computational power. If our current understanding of quantum mechanics holds up,
 it would mean the ability to efficiently simulate *any physical process*. 
 
 But it might take decades to build a quantum computer powerful enough to catch 
-up to classical computers with their 50 year headstart. 
+up with classical computers after their 50-year headstart. 
 
 A question I've been trying to answer since I started studying quantum computing 
 concerns its near-term usefulness: <u>what exactly can near-term quantum 
@@ -40,9 +41,50 @@ model in condensed matter physics, the Hubbard model.
 
 You've noticed the length of this post by now. It is not for the windowshopper. 
 This is intentional; I've favored a long, winding, wandering, uncertain path 
-as the search for uses of a quantum computer. 
+as the search for uses of a quantum computer. Let's get started!
+{% annotate *Note to the prospective reader:* I've done my best to only assume 
+you've read the [four essays at QuantumCountry](https://quantum.country/). %}
 
-# The Hubbard model 
+:::: {style="width: 50%; margin: 0 auto"}
+### <small>Table of Contents</small>
+
+[The Hubbard model](#Hubbard-model)
+
+- [A quantum mechanical solid!](#qm-solid)
+    - [Why are electrons important?](#electrons)
+- [Generalizing to the Hubbard model](#generalize-Hubbard)
+    - [Defining creation and annihilation operators](#operators)
+- [The Hubbard Hamiltonian](#Hubbard-Hamiltonian)
+- [The Jordan-Wigner transformation](#JW)
+- [Mott gap](#Mott)
+
+[Exploring the Variational Quantum Eigensolver (VQE)](#VQE)
+
+- [Representing the $2 \times 2$ Hubbard model](#four-site)
+- [VQE Primer](#VQE-Primer)
+- [The Variational Hamiltonian Ansatz](#VHA)
+    - [Adiabatic evolution](#adiabatic)
+    - [An ansatz based on adiabatic evolution](#ansatz)
+    - [How *good* is this ansatz?](#ansatz-quality)
+- [Choosing an initial state](#initial)
+    - [Position to momentum transformation](#fourier)
+    - [The 1D tunneling term](#one-D)
+    - [The 2D tunneling term](#two-D)
+    - [Choosing the states with best overlap](#overlap)
+- [Finding the ground state](#ground)
+- [Analyzing the ground state](#analyze)
+
+[Uncovering magnetism from the Hubbard model](#magnetism)
+
+- [Spin and magnetism](#spin)
+- [The Stoner criterion](#Stoner)
+
+[Appendix](#appendix)
+
+  - [Nielsen fermionic anticommutation relations](#Nielsen)
+::::
+
+# The Hubbard model {#Hubbard-model}
 
 :::: {style="width: 50%; margin: 0 auto"}
 ::::: {style="text-align: center;"}
@@ -53,9 +95,19 @@ passing grade anyway.*
 &mdash; Ntwali Toussaint
 ::::
 
-## A quantum mechanical solid! 
-- what if I actually use sodium? Then for Stoner, try others like iron to show 
-ferromagnetism. 
+## A quantum mechanical solid! {#qm-solid}
+
+When do we *need* to use quantum computers to analyze solids? 
+Quantum computers are based on quantum mechanics, so we can intuit that materials 
+whose properties and behavior are so *quantum mechanical that we can't hope to 
+approximate them with classical methods* will be good candidates for 
+demonstrating the usefulness of quantum computers. 
+
+But what solids fit this description? 
+From Griffiths' *Introduction to Quantum Mechanics*, 
+
+:::: card 
+::::: card-body
 
 **Problem 1.21:** In general, quantum mechanics is relevant when the de Broglie 
 wavelength of the particle in question is greater than the characteristic 
@@ -67,32 +119,33 @@ K^{-1}}$), so the typical de Broglie wavelength ($\lambda = h / p$) is
 $$\lambda = \frac{h}{\sqrt{3m k_B T}}$$ 
 where $h$ is Planck's constant $6.626 \times 10^{-34} \mathrm{J \cdot s}$. 
 
-The purpose of this problem is to anticipate which systems will *have to be* 
-treated quantum mechanically, and which can be safely described classically. 
+<mark>The purpose of this problem is to anticipate which systems will *have to be* 
+treated quantum mechanically, and which can be safely described classically. </mark>
 
 The lattice spacing in a typical **solid** is around $d=0.3 \mathrm{nm}$. Find 
-the temperature below which the free\* *electrons* in a solid are quantum 
+the temperature below which the free^1^ *electrons* in a solid are quantum 
 mechanical. Below what temperature are the *nuclei* in a solid quantum 
 mechanical? Use sodium as a typical case. *Moral*: The free electrons in a 
 solid are *always* quantum mechanical; the nuclei are almost *never* quantum 
 mechanical. 
 
-\* In a solid the inner electrons are attached to a particular nucleus, and for 
+^1^In a solid the inner electrons are attached to a particular nucleus, and for 
 them the relevant size would be the radius of the atom. But the outermost 
 electrons are not attached, and for them the relevant distance is the lattice 
 spacing. This problem pertains to *outer* electrons. 
+::::
+:::::
 
 {% annotate We don't know what or why the de Broglie wavelength is useful. 
 We just assume that's correct. Treat it like magic. %}
 
 We need to solve $\lambda > 3 \times 10^{-10} \mathrm{m}$. We need to choose some value for 
 mass $m$ to plug in, so that the inequality is only a function of temperature 
-$T$. The problem recommends using sodium, 
+$T$. The problem recommends using sodium: 
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Na_%28Sodium%29.jpg/220px-Na_%28Sodium%29.jpg)
-
-{% annotate The [Wikipedia page](https://en.wikipedia.org/wiki/Sodium) is very 
-interesting %}
+![Sodium is a highly reactive alkali metal. [Image source](
+https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Na_%28Sodium%29.jpg/220px-Na_%28Sodium%29.jpg).](
+/images/hubbard/sodium.jpg){ style="width: 30%; margin: auto;" }
 
 Solving $\lambda > d$: 
 $$
@@ -129,7 +182,12 @@ Earth](https://en.wikipedia.org/wiki/Lowest_temperature_recorded_on_Earth)
 is $184 \mathrm{K}$, so the above inequality is almost never true. The 
 nucleus can usually be treated with classical methods. 
 
-### Why are electrons important? 
+Our takeaway is that <u>outer electrons must be analyzed quantum mechanically 
+while 
+nuceli can be well approximated classically</u>. We'll focus on 
+solids whose outer electrons majorly determine their properties. 
+
+### Why are electrons important? {#electrons}
 
 It's not clear *why* we should care about the outer electrons of atoms in a 
 solid. 
@@ -137,7 +195,7 @@ solid.
 But since we want to do something useful with quantum computers that can't be 
 done with classical computers, this seems like a good thread to follow! 
 
-## The Hubbard model
+## Generalizing to the Hubbard model {#generalize-Hubbard}
 
 The problem we're attacking is: how do the outer electrons in a solid affect 
 the properties of the entire solid? 
@@ -168,7 +226,7 @@ represent the Hubbard model on a 2-dimensional lattice as:
 We're making good progress, but we need more than a purely visual understanding 
 of our model. 
 
-### Defining creation and annihilation operators 
+### Defining creation and annihilation operators {#operators}
 
 **I really should do this later. If I have extra time, I can think about how to 
 explain this well and with all the scattered knowledge I have about this, but 
@@ -238,7 +296,7 @@ $(2n^2 -2n + 1)\ket{n}$. Plugging in $n=0$ and $n=1$ results in the same thing:
 $2n^2 -2n+1 = 1$, which means we can write that $\{ a, a^\dagger \} = 1$ always, 
 and we get our first commutation relation!
 
-## The Hubbard Hamiltonian 
+## The Hubbard Hamiltonian {#Hubbard-Hamiltonian}
 
 The Hamiltonian of a system is the operator that represents its energy, 
 $H = KE + PE$, where $KE$ is kinetic energy and $PE$ is potential energy. 
@@ -279,7 +337,7 @@ of the chemical potential. Suppose I have a system that's not at half-filling
 yet. If I add an electron, does the total energy change without this chemical 
 potential term? I think so... %}
 
-## The Jordan-Wigner transformation 
+## The Jordan-Wigner transformation {#JW}
 - maybe write out the Hubbard Hamiltonian then explain the dimension of the 
 matrix in JW
 
@@ -354,7 +412,7 @@ a^\dagger_{2n} &= Z \otimes Z \otimes Z \otimes ... \otimes \frac{X -iY}{2}
 \end{align}
 $$
 
-## Mott gap
+## Mott gap {#Mott}
 - rewrite Hamiltonian so half-filling at $\mu = 0$
 
 Most chemistry problems are concerned with finding the eigenstates and 
@@ -453,7 +511,7 @@ to do is calculate $\rho = \braket{n}$. In the Jordan-Wigner transformation, we
 encode each spin-orbital in a qubit, so all we have to do to find $\rho$ is 
 measure each qubit. 
 
-# Exploring the Variational Quantum Eigensolver (VQE) 
+# Exploring the Variational Quantum Eigensolver (VQE) {#VQE}
 
 We'll start by finding the ground state and ground state energy of the 
 $2 \times 2$ Hubbard model 
@@ -468,7 +526,7 @@ get the ground state.
 > observables. The total energy... is the least interesting quantity. 
 > [The authors of 1506.05135(https://arxiv.org/abs/1506.05135)]{.blockquote-footer}
 
-## Representing the $2 \times 2$ Hubbard model 
+## Representing the $2 \times 2$ Hubbard model {#four-site}
 
 I'll be using the [OpenFermion](https://github.com/quantumlib/OpenFermion)
 software package for most of this post. OpenFermion 
@@ -502,7 +560,7 @@ for an explanation.
 
 And that's it. We can access the actual Hamiltonian with `hubbard.hamiltonian()`. 
 
-## VQE Primer 
+## VQE Primer {#VQE-Primer}
 
 VQE requires us to specify 3 things: 
 
@@ -510,10 +568,10 @@ VQE requires us to specify 3 things:
 #. An initial state 
 #. Some initial parameters
 
-## The Variational Hamiltonian Ansatz 
+## The Variational Hamiltonian Ansatz {#VHA}
 - Haar measure
 
-### Adiabatic evolution 
+### Adiabatic evolution {#adiabatic}
 
 {% annotate How do I learn this myself and explain it well? Scott Aaronson's 
 textbook has an explanation and I have a few bookmarked. Also I can try using 
@@ -598,7 +656,7 @@ had to start in the $+1$ eigenstate of $Z$.
 Keep this in mind! It means we have to *choose which state we start in 
 carefully*. We cannot simply start in the ground state everytime. 
 
-### An ansatz based on adiabatic evolution 
+### An ansatz based on adiabatic evolution {#ansatz}
 
 Adiabatic evolution is an interesting concept and seems very powerful - it 
 allows us to find ground states of arbitrary Hamiltonians by starting with an 
@@ -656,11 +714,11 @@ Explain how the ansatz is created with a circuit. Explain how the number of
 parameters stays constant, so we can explore an exponential space with constant 
 parameters that need to be optimized. 
 
-### How *good* is this ansatz? 
+### How *good* is this ansatz? {#ansatz-quality}
 - not sure if I can answer this in a meaningful way - I need to have an initial 
 state be constant and then I need
 
-## Choosing an initial state 
+## Choosing an initial state {#initial}
 
 - Read Wecker 2 Section 2C - something about how horizontal and veritcal commute 
 because they're diagonal in same basis? 
@@ -683,7 +741,7 @@ efficiently solvable it's an okay place to cheat.
 yourself that these 3 vectors sum to 0.](
 https://upload.wikimedia.org/wikipedia/commons/3/39/3rd_roots_of_unity.svg)
 
-### Position to momentum transformation 
+### Position to momentum transformation {#fourier}
 
 We can apply a Fourier transform to our creation operators to change from 
 position to momentum basis: {% annotate I need to understand why this works. 
@@ -777,7 +835,7 @@ has its own position and momentum, so these are just two ways of counting up
 the total number of fermions. We could have predicted this property without 
 doing the math. 
 
-### The 1D tunneling term 
+### The 1D tunneling term {#one-D}
 
 **Theorem 1**: For $U = 0$, the $1$D Hubbard Hamiltonian in momentum basis 
 is 
@@ -846,7 +904,7 @@ This means that by switching to the momentum basis we diagonalize our tunneling
 term. In this basis, its eigenvectors are just $[1, 0, 0, ...], [0, 1, 0, ...]$
 and its eigenvaluesu are $\cos (k) - \mu$. 
 
-### The 2D tunneling term 
+### The 2D tunneling term {#two-D}
 
 Extending the previous result to 2 dimensions isn't that hard. 
 
@@ -878,7 +936,7 @@ and $-1$ in $y$. Notice that these 4 terms correspond to a difference of $1$
 in a single dimension, and by Lemma 2, we get the hopping term over neighbors 
 again. {% annotate Not done yet, need to combine $\mu$ term. %}
 
-### Choosing the states with best overlap 
+### Choosing the states with best overlap {#overlap}
 
 We found a change of basis that makes it easy to find ground states of the 
 tunneling term and their corresponding ground state energies. Earlier we 
@@ -994,7 +1052,7 @@ Perhaps `preepare_gaussian_state` adds a perturbation? Regardless, this state
 with <samp>0.99999</samp> overlap is the same as the state we got with overlap 
 <samp>0.17225</samp> so it shouldn't matter for our results. 
 
-## Finding the ground state 
+## Finding the ground state {#ground}
 - do for a 2x6 lattice like page 5 of Wecker 2 and show how with few parameters 
 we can explore a huge Hilbert space to get large overlap
 
@@ -1014,7 +1072,7 @@ with the true ground state.
 97.7% overlap is pretty great, but it's not even close to achieving chemical 
 accuracy on our ground state energy. 
 
-## Analyzing the ground state 
+## Analyzing the ground state {#analyze}
 - show that parameters don't follow adiabatic evolution path
 
 First, let's see how many non-zero elements the state vector of the ground 
@@ -1099,9 +1157,9 @@ This is a plot of the number of spin-up electrons in our trials. The number of
 spin-down electrons is 4 - \# spin-up electrons because we're at half-filling. 
 The symmetric nature of this histogram means on average, there's no magnetism. 
 
-# Uncovering magnetism from the Hubbard model 
+# Uncovering magnetism from the Hubbard model {#magnetism}
 
-## Spin and magnetism 
+## Spin and magnetism {#spin}
 - Exercise 16, ..., all of Section 5,6
 - Section 10, 11
 
@@ -1157,14 +1215,12 @@ here for the 2 site Hubbard model.
 
 
 
-## The Stoner criterion 
+## The Stoner criterion {#Stoner}
 
 
 
-# Appendix 
+# Appendix {#appendix}
 
-## Nielsen fermionic anticommutation relations
-
-## Adiabatic evolution 
+## Nielsen fermionic anticommutation relations {#Nielsen}
 
 :::
