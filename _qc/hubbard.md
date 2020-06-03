@@ -44,6 +44,11 @@ This is intentional; I've favored a long, winding, wandering, uncertain path
 as the search for uses of a quantum computer. Let's get started!
 {% annotate *Note to the prospective reader:* I've done my best to only assume 
 you've read the [four essays at QuantumCountry](https://quantum.country/). %}
+Another thing: I don't know much quantum mechanics, so instead of pretending 
+like things make sense when I don't understand them, I'll explicitly say 
+["This is true by magic"](
+https://www.lesswrong.com/posts/kpRSCH7ALLcb6ucWM/say-not-complexity) 
+as a reminder that we're assuming something without understanding it. 
 
 :::: {style="width: 50%; margin: 0 auto"}
 ### <small>Table of Contents</small>
@@ -86,11 +91,9 @@ you've read the [four essays at QuantumCountry](https://quantum.country/). %}
 
 # The Hubbard model {#Hubbard-model}
 
-:::: {style="width: 50%; margin: 0 auto"}
-::::: {style="text-align: center;"}
+:::: {style="width: 50%; margin: 0 auto; text-align: center;"}
 *It is almost like Nature knows you are blatantly cheating, but she gives you a 
 passing grade anyway.*
-:::::
 
 &mdash; Ntwali Toussaint
 ::::
@@ -205,25 +208,25 @@ Let's make some simplifying assumptions:
 
 #. Assume the atoms (nuclei) aren't moving. We can model this as a lattice of fixed 
 sites. 
-    #. The mass of an electron is more than a thousand times smaller than the 
+    - The mass of an electron is more than a thousand times smaller than the 
     mass of a proton. Since the nucleus is made up of protons and neutrons, we're 
     justified in thinking only of movement *relative* to the nucleus, which 
     treats it as stationary. 
 #. Assume the atoms only have *one* electron orbital. The Pauli exclusion 
 principle states that each atom can have a maximum of 2 electrons: an up electron 
 and a down electron. 
-    #. We've determined that the outer electrons *must* be treated quantum 
+    - We've determined that the outer electrons *must* be treated quantum 
     mechanically, so this restriction is justified if we only consider the outer 
     electrons. We make the additional simplification of only considering *one 
     orbital* of outer electrons. 
 #. Assume 2 electrons interact *with each other* only if they're in the same 
 orbital. 
-    #. Interaction strength is determined by proximity: two electrons interact 
+    - Interaction strength is determined by proximity: two electrons interact 
     very strongly if they're very close. We've decided to only consider the 
     strongest interactions. 
 #. Assume electrons can only hop to another atom if that atom is directly 
 adjacent to their current atom. 
-    #. It's easiest and most common for electrons to hop to the nearest orbital, 
+    - It's easiest and most common for electrons to hop to the nearest orbital, 
     so we're only considering these hopping terms. 
 
 These 4 assumptions define the *Hubbard model* of solids. Pictorially, we can 
@@ -238,9 +241,9 @@ understanding of our model.
 ### Defining creation and annihilation operators {#operators}
 
 **I really should do this later. If I have extra time, I can think about how to 
-explain this well and with all the scattered knowledge I have about this, but 
+explain this well and with all the scattered knowledge I have, but 
 it isn't a priority because if I run out of time, this is an area where it will 
-be acceptable to say "I assume the reader knows this" or link to a resource.**
+be acceptable to just link to a resource.**
 
 From our 4 assumptions above, there seem to be 2 main ideas we need to express 
 about the behavior of free electrons: the *kinetic energy* of an electron 
@@ -260,8 +263,9 @@ explanation for these differences.
 
 Since we're describing electrons, the creation and annihilation operators have 
 *fermionic anticommutation relations*. In other words, for two fermions on 
-sites $j$ and $k$, with spins $\sigma$ and $\pi$, we have. Need to mention Fock 
-space. 
+sites $j$ and $k$, with spins $\sigma$ and $\pi$, we have. 
+{% annotate Need to mention Fock 
+space. %}
 
 $$
 \Large
@@ -274,7 +278,8 @@ $$
 
 I'm not sure *why* these relations hold, but we can derive some interesting 
 properties of operators that obey the above relations, namely the Pauli 
-exclusion principle. We'll do these derivations in the appendix. 
+exclusion principle. {% annotate These are done in Nielsen's paper. I need to 
+do this here or in the appendix. %}
 
 For now, I'll quickly summarize what you need to know about these operators. 
 
@@ -284,15 +289,16 @@ with spin $\sigma$ while $a_{j \sigma}$ destroys a fermion on site $j$ with
 spin $\sigma$. 
 
 I said I don't know why these relations hold, but we can try to think about how 
-we could have derived them by ourselves. We want some relation that makes it 
+we might have derived them by ourselves. We want some relation that makes it 
 clear that $a^2$ and $a^{\dagger^{2}}$ are both nonsense, since we can't have two 
 fermions of the same spin in the same place. Since we're working in a vector 
 space, we can set these both equal to $0$, which means that doing either of 
 these operations destroys our whole vector space. Notice another way of writing 
 $a^2 = 0$ is $2a^2 = \{ a, a \} = 0$ which is the exact anticommutation 
-relation we have. The same logic works for $a^\dagger$. 
+relation we have. The same logic works for $a^\dagger$. This explain two of the 
+three relations above. 
 
-Okay but how could we have come up with the first relation? 
+How could we have come up with the first relation? 
 
 Recall from the quantum harmonic oscillator that $a \ket{n} = \sqrt{n} \ket{n-1}$ 
 and $a^\dagger \ket{n} = \sqrt{n+1} \ket{n+1}$. Let's enforce the rule that $n$ 
@@ -302,15 +308,28 @@ $$ a \ket{n} = n \ket{1-n} \qquad a^\dagger \ket{n} = (1 -n) \ket{1-n}$$
 
 Now what is $(aa^\dagger + a^\dagger a) \ket{n}$? It simplifies to 
 $(2n^2 -2n + 1)\ket{n}$. Plugging in $n=0$ and $n=1$ results in the same thing: 
-$2n^2 -2n+1 = 1$, which means we can write that $\{ a, a^\dagger \} = 1$ always, 
+$2n^2 -2n+1 = 1$, which means we can write that $\{ a, a^\dagger \}$ is always 
+equal to 1, 
 and we get our first commutation relation!
+
+One last useful operator: the number operator $\hat{n} = a^\dagger a$: 
+$$\hat{n} \ket{n} = a^\dagger a \ket{n} = a^\dagger (n \ket{1 - n}) = 
+n^2 \ket{n} = n \ket{n}$$
+As you can see, it's behavior is to multiply a state by the number of fermions 
+that occupy it. When it's clear, I'll use $n$ instead of $\hat{n}$ to denote 
+the number operator. 
 
 ## The Hubbard Hamiltonian {#Hubbard-Hamiltonian}
 
 The Hamiltonian of a system is the operator that represents its energy, 
 $H = KE + PE$, where $KE$ is kinetic energy and $PE$ is potential energy. 
-{% annotate I need a better explanation of why the Hamiltonian is energy and 
-why it's so important. %} Using the language of creation and annihilation 
+{% annotate The Hamiltonian's eigenstates are 
+the possible resulting states when we measure a system, each eigenstate's 
+corresponding eigenvalue is that state's energy, and the Hamiltonian tells us 
+exactly how a system evolves with time according to the Schrödinger equation. 
+*Why* this operator turns out to be so important is a much harder question. For 
+now, it's magic. %} 
+Using the language of creation and annihilation 
 operators, we can write the Hamiltonian as
 $$ H = -t \sum_{ \braket{j, k} \sigma} ( a^\dagger_{j \sigma} a_{k \sigma} + 
 a^\dagger_{k \sigma} a_{j \sigma} ) + U \sum_j n_{j \uparrow} n_{j \downarrow} $$
@@ -320,35 +339,41 @@ term. Notice the notation $\braket{j, k}$.
 I use this to denote we're summing over adjacent sites $j$ and $k$. The second 
 term represents the potential energy. It's also called the interaction term. 
 Notice it's nonlinear - we only add $U$ if 
-there are 2 electrons on a site. {% annotate I need to introduce the number 
-operator. %}
+there are 2 electrons on a site. 
 
 This notation should seem weird. We almost *never* add unitary matrices in 
 quantum 
-computing. The resulting sum isn't generally unitary. But Hamiltonians just 
-have to 
+computing, because the resulting sum isn't generally unitary. But Hamiltonians 
+must 
 be Hermitian, and it's easy to see that the sum of Hermitian matrices is also 
 Hermitian. Still, what does a sum of matrices *physically mean*? If we multiply 
 some vector by this matrix, we're acting on it with the kinetic and potential 
 energy matrices and our result is a sum of the results. So maybe we can 
 intuitively think of a sum of Hermitian matrices as two *processes* happening 
-simultaneously to our state. {% annotate This answer is in Scott Aaronson's 
-recenly-published [lecture notes](https://www.scottaaronson.com/qclec.pdf) on 
-Quantum Information Science. %}
+simultaneously to our state. {% annotate This explanation is in Scott Aaronson's 
+recenly-published [lecture notes](https://www.scottaaronson.com/qclec.pdf#page=215) 
+on Quantum Information Science. %}
 
-**I need to introduce chemical potential here.**
-
+Notice our interaction term is only relevant if there are 2 electrons on some 
+sites. If have $n$ total sites, then we can have a maximum of $2n$ electrons, 
+1 spin-up and 1 spin-down on each site according to the Pauli exclusion principle. 
+If we have less than or equal to $n$ electrons, we can order them so that we 
+never have any interaction energy $U$ by placing at most one electron on each 
+site. This isn't exactly a physical behavior because it means all those 
+configurations have the same energy. To fix this, we'll add a *chemical 
+potential energy* $\mu$ which scales with the total number of electrons: 
 {% annotate I don't have a good explanation of why the chemical potential is 
 important. It seems to be how "accepting" the system is of additional 
 particles. It adds a linear potential term, so that we don't have a potential 
 *only* if we have 2 electrons, but we also keep the nonlinear potential on top 
-of the chemical potential. Suppose I have a system that's not at half-filling 
-yet. If I add an electron, does the total energy change without this chemical 
-potential term? I think so... %}
+of the chemical potential. %}
+
+$$ H = -t \sum_{ \braket{j, k} \sigma} ( a^\dagger_{j \sigma} a_{k \sigma} + 
+a^\dagger_{k \sigma} a_{j \sigma} ) + U \sum_j n_{j \uparrow} n_{j \downarrow} 
+- \mu \sum_j (n_{j \uparrow} + n_{j \downarrow}) $$
+
 
 ## The Jordan-Wigner transformation {#JW}
-- maybe write out the Hubbard Hamiltonian then explain the dimension of the 
-matrix in JW
 
 We've got analytic and visual ways to think of our model now, but how can we 
 represent it on a *quantum computer*? Notice that our Hamiltonian calculates 
@@ -362,18 +387,18 @@ each spin-orbital. {% annotate I could use a picture that shows how we put all
 the UP spins first and then all the DOWN spins. %} 
 If we order our $2n$ qubits by having the $n$ up spin-orbitals be represented 
 in the first $n$ qubits, and then the $n$ down spin-orbitals be represented in 
-the last $n$ qubits, if the $j \uparrow$-th spin-orbital has an electron, then the 
-$j$-th qubit is $\ket{1}$, and if the $j \downarrow$-th spin-orbital doesn't 
+the last $n$ qubits, if the $j_\uparrow$-th spin-orbital has an electron, then the 
+$j$-th qubit is $\ket{1}$, and if the $j_\downarrow$-th spin-orbital doesn't 
 have an electron, then the $n + j$-th qubit is $\ket{0}$. 
 
 Now that we have this figured out, we need some way to encode our creation and 
 annihilation operators into qubit operators. There are 3 main ways of doing 
 this, but we'll focus on the *Jordan-Wigner transformation*. {% annotate The 
 2 other popular ways to encode are the Bravyi-Kitaev and parity encodings. 
-These are more complex than the Jordan-Wigner encoding, but more useful with 
-other ansatz. %} 
+These are more complex than the Jordan-Wigner encoding, but more useful in 
+some situations. %} 
 
-The Jordan-Wigner transformation is very intuitive, and we can stumble on it 
+The Jordan-Wigner transformation is very intuitive, and we can stumble across it 
 ourselves. We need $a^\dagger$ to convert $\ket{0} \rightarrow \ket{1}$ and 
 $\ket{1} \rightarrow 0$, while $a$ must convert $\ket{1} \rightarrow \ket{0}$ 
 and $\ket{0} \rightarrow 0$. Since qubits are 2-dimensional and we've specified 
@@ -409,7 +434,7 @@ we can use this property to get the desired behavior. {% annotate [This article]
 https://docs.microsoft.com/en-us/quantum/libraries/chemistry/concepts/jordan-wigner)
 by Microsoft is a great resource. %}
 
-This is the Jordan-Wigner transform. We replace use the above formulation for 
+This is the Jordan-Wigner transform. We use the above formulation for 
 $a^\dagger$ and $a$, then prepend the operator with Pauli $Z$s and append a 
 sequence of identity operators $I$. In other words, 
 $$ 
@@ -420,6 +445,13 @@ a^\dagger_2 &= Z \otimes \frac{X - iY}{2} \otimes I \otimes ... \otimes I \\
 a^\dagger_{2n} &= Z \otimes Z \otimes Z \otimes ... \otimes \frac{X -iY}{2} 
 \end{align}
 $$
+
+We can guess that these matrices become huge by looking at the 
+chains of tensor products. For example, if we have a 4 site Hubbard model, we'd 
+need 8 
+qubits for the JW transformation which means our Hilbert space has dimension 
+$2^8 = 256$. For a 10 site model our vectors have dimension $2^{20} = 1048576$. 
+This gets out of hand quickly!
 
 ## Mott gap {#Mott}
 - rewrite Hamiltonian so half-filling at $\mu = 0$
@@ -531,9 +563,15 @@ don't really have a use for the ground state energy. We'll proceed anyway
 because it'll give us a working example of VQE and the parameters we need to 
 get the ground state. 
 
-> In this section we will discuss the measurement of interesting physical 
-> observables. The total energy... is the least interesting quantity. 
-> [The authors of 1506.05135(https://arxiv.org/abs/1506.05135)]{.blockquote-footer}
+:::: {style="width: 50%; margin: 0 auto; text-align: center;"}
+*In this section, we will discuss the measurement of interesting physical 
+observables. The total energy... is the **least** interesting quantity. We will 
+instead focus on densities and density correlations, kinetic energies, Green's 
+functions and pair correlation functions.*
+
+&mdash; Wecker et. al.,  Section 6 of 
+[1506.05135](https://arxiv.org/abs/1506.05135)
+::::
 
 ## Representing the $2 \times 2$ Hubbard model {#four-site}
 
@@ -611,7 +649,7 @@ I haven't proven the adiabatic theorem because I don't know how to (yet). We're
 just assuming it's true for now. Regardless, let me try to make things more 
 concrete with an example. 
 
-The Schrodinger equation is 
+The Schrödinger equation is 
 $$ i \frac{d \ket{\psi}}{dt} = H \ket{\psi} $$ 
 which means, for *time-independent* $H$, the solution is 
 $$ \ket{\psi(t)} = e^{-i H t} \ket{\psi(0)} $$
