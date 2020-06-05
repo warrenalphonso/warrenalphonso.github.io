@@ -554,14 +554,14 @@ measure each qubit.
 
 # Exploring the Variational Quantum Eigensolver (VQE) {#VQE}
 
-We'll start by finding the ground state and ground state energy of the 
-$2 \times 2$ Hubbard model 
-using VQE. To be clear, I haven't explained *why* finding the ground state 
-energy is important or useful. That's because I honestly don't know. Once we 
-find the ground state, we can get to work uncovering its properties, but I 
-don't really have a use for the ground state energy. We'll proceed anyway 
-because it'll give us a working example of VQE and the parameters we need to 
-get the ground state. 
+In this section, we'll learn how to use VQE to learn properties of the 
+$2 \times 2$ Hubbard 
+model. People tend to focus on finding the ground state energy to high accuracy 
+with VQE, but I honestly still don't know why this is such an important 
+quantity and why we need such high accuracy. We'll find the ground state 
+energy anyway because we get it for free when we do VQE, but I'm more 
+interested in the ground state itself. Once we finish running VQE and find the 
+ground state, we can analyze its properties. 
 
 :::: {style="width: 50%; margin: 0 auto; text-align: center;"}
 *In this section, we will discuss the measurement of interesting physical 
@@ -581,42 +581,36 @@ is an open-source project that makes working with quantum chemistry much easier.
 {% annotate I originally planned to write my own code for representing and 
 simulating the Hamiltonian for the Hubbard model, but it was wildly inefficient. 
 My computer couldn't handle anything more than a $2 \times 2$ Hubbard 
-Hamiltonian, probably because I was storing the entire matrix. For the $2 \times 2$
-case, we have $8$ spin-orbitals which translates to a $2^8 = 256$ dimension 
-Hilbert space. OpenFermion doesn't use this approach, opting to store strings 
-of creation and annihilation operators or scipy.sparse matrices. %} OpenFermion 
+Hamiltonian, probably because I was storing the entire matrix. 
+For the $2 \times 2$ case this translates to a $256 \times 256$ matrix. 
+OpenFermion doesn't use this approach, opting to store strings 
+of creation and annihilation operators or `scipy.sparse` matrices. %} OpenFermion 
 is built by Google, so they've made it easy to integrate with their own quantum 
 computing library [Cirq](https://github.com/quantumlib/cirq). We'll be using 
 Cirq as well later on. 
 
-For now, let's create a $2 \times 2$ Hubbard lattice in OpenFermion. 
+![A diagram of the $2 \times 2$ Hubbard model with chemical potential $\mu$. 
+Notice that this is *not* at half-filling.](
+/images/hubbard/4sitehubbard.png){ style="width: 50%; margin: auto;" }
 
-![](/images/22hubbard.png)
-{% annotate I need to make this diagram more informative - it'll be easy to 
-add info since I'm just drawing it so do something more. %}
-
+Let's create a $2 \times 2$ Hubbard lattice in OpenFermion: 
 <script src="https://gist.github.com/warrenalphonso/aeac8e5265281fa838b566051ca7b88f.js"></script>
 
 Next, we'll want to create a `FermiHubbardModel` instance from our lattice. 
-The format for the tunneling and interaction coefficients is a little weird - 
-check out the [documentation](
+The format for the tunneling and interaction coefficients is a little weird 
+&mdash; check out the [documentation](
 https://openfermion.readthedocs.io/en/latest/openfermion.html#openfermion.hamiltonians.FermiHubbardModel)
 for an explanation. 
-
 <script src="https://gist.github.com/warrenalphonso/96fcbefce44a520a928e347f358c1171.js"></script>
 
 And that's it. We can access the actual Hamiltonian with `hubbard.hamiltonian()`. 
 
 ## VQE Primer {#VQE-Primer}
 
-VQE requires us to specify 3 things: 
-
-#. An ansatz 
-#. An initial state 
-#. Some initial parameters
+The VQE algorithm requires us to specify 3 things: an ansatz, an initial state, 
+and some initial parameters. 
 
 ## The Variational Hamiltonian Ansatz {#VHA}
-- Haar measure
 
 ### Adiabatic evolution {#adiabatic}
 
@@ -637,15 +631,14 @@ time-dependent Hamiltonian goes from $H_A$ to $H_B$.
 
 The adiabatic theorem tell us that if we *evolve* $\ket{\psi_A}$ by $e^{-itH(s)}$
 while slowly changing $s$, the final resulting state will be the *corresponding*
-eigenvector of $H_B$. 
-{% annotate Show what I mean by slowly change evolution as a series of matrix 
-multiplications. Also, explain what corresponding eigenvector means. %} 
+eigenvector of $H_B$. (It will be clearer later what I mean by "corresponding 
+eigenvector.")
 This is useful if one Hamiltonian is diagonal, or at least easy to diagonalize, 
 because then we can easily find its ground state. Then we adiabatically evolve 
 this ground state to get the ground state of another Hamiltonian that is perhaps 
 harder to diagonalize. 
 
-I haven't proven the adiabatic theorem because I don't know how to (yet). We're 
+I haven't proven the adiabatic theorem because I don't know how to yet. We're 
 just assuming it's true for now. Regardless, let me try to make things more 
 concrete with an example. 
 
@@ -656,8 +649,8 @@ $$ \ket{\psi(t)} = e^{-i H t} \ket{\psi(0)} $$
 where we evolve for time $t$. 
 
 Suppose we choose $5$ discrete times: $H(0), H(.25), H(.50), H(.75), H(1)$. At 
-each time step, we'll simulate for $t=1$. Then, if the ground state of $H_A$ is 
-$\ket{\psi_A}$, the ground state of $H_B$ is: 
+each time step, we'll simulate for $t=1$. Then, if an eigenvector of $H_A$ is 
+$\ket{\psi_A}$, an eigenvector of $H_B$ is: 
 $$\ket{\psi_B} = e^{-i H(1)} e^{-i H(0.75)} e^{-i H(0.50)} e^{-i H(0.25)} 
 e^{-i H(0)} \ket{\psi_A}$$
 
@@ -665,23 +658,27 @@ Of course, this only works if we choose sufficiently many discrete values for
 $s$ and a short enough time $t$. {% annotate Give an 
 estimate for values for number of steps and $t$. %} 
 
+The adiabatic theorem tells us this will work only if we choose sufficiently 
+many values of $s$ and a short enough time $t$. I wish I could prove some 
+bounds for these, but I can't yet. &#128542;
+
 Here's an example with $2 \times 2$ Hamiltonians. We'll choose $H_A = Z$ and 
 $H_B = X$. 
-
 <script src="https://gist.github.com/warrenalphonso/2b22bf3418e301b28f33e675b995402c.js"></script>
 
-With `n = 5`, we get <samp>res = [0.29916787+0.66776416j, 
--0.13667712-0.66776416j]</samp>
-and `np.dot(H_B, res)` gives us <samp>res = [-0.13667712-0.66776416j, 
-0.29916787+0.66776416j]</samp>, which isn't quite an eigenvector. 
+With `n = 5`, we get <samp>res = [0.299+0.668j, -0.137-0.668j]</samp>
+and `np.dot(H_B, res)` gives us <samp>res = [-0.137-0.668j, 0.299+0.668j]</samp>, 
+which isn't quite an eigenvector. 
 
-However, if we set `n = 50`, we get <samp>res = [ 0.71332125-0.04347244j, 
--0.69813543+0.04347244j]</samp>, which is very close to the eigenvector of the 
+However, if we set `n = 50`, we get 
+<samp>res = [ 0.713-0.043j, -0.698+0.043j]</samp>, 
+which is very close to the eigenvector of the 
 Pauli $X$ matrix with eigenvalue $-1$. We started with the ground state of $H_A$ 
 and ended in the ground state of $H_B$, just like the adiabatic theorem predicts! 
 
-Let's try one last example. This time we'll use 
-`H_B = np.array( [[-5, 0], [0, 4]] )`. When we use the same parameters as 
+Let's try one last example. Instead of $H_B = X$, this time we'll use 
+$H_B = \begin{bmatrix} -5 & 0 \\ 0 & 4 \end{bmatrix}$. 
+When we use the same parameters as 
 before (`n = 50, t = 1`), we get <samp>res = [0, 0.92175127+0.38778164j]</samp>. 
 This is very close to <samp>[0, 1]</samp> which is the eigenvector with 
 eigenvalue $4$. We *didn't* get the ground state! What went wrong? 
@@ -689,8 +686,10 @@ eigenvalue $4$. We *didn't* get the ground state! What went wrong?
 We can get some intuition by plotting the eigenvalues of $H(s)$ as we increase 
 $s$: 
 
+:::: {style="width: 80%; margin: 0 auto; "}
 ![](/images/adiabatic_X.png){ float="left" }
 ![](/images/adiabatic_crossing.png){ float="right" }
+::::
 
 In the first graph, there is no *crossing* of the eigenvalues. We started with 
 the lowest eigenstate of $Z$ and ended in the lowest eigenstate of $X$. In the 
@@ -705,10 +704,10 @@ carefully*. We cannot simply start in the ground state everytime.
 
 ### An ansatz based on adiabatic evolution {#ansatz}
 
-Adiabatic evolution is an interesting concept and seems very powerful - it 
+Adiabatic evolution is an interesting concept and seems very powerful &mdash; it 
 allows us to find ground states of arbitrary Hamiltonians by starting with an 
 easy Hamiltonian. The catch is that the change in $s$ might have to be 
-exponentially small. {% annotate I don't like this. %}
+exponentially small. 
 
 Instead of calculating this ourselves, we can just turn it into an ansatz and 
 let an optimizer choose the best values! 
@@ -724,28 +723,16 @@ $e^{A + B} = e^A e^B$. %}
 $$\ket{\psi_B} = \prod_k e^{\theta_{kA} H_A} e^{\theta_{kB} H_B} \ket{\psi_A}$$
 
 Here's our strategy for the Hubbard model: we'll set $H_A$ to be the 
-tunneling term and $H_B$ to be the interaction term. This is because the 
+tunneling term and $H_B$ to be the full Hamiltonian. This is because the 
 tunneling term is *quadratic* which means that it's a linear combination of 
 operators that are products of at most 2 creation and annihilation operators. 
 We have efficient algorithms to diagonalize these and easily find the 
-eigenvalues and eigenvectors. But the interaction term is *quartic*. There's no 
-clear way to find their eigenspectrum. 
-
-This choice of $H_A$ and $H_B$ also commute: $H_B$ simply counts the number of 
-fermions on all the sites, so $[ H_A, H_B ] = 0$ is true if $H_A$ doesn't 
-change the total number of fermions. $H_A$ is the tunneling term which only 
-moves fermions around, so this condition is satisfied, and $[H_A, H_B]=0$. 
-
-{% annotate WAIT, this is all wrong. $H_B$ isn't the interaction term, it's 
-the *full* Hamiltonian! %}
+eigenvalues and eigenvectors. But the interaction term (and therefore the entire 
+Hubbard Hamiltonian) is *quartic*. There's no 
+efficient way to find its eigenspectrum. 
 
 Creating this ansatz is easy with OpenFermion: 
-
 <script src="https://gist.github.com/warrenalphonso/9343ca296b524c9bdbdca7c2292ca796.js"></script>
-
-This class takes care of a bunch of messy ansatz instantiation for us. We'll be 
-customizing it later in this post to try some more strategies, but for now we 
-won't question most of the defaults. 
 
 We've got our ansatz now. But we also need to choose an initial state and 
 specify initial parameters. We'll go over choosing an initial state in the next 
@@ -754,12 +741,13 @@ section.
 Turns out the `SwapNetworkTrotterHubbardAnsatz` class has a good default strategy 
 for initial parameters if we don't specify one. Here's the docstring that 
 explains it: 
-
 <script src="https://gist.github.com/warrenalphonso/4e6ce0b1bca5a58537a3b3082f3e2c13.js"></script>
 
-Explain how the ansatz is created with a circuit. Explain how the number of 
+{% annotate Explain how the ansatz is created with a circuit. Explain how the 
+number of 
 parameters stays constant, so we can explore an exponential space with constant 
-parameters that need to be optimized. 
+parameters that need to be optimized. Also maybe customize ansatz a bit so I 
+don't only use defaults? %}
 
 ### How *good* is this ansatz? {#ansatz-quality}
 - not sure if I can answer this in a meaningful way - I need to have an initial 
