@@ -39,8 +39,8 @@ project explores the most well-known of the variational algorithms: the
 Variational Quantum Eigensolver (VQE). We'll use the VQE to analyze a fundamental 
 model in condensed matter physics, the Hubbard model. 
 
-You've noticed the length of this post by now. It is not for the windowshopper. 
-This is intentional; I've favored a long, winding, wandering, uncertain path 
+You've noticed the length of this post by now. 
+It is intentional; I've favored a long, winding, wandering, uncertain path 
 as the search for uses of a quantum computer. Let's get started!
 {% annotate *Note to the prospective reader:* I've done my best to only assume 
 you've read the [four essays at QuantumCountry](https://quantum.country/). %}
@@ -607,8 +607,112 @@ And that's it. We can access the actual Hamiltonian with `hubbard.hamiltonian()`
 
 ## VQE Primer {#VQE-Primer}
 
-The VQE algorithm requires us to specify 3 things: an ansatz, an initial state, 
-and some initial parameters. 
+I'll give only a short hand-wavy explanation of the VQE algorithms; for a more 
+in-depth understanding I recommend [Michał Stęchły's article](
+https://www.mustythoughts.com/variational-quantum-eigensolver-explained). 
+
+The VQE algorithm uses a principle in quantum mechanics called the *variational 
+principle*, which states that $$ \bra{\psi} H \ket{\psi} \geq E_0$$
+where $E_0$ is the ground state energy and $\ket{\psi}$ is any state vector. 
+A simple way to see that this inequality holds: we can write any state vector 
+$\ket{\psi}$
+as a linear combination of eigenvectors $\ket{\psi} = \sum_i a_i \ket{E_i}$, 
+so $H$ acting 
+on this linear combination multiplies each eigenvector by its eigenvalue $E_i$ 
+and 
+then we take the inner product with the initial state $\ket{\psi}$ which had 
+norm 1 so we're left with $\sum_i a_i E_i $ of each eigenvector, 
+which is clearly minimized if $\ket{\psi} = \ket{E_0}$, the ground state. 
+
+The variational principle tells us that if we minimize $\bra{\psi} H \ket{\psi}$ 
+we'll find the ground state. Machine learning and optimization techniques have 
+been getting pretty good in the past few years; the insight of VQE is that we 
+should use classical optimization techniques with a quantum computer. How? We 
+create a *parameterized* circuit, which changes its gates based on a few 
+parameters that a classical optimizer chooses. 
+
+![Here's a circuit with 1 parameters: the rotation angle for the 
+R~z~ gate. Varying the parameter produces different final states.](
+/images/hubbard/parameterized_circuit.png
+){ style="width: 50%; margin: auto;" }
+
+The number of parameters increases very quickly. [This paper](
+https://arxiv.org/abs/quant-ph/0308033) found an ansatz that can reach every 
+single state in the 2-qubit state space; the ansatz has **24 parameters**. Our 
+Hubbard model is represented on an 8-qubit state space. The strategy of an 
+ansatz that can reach every single state would probably require thousands of 
+parameters and be incredibly hard to optimize. That's why choosing a good 
+ansatz is very important. 
+
+Once we have a state, how do we find $\bra{\psi} H \ket{\psi}$? The only way 
+we can extract information from a quantum circuit is through measurement so we 
+have to rephrase this quantity as a measurement somehow. 
+
+:::: card 
+::::: card-body
+**Lemma 0**: The Pauli tensors form a basis for all Hamiltonians. 
+
+*Proof*: The Pauli matrices are: 
+$$
+I = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \quad 
+X = \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} \quad 
+Y = \begin{bmatrix} 0 & -i \\ i & 0 \end{bmatrix} \quad 
+Z = \begin{bmatrix} 1 & 0 \\ 0 & -1 \end{bmatrix}
+$$
+
+Any 2-dimensional Hermitian operator can be written as: 
+$$H = \begin{bmatrix} a & b \\ b^* & c \end{bmatrix}$$ where $a, c$ are real. 
+We can define a linear combination of the Pauli matrices as:
+$$
+a_0 I + a_1 X + a_2 Y + a_3 Z = 
+\begin{bmatrix} 
+a_0 + a_3 & a_1 - i a_2 \\ a_1 + i a_2 & a_0 - a_3 
+\end{bmatrix}
+$$
+for real $a_i$. 
+Notice the upper-right and lower-left elements are complex conjugates of each 
+other which is what a Hermitian matrix requires. The upper-left and lower-right 
+values can be *any real number*, we just choose $a_0$ to be the midpoint between 
+the desired two real numbers and then $a_3$ the distance from the midpoint to 
+the desired number. 
+
+This means the Pauli matrices form a basis for 2-dimensional Hermitian matrices. 
+Then we simply use the definition of the tensor product, which states that for 
+any two vector spaces $V_1$ and $V_2$ with basis $\{ e_i \}$ and $\{ f_j \}$, 
+the tensor product $V_1 \otimes V_2$ is a vector space with basis 
+$\{ e_i \otimes f_j \}$. 
+
+All Hamiltonians are Hermitian and have dimension $2^n$ where $n$ is the number 
+of qubits they act on, so all Hamiltonians can be written as a linear combination 
+of Pauli tensors. 
+
+:::::: {style="float: right"}
+$\blacksquare$
+::::::
+
+:::::
+::::
+
+Thus, we can write $\bra{\psi} H \ket{\psi}$ as a linear combination of Pauli 
+tensors, like 
+$\bra{\psi} \frac{1}{2} X \otimes Y \otimes \cdots \otimes Z + \frac{1}{2} ... \ket{\psi}$.
+
+This is useful because we can compute these with measurements. I'll do a 1-qubit 
+example: suppose we wanted to get $\bra{\psi} Z \ket{\psi}$. We can write 
+$\ket{\psi}$ as a linear combinations of $Z$'s eigenvectors: 
+$\ket{\psi} = c_0 \ket{0} + c_1 \ket{1}$. Now, 
+$$\bra{\psi} Z \ket{\psi} = \Big( c_0^* \bra{0} + c_1^* \bra{1} \Big) \Big( 
+c_0 \ket{0} - c_1 \ket{1} \Big) = \lvert c_0 \rvert^2 - \lvert c_1 \rvert^2 $$
+Hey, $\lvert c_0 \rvert^2$ is the probability we measure $\ket{0}$ and 
+$\lvert c_1 \rvert^2$ is the probability we measure $\ket{1}$, so we can find 
+these values by doing a bunch of measurements and averaging our results. This 
+can be extended to multiple-qubit states by measuring $\ket{00}$, etc., and can
+be extended to other Pauli operators by changing basis so any Pauli operator's 
+eigenvectors are $\ket{0}$ and $\ket{1}$. 
+
+As a reminder, the VQE algorithm requires us to **specify 3 things: an ansatz, 
+an initial state, and some initial parameters**. We'll choose them in the next 
+few sections. 
 
 ## The Variational Hamiltonian Ansatz {#VHA}
 
@@ -768,10 +872,6 @@ last subsection goes over code that can just find the ground state for us. This
 is cheating, but since I told you quadratic Hamiltonians ground states are 
 efficiently solvable it's an okay place to cheat. 
 
-![Here's a picture for the $3$-rd roots of unity from Wikipedia. Convince 
-yourself that these 3 vectors sum to 0.](
-https://upload.wikimedia.org/wikipedia/commons/3/39/3rd_roots_of_unity.svg)
-
 ### Position to momentum transformation {#fourier}
 
 We can apply a Fourier transform to our creation operators to change from 
@@ -786,10 +886,18 @@ a_{l \sigma}^\dagger$$
 where $k$ is a discrete momentum and $l$ is a discrete position eigenstate. In 
 $1$D, $k \cdot l = kl$. 
 
-If you're not familiar with the Fourier transorm, you don't lose much right now 
+If you're not familiar with the Fourier transorm, right now you don't lose much 
 by thinking of this as defining *new* operators as linear combinations of the 
-old ones. 
+old ones. Below (and in most treatments of Fourier analysis), we use the concept 
+of $n$-th roots of unity, $\omega$. These $\omega$ are numbers such that 
+$\omega^n = 1$. Here's a visual representation of the 3-rd roots of unity: 
 
+![These are the three 3-rd roots of unity. If you raise any of them to the third
+power, you'll get 1.](/images/hubbard/roots_unity.png){ 
+style="width: 50%; margin: auto;" }
+
+:::: card 
+::::: card-body
 **Lemma 1**: $\frac{1}{N} \sum_l e^{i (k_n - k_m) \cdot l} = \delta_{n, m}$
 where $k_n = 2 \pi n/N$. 
 
@@ -806,10 +914,12 @@ finite geometric series} \\
 $$
 
 Of course, here we asssumed $\omega \neq 1$, otherwise we can't use the finite 
-geometric series formula. In that case, $\frac{1}{N} \sum_l 1^l = 1$. Hence, 
+geometric series formula. In that case, $\frac{1}{N} \sum_l 1^l = 1$. Either way, 
 $\frac{1}{N} \sum_l e^{i (k_n - k_m) \cdot l} = \delta_{n, m}$.
 
-QED. 
+:::::: {style="float: right"}
+$\blacksquare$
+::::::
 
 **Lemma 2**: $\frac{1}{N} \sum_n e^{i k_n (l - j)} = \delta_{l, j}$. 
 
@@ -818,6 +928,10 @@ This uses the same strategy as the previous proof, so I'll skip this proof.
 These two lemmas rely on our definition of momentum as $k_n = 2 \pi n/N$. From 
 now on, when summing over $k_n$ I'll write summing over $k$, ie 
 $\sum_{k_n} = \sum_k$. 
+
+:::::: {style="float: right"}
+$\blacksquare$
+::::::
 
 **Lemma 3**: 
 $a_{l \sigma}^\dagger = \frac{1}{\sqrt{N}} \sum_k e^{-i k \cdot l} a_{k \sigma}^\dagger$
@@ -834,12 +948,19 @@ $$
 \end{align}
 $$
 
-QED. 
+:::::: {style="float: right"}
+$\blacksquare$
+::::::
+
+:::::
+::::
 
 Using these relations, it's easy to verify that the creation and annihilation 
 operators in the momentum basis obey the fermionic anticommutation relations. 
 I won't do that here; most of the proof is mechanical. 
 
+:::: card 
+::::: card-body
 **Lemma 4**: 
 $\sum_{k \sigma} a_{k \sigma}^\dagger a_{k \sigma} = \sum_{l \sigma} a_{l \sigma}^\dagger a_{l \sigma}$
 for momentum $k$ and position $l$. 
@@ -859,6 +980,8 @@ e^{i k (l -m)} = \sum_{lm\sigma} a_{l \sigma}^\dagger a_{m \sigma} \delta_{l, m}
 $$
 
 QED. 
+:::::
+::::
 
 Take a moment to make sense of this result. The sum of number operators over 
 position is equal to the sum of number operators over momentum. Every fermion 
@@ -868,6 +991,8 @@ doing the math.
 
 ### The 1D tunneling term {#one-D}
 
+:::: card 
+::::: card-body
 **Theorem 1**: For $U = 0$, the $1$D Hubbard Hamiltonian in momentum basis 
 is 
 $$ H = \sum_{k \sigma} (\epsilon_k - \mu) a_{k \sigma}^\dagger a_{k \sigma}$$
@@ -924,6 +1049,8 @@ $$\sum_{k \sigma} \epsilon_k a_{k\sigma}^\dagger a_{k \sigma} = -t
 \sum_{\braket{l, m} \sigma} a_{l \sigma}^\dagger a_{m \sigma} $$
 
 {% annotate Not done yet. Need to combine $\mu$ term. %}
+:::::
+::::
 
 This took me by complete surprise. The tunneling term in the position basis 
 looks strange because we have this 
@@ -939,6 +1066,8 @@ and its eigenvaluesu are $\cos (k) - \mu$.
 
 Extending the previous result to 2 dimensions isn't that hard. 
 
+:::: card 
+::::: card-body
 **Theorem 2**: For $U=0$, the 2D Hubbard Hamiltonian is 
 $$H = \sum_{k \sigma} (\epsilon_k - \mu) a_{k \sigma}^\dagger a_{k \sigma}$$ 
 where $\epsilon_k = -2t( \cos k_k + \cos k_y)$. 
@@ -966,6 +1095,8 @@ $+1$ in the $x$ direction, one with $-1$ in the $x$ direction, $+1$ in $y$,
 and $-1$ in $y$. Notice that these 4 terms correspond to a difference of $1$ 
 in a single dimension, and by Lemma 2, we get the hopping term over neighbors 
 again. {% annotate Not done yet, need to combine $\mu$ term. %}
+:::::
+::::
 
 ### Choosing the states with best overlap {#overlap}
 
