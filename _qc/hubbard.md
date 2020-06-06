@@ -70,12 +70,12 @@ as a reminder that we're assuming something without understanding it.
 - [The Variational Hamiltonian Ansatz](#VHA)
     - [Adiabatic evolution](#adiabatic)
     - [An ansatz based on adiabatic evolution](#ansatz)
-    - [How *good* is this ansatz?](#ansatz-quality)
 - [Choosing an initial state](#initial)
     - [Position to momentum transformation](#fourier)
     - [The 1D tunneling term](#one-D)
     - [The 2D tunneling term](#two-D)
     - [Choosing the states with best overlap](#overlap)
+    - [How *good* is this ansatz?](#ansatz-quality)
 - [Finding the ground state](#ground)
 - [Analyzing the ground state](#analyze)
 
@@ -95,7 +95,7 @@ as a reminder that we're assuming something without understanding it.
 *It is almost like Nature knows you are blatantly cheating, but she gives you a 
 passing grade anyway.*
 
-&mdash; Ntwali Toussaint
+&mdash; Ntwali Bashige
 ::::
 
 ## A quantum mechanical solid! {#qm-solid}
@@ -749,10 +749,6 @@ parameters stays constant, so we can explore an exponential space with constant
 parameters that need to be optimized. Also maybe customize ansatz a bit so I 
 don't only use defaults? %}
 
-### How *good* is this ansatz? {#ansatz-quality}
-- not sure if I can answer this in a meaningful way - I need to have an initial 
-state be constant and then I need
-
 ## Choosing an initial state {#initial}
 
 - Read Wecker 2 Section 2C - something about how horizontal and veritcal commute 
@@ -1083,9 +1079,68 @@ our desired state `v_tun[:, 34]`.
 It's odd that the overlap is so low. I thought it would be close to 1. What's 
 really weird is that if I instead made the `overlaps` array the overlap between 
 state and `per_state_most_overlap`, the best overlap is <samp>0.99999</samp>. 
-Perhaps `preepare_gaussian_state` adds a perturbation? Regardless, this state 
+Perhaps `prepare_gaussian_state` adds a perturbation? Regardless, this state 
 with <samp>0.99999</samp> overlap is the same as the state we got with overlap 
 <samp>0.17225</samp> so it shouldn't matter for our results. 
+
+### How *good* is this ansatz? {#ansatz-quality}
+
+Now we've got everything we need to run VQE: an ansatz, a starting state, and 
+some initial parameters. Before we run the algorithm, let's step back to think 
+about what we're expecting to happen. 
+
+At first glance, this ansatz seems pretty terrible. A good ansatz is one that 
+explores most of the state space fairly evenly. The VHA only has access to 
+states which our starting state evolves into. 
+
+How can we think about this more concretely? The paper ["Expressibility and 
+entangling capability of parameterized quantum circuits for hybrid 
+quantum-classical algorithms"](https://arxiv.org/abs/1905.10876) goes much more 
+in-depth into this topic, but I didn't understand most of it. Instead, I'll
+use the following: 
+
+#. Define a vector 
+$$\ket{\psi} = \frac{1}{M} \Big( \sum_{i=1}^M R_i \ket{s} - \sum_\theta 
+U(\theta) \ket{s} \Big)$$
+where $R_i$ are [*uniformly* random unitary matrices](
+http://home.lu.lv/~sd20008/papers/essays/Random%20unitary%20%5Bpaper%5D.pdf)
+and $U(\theta)$ is our ansatz parameterized with $\theta$. We'll choose these 
+parameters $\theta$ to be uniformly distributed as well. $\ket{s}$ is our 
+starting state. 
+    - The "perfect" ansatz {% annotate We don't actually use this because it would 
+have a *lot* of parameters and be incredibly hard to optimize. %} is one that 
+has an even chance of reaching any state vector. 
+We can simulate this with uniformly random unitary matrices, since unitary 
+matrices are just rotations of a vector in state space. The diagrams below 
+offer a more intuitive understanding. Then $\ket{\psi}$ is just the difference 
+between 
+our ansatz and the "perfect" ansatz. 
+#. We'll classify the *badness* of an ansatz by the norm of $\ket{\psi}$. The 
+smaller the badness value, the better our ansatz. 
+    - Since $\ket{\psi}$ is the difference between our ansatz and the "perfect" 
+ansatz, the smaller the magnitude of the difference, the better the ansatz. 
+
+![1-qubit Bloch sphere representation of which states various ansatze can 
+"reach" with random parameters. Notice how the 
+uniformly random unitary is most evenly distributed. [Image Source](
+https://arxiv.org/pdf/1905.10876.pdf#page=5).](
+/images/hubbard/bloch_expressibility.png){ style="width: 100%; margin: auto;" }
+
+Here's code to evaluate our badness metric: 
+<script src="https://gist.github.com/warrenalphonso/1c558ced5a5b43680ef39422ec9a7a7a.js"></script>
+
+To contextualize our metric, the identity ansatz got a badness score of almost 
+1 while 
+a uniformly random unitary ansatz got a badness score of about 0.06. Our ansatz 
+got a badness score of around 0.20. This is much closer to the perfect ansatz 
+than to the identity, which is a little surprising because our ansatz is so 
+restricted and has very few parameters. 
+
+To be clear, this is a pretty naive metric for how good an ansatz is. 
+Expressibility of *all* states isn't nearly as important as the ansatz' ability 
+to reach the *desired* state. Regardless, it is pretty interesting that our 
+ansatz' badness is closer to the expressive limit than to the completely 
+unexpressive limit. 
 
 ## Finding the ground state {#ground}
 - do for a 2x6 lattice like page 5 of Wecker 2 and show how with few parameters 
