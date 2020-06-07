@@ -77,11 +77,12 @@ as a reminder that we're assuming something without understanding it.
     - [Choosing the states with best overlap](#overlap)
     - [How *good* is this ansatz?](#ansatz-quality)
 - [Finding the ground state](#ground)
-- [Analyzing the ground state](#analyze)
+- [Reducing the Trotter error](#Trotter)
 
 [Uncovering magnetism from the Hubbard model](#magnetism)
 
 - [Spin and magnetism](#spin)
+- [Analyzing the ground state](#analyze)
 - [The Stoner criterion](#Stoner)
 
 [Appendix](#appendix)
@@ -1131,9 +1132,8 @@ one that evolves to have high overlap with `gstate`. Code for step 5:
 <samp>Overlap with perturbed eigenvector and true ground state is: 
 0.942</samp>
 
-That's pretty good for a starting state. 
-
-
+So our starting state has 94.2% overlap with the desired ground state already. 
+Let's see how much better VQE can get us. 
 
 ### How *good* is this ansatz? {#ansatz-quality}
 
@@ -1195,24 +1195,80 @@ ansatz' badness is closer to the expressive limit than to the completely
 unexpressive limit. 
 
 ## Finding the ground state {#ground}
-- do for a 2x6 lattice like page 5 of Wecker 2 and show how with few parameters 
-we can explore a huge Hilbert space to get large overlap
 
 <script src="https://gist.github.com/warrenalphonso/4b6d88c241146b19b34f2b64143084a8.js"></script>
-<samp>Optimal ground state energy is -3.49999</samp>
+<samp>Optimal ground state energy is -6.501</samp>
 
-If we check the true ground state energy, we get `w_hub[0] = -3.62721`, so our 
-energy is off by about 0.13. We'll dig deeper to try to fix this error in the 
-next few sections. 
+Recall the true ground state energy was `genergy = -6.828`, so we were off by 
+about 0.327. We'll dig deeper to try to fix this error later in the post. 
 
 For now, let's see how much overlap the ground *state* that VHA outputted has 
 with the true ground state. 
 
 <script src="https://gist.github.com/warrenalphonso/9ddf4db6308c8bc0598173f85287b4b7.js"></script>
-<samp>VHA ground state and true ground state have an overlap of 0.977026</samp>
+<samp>VHA ground state and true ground state have an overlap of 0.942</samp>
 
-97.7% overlap is pretty great, but it's not even close to achieving chemical 
-accuracy on our ground state energy. 
+94.2% overlap is okay, but we didn't improve our initial state overlap at all...
+
+## Reducing the Trotter error {#Trotter}
+
+- point out how adiabatic evolution shows Trotter error is the problem 
+
+# Uncovering magnetism from the Hubbard model {#magnetism}
+
+## Spin and magnetism {#spin}
+- Exercise 16, ..., all of Section 5,6
+- Section 10, 11
+
+Electron spin is deeply connected to magnetism. I don't yet understand the 
+physics behind this so we'll take it as a given. 
+
+When many electrons have the same spin, we get *ferromagnetism*, which means 
+all the magnetic moments are aligned and we get a strong magnetic moment. If 
+electron spins are balanced, they cancel each other out and we get 
+*antiferromagnetism*, which means the material doesn't have a strong magnetic 
+moment. 
+
+![Ferromagnetic material.](
+https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Ferromagnetic_ordering.svg/180px-Ferromagnetic_ordering.svg.png)
+
+![Antiferromagnetic material. Both images from Wikipedia. ](
+https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Antiferromagnetic_ordering.svg/220px-Antiferromagnetic_ordering.svg.png)
+
+So to figure out the magnetic properties of solids, we have to look at the spins 
+of its electrons. An important quantity we'll analyze is the *local moment*: 
+$\braket{m^2} = \braket{ (n_{\uparrow} - n_{\downarrow})^2 }$. The local moment 
+is 0 if the site is empty or has 2 spins, and 1 otherwise. We'll begin our 
+analysis with the simplest case: the single site Hubbard model at half-filling. 
+
+Recall that for this case we have the partition function: 
+$$Z = 1 + 2e^{\beta \mu} + e^{-\beta U + 2 \beta \mu} = 
+2 + 2e^{\beta \mu}$$
+where the last step follows from $\mu = \frac{U}{2}$ as the condition for 
+half-filling. We can write the expectation of the local moment as: 
+$$
+\begin{align}
+\braket{m^2} &= \braket{(n_{\uparrow} - n_{\downarrow})^2} = \braket{n_{\uparrow}} + \braket{n_{\downarrow}} - 
+2\braket{n_{\uparrow} n_{\downarrow}} \qquad \text{by linearity of expectation} 
+\\ 
+&= Z^{-1} \Big( \text{Tr } (n_\uparrow e^{-\beta H}) + \text{Tr } (n_\downarrow 
+e^{-\beta H}) - 2 \text{Tr } (n_\uparrow n_\downarrow e^{-\beta H}) \Big) \\ 
+&= 2 Z^{-1} e^{\beta \mu} \\
+&= \frac{e^{\beta \mu}}{1 + e^{\beta \mu}}   \qquad \text{Plugging in $Z^{-1}$}
+\end{align}
+$$
+
+Since $\beta = \frac{1}{T}$ and $\mu = \frac{U}{2}$, it's clear that as 
+$U \rightarrow \infty$, $\braket{m^2} \rightarrow 1$. The potential $U$ seems 
+to encourage local moments. 
+
+On the other hand, for finite $U$, as $T \rightarrow \infty$, 
+$\braket{m^2} \rightarrow \frac{1}{2}$. The temperature seems to prefer random 
+configurations and inhibits strong local moments. 
+
+What about the tunneling coefficient? Does it affect local moments? Turns out 
+this behaves like temperature: it inhibits local moments. I'll skip the math 
+here for the 2 site Hubbard model. 
 
 ## Analyzing the ground state {#analyze}
 - show that parameters don't follow adiabatic evolution path
@@ -1293,77 +1349,28 @@ Finally, let's look at the distribution of electron spins. We know that we
 sometimes get a nonzero local moment, but I suspect the number of trials with 
 spin-up and spin-down local moments will be roughly equal. 
 
-![](/images/symmetric_spins.png)
+<figure>
+![](/images/hubbard/symmetric_spins.png){ style="width: 60%; margin: auto;" }
+</figure>
 
 This is a plot of the number of spin-up electrons in our trials. The number of 
 spin-down electrons is 4 - \# spin-up electrons because we're at half-filling. 
-The symmetric nature of this histogram means on average, there's no magnetism. 
+The symmetric nature of this histogram means *on average*, there's no magnetism. 
+The spike in the center means for the vast majority of trials, there will be 
+exactly 0 magnetism. 
 
-### Reducing the Trotter error 
+I wonder if this huge ratio of 0 magnetism to small magnetism is present for 
+larger lattices. Let's try for a $4 \times 2$ lattice: 
 
-- point out how adiabatic evolution shows Trotter error is the problem 
+<figure>
+![ ](/images/hubbard/symmetric_spins_4x2.png){ style="width: 60%; margin: auto;" }
+</figure>
 
-# Uncovering magnetism from the Hubbard model {#magnetism}
-
-## Spin and magnetism {#spin}
-- Exercise 16, ..., all of Section 5,6
-- Section 10, 11
-
-Electron spin is deeply connected to magnetism. I don't yet understand the 
-physics behind this so we'll take it as a given. 
-
-When many electrons have the same spin, we get *ferromagnetism*, which means 
-all the magnetic moments are aligned and we get a strong magnetic moment. If 
-electron spins are balanced, they cancel each other out and we get 
-*antiferromagnetism*, which means the material doesn't have a strong magnetic 
-moment. 
-
-![Ferromagnetic material.](
-https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Ferromagnetic_ordering.svg/180px-Ferromagnetic_ordering.svg.png)
-
-![Antiferromagnetic material. Both images from Wikipedia. ](
-https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Antiferromagnetic_ordering.svg/220px-Antiferromagnetic_ordering.svg.png)
-
-So to figure out the magnetic properties of solids, we have to look at the spins 
-of its electrons. An important quantity we'll analyze is the *local moment*: 
-$\braket{m^2} = \braket{ (n_{\uparrow} - n_{\downarrow})^2 }$. The local moment 
-is 0 if the site is empty or has 2 spins, and 1 otherwise. We'll begin our 
-analysis with the simplest case: the single site Hubbard model at half-filling. 
-
-Recall that for this case we have the partition function: 
-$$Z = 1 + 2e^{\beta \mu} + e^{-\beta U + 2 \beta \mu} = 
-2 + 2e^{\beta \mu}$$
-where the last step follows from $\mu = \frac{U}{2}$ as the condition for 
-half-filling. We can write the expectation of the local moment as: 
-$$
-\begin{align}
-\braket{m^2} &= \braket{(n_{\uparrow} - n_{\downarrow})^2} = \braket{n_{\uparrow}} + \braket{n_{\downarrow}} - 
-2\braket{n_{\uparrow} n_{\downarrow}} \qquad \text{by linearity of expectation} 
-\\ 
-&= Z^{-1} \Big( \text{Tr } (n_\uparrow e^{-\beta H}) + \text{Tr } (n_\downarrow 
-e^{-\beta H}) - 2 \text{Tr } (n_\uparrow n_\downarrow e^{-\beta H}) \Big) \\ 
-&= 2 Z^{-1} e^{\beta \mu} \\
-&= \frac{e^{\beta \mu}}{1 + e^{\beta \mu}}   \qquad \text{Plugging in $Z^{-1}$}
-\end{align}
-$$
-
-Since $\beta = \frac{1}{T}$ and $\mu = \frac{U}{2}$, it's clear that as 
-$U \rightarrow \infty$, $\braket{m^2} \rightarrow 1$. The potential $U$ seems 
-to encourage local moments. 
-
-On the other hand, for finite $U$, as $T \rightarrow \infty$, 
-$\braket{m^2} \rightarrow \frac{1}{2}$. The temperature seems to prefer random 
-configurations and inhibits strong local moments. 
-
-What about the tunneling coefficient? Does it affect local moments? Turns out 
-this behaves like temperature: it inhibits local moments. I'll skip the math 
-here for the 2 site Hubbard model. 
-
-
+That's interesting &mdash; the spike on 0 magnetism is still there but it's 
+gotten relatively smaller. Regardless, because the graph is symmetric, 
+there's still no magnetism on average. 
 
 ## The Stoner criterion {#Stoner}
-
-
 
 # Appendix {#appendix}
 
