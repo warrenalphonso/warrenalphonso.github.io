@@ -95,9 +95,6 @@ as a reminder that we're assuming something without understanding it.
 - [Analyzing the ground state](#analyze)
 - [The Stoner criterion](#Stoner)
 
-[Appendix](#appendix)
-
-  - [Nielsen fermionic anticommutation relations](#Nielsen)
 ::::
 
 # The Hubbard model {#Hubbard-model}
@@ -250,11 +247,6 @@ We're making good progress, but we'll need more than a purely visual
 understanding of our model. 
 
 ### Defining creation and annihilation operators {#operators}
-
-**I really should do this later. If I have extra time, I can think about how to 
-explain this well and with all the scattered knowledge I have, but 
-it isn't a priority because if I run out of time, this is an area where it will 
-be acceptable to just link to a resource.**
 
 From our 4 assumptions above, there seem to be 2 main ideas we need to express 
 about the behavior of free electrons: the *kinetic energy* of an electron 
@@ -845,14 +837,29 @@ eigenvalues and eigenvectors. But the interaction term (and therefore the entire
 Hubbard Hamiltonian) is *quartic*. There's no 
 efficient way to find its eigenspectrum. 
 
-Creating this ansatz is easy with OpenFermion: 
+OpenFermion has a lot of good ansatze already defined that we can use. The two 
+most relevant ones for the Hubbard model are `SwapNetworkTrotterAnsatz` and 
+`SwapNetworkTrotterHubbardAnsatz`. The former is a generic adiabatic evolution 
+ansatz which has about 20 parameters per iteration for the $2 \times 2$ Hubbard, 
+while the latter is a less accurate that has 3 parameters per iteration. 
+
+After many hours of testing different configurations, I came up with a custom 
+ansatz that scales as 9 parameters per iteration for the $2 \times 2$ Hubbard 
+and has the same accuracy as `SwapNetworkTrotterAnsatz`. The code is messy 
+because I had to make slight modifications to some methods in the 
+`SwapNetworkTrotterAnsatz` class, but it's available [here](
+https://github.com/warrenalphonso/qc-mentorship/blob/master/CustomSwapNetworkTrotterAnsatz.py).
+
+Using my custom ansatz:
 <script src="https://gist.github.com/warrenalphonso/9343ca296b524c9bdbdca7c2292ca796.js"></script>
 
 We've got our ansatz now. But we also need to choose an initial state and 
 specify initial parameters. We'll go over choosing an initial state in the next 
 section. 
 
-Turns out the `SwapNetworkTrotterHubbardAnsatz` class has a good default strategy 
+Turns out the `SwapNetworkTrotterAnsatz` class 
+(which my custom ansatz inherits from)
+has a good default strategy 
 for initial parameters if we don't specify one. Here's the docstring that 
 explains it: 
 <script src="https://gist.github.com/warrenalphonso/4e6ce0b1bca5a58537a3b3082f3e2c13.js"></script>
@@ -1206,18 +1213,18 @@ unexpressive limit.
 ## Finding the ground state {#ground}
 
 <script src="https://gist.github.com/warrenalphonso/4b6d88c241146b19b34f2b64143084a8.js"></script>
-<samp>Optimal ground state energy is -6.501</samp>
+<samp>Optimal ground state energy is -6.764</samp>
 
 Recall the true ground state energy was `genergy = -6.828`, so we were off by 
-about 0.327. We'll dig deeper to try to fix this error later in the post. 
+about 0.064. 
 
 For now, let's see how much overlap the ground *state* that VHA outputted has 
 with the true ground state. 
 
 <script src="https://gist.github.com/warrenalphonso/9ddf4db6308c8bc0598173f85287b4b7.js"></script>
-<samp>VHA ground state and true ground state have an overlap of 0.942</samp>
+<samp>VHA ground state and true ground state have an overlap of 0.992</samp>
 
-94.2% overlap is okay, but we didn't improve our initial state overlap at all...
+99.2% overlap is great, especially since we *only did 2 iterations*!
 
 # Uncovering magnetism from the Hubbard model {#magnetism}
 
@@ -1376,9 +1383,5 @@ gotten relatively smaller. Regardless, because the graph is symmetric,
 there's still no magnetism on average. 
 
 ## The Stoner criterion {#Stoner}
-
-# Appendix {#appendix}
-
-## Nielsen fermionic anticommutation relations {#Nielsen}
 
 :::
