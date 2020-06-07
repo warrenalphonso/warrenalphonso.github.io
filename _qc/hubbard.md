@@ -3,19 +3,16 @@ layout: bootstrap
 title: Investigating the Hubbard model with variational algorithms
 ---
 
-:::context
+:::area
 
 ::::display-2
 Investigating the Hubbard model with variational algorithms 
 ::::
 
 :::::display-4
-A project done through the QC Mentorship program.
+A project done through the QC Mentorship program
 :::::
 
-:::
-
-:::area
 <ul class="circles">
 <li></li>
 <li></li>
@@ -31,6 +28,8 @@ A project done through the QC Mentorship program.
 :::
 
 ::: container-lg
+
+**Written by Warren Alphonso, advised by Ntwali Bashige.**
 
 Once realized, quantum computers would be an intellectual and engineering 
 triumph, success in turning Nature's powerful and mysterious laws into 
