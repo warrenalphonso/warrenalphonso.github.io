@@ -889,8 +889,7 @@ $1$D, $k \cdot l = kl$.
 If you're not familiar with the Fourier transorm, right now you don't lose much 
 by thinking of this as defining *new* operators as linear combinations of the 
 old ones. Below (and in most treatments of Fourier analysis), we use the concept 
-of $n$-th roots of unity, $\omega$. These $\omega$ are numbers such that 
-$\omega^n = 1$. Here's a visual representation of the 3-rd roots of unity: 
+of $n$-th roots of unity, $\omega$, which satisfy $\omega^n = 1$. 
 
 ![These are the three 3-rd roots of unity. If you raise any of them to the third
 power, you'll get 1.](/images/hubbard/roots_unity.png){ 
@@ -979,7 +978,10 @@ e^{i k (l -m)} = \sum_{lm\sigma} a_{l \sigma}^\dagger a_{m \sigma} \delta_{l, m}
 \end{align}
 $$
 
-QED. 
+:::::: {style="float: right"}
+$\blacksquare$
+::::::
+
 :::::
 ::::
 
@@ -1011,34 +1013,10 @@ $$
 \qquad \text{ by transfoming both operators to position basis} \\
 &= \frac{-2t}{N} \sum_{lm\sigma} a_{l\sigma}^\dagger a_{m \sigma} \sum_k 
 \cos (k) e^{ik(l-m)} \\ 
-\end{align}
-$$
-
-**This break is unnecessary - we'll stop considering it when the difference 
-must be 1 anyway.**
-
-It's not clear where to go from here. Let's try considering 2 cases: either 
-$l = m$ or $l \neq m$. If $l = m$, then 
-$$ \sum_k \cos (k) e^{ik(l-m)} = \sum_k \cos (k) = \sum_n \cos (2 \pi n /N) $$ 
-
-I claim this equals 0. Why? Notice that $\cos (n)$ is the real coordinate of 
-$e^{i 2 \pi n /N}$. We already know this latter term is 0 when summed over all 
-$n$ from Lemma 1, so it follows that its real coordinate must also be 0. This 
-means we only have to consider sites $l \neq m$. Hey, this is starting to look 
-like our tunneling term, which only considers adjacent sites...
-
-Back to the proof. I'm using $(l, m)$ to denote indices $l,m: l \neq m$.
-
-$$
-\begin{align}
-\frac{-2t}{N} \sum_{lm\sigma} a_{l\sigma}^\dagger a_{m \sigma} \sum_k 
-\cos (k) e^{ik(l-m)} 
-&= \frac{-2t}{N} \sum_{(l, m) \sigma} a_{l \sigma}^\dagger a_{m \sigma} \sum_k 
-\cos (k) e^{ik (l-m)} \\
-&= \frac{-2t}{N} a_{l \sigma}^\dagger a_{m \sigma} \sum_k \frac{1}{2} 
-(e^{ik} + e^{-ik}) e^{ik (l-m)} \qquad \text{ by using the identity 
+&= \frac{-2t}{N} \sum_{lm \sigma} a_{l \sigma}^\dagger a_{m \sigma} \sum_k 
+\frac{1}{2} (e^{ik} + e^{-ik}) e^{ik (l-m)} \qquad \text{ by using the identity 
 $\cos (x) = (e^{ix} + e^{-ix})/2$} \\
-&= \frac{-t}{N} \sum_{(l, m) \sigma} a_{l \sigma}^\dagger a_{m \sigma} \sum_k 
+&= \frac{-t}{N} \sum_{lm \sigma} a_{l \sigma}^\dagger a_{m \sigma} \sum_k 
 e^{ik(l-m+1)} + e^{ik(l-m-1)}
 \end{align}
 $$
@@ -1048,7 +1026,13 @@ otherwise it's $N$. Thus, we simplify to only the adjacent terms!
 $$\sum_{k \sigma} \epsilon_k a_{k\sigma}^\dagger a_{k \sigma} = -t 
 \sum_{\braket{l, m} \sigma} a_{l \sigma}^\dagger a_{m \sigma} $$
 
-{% annotate Not done yet. Need to combine $\mu$ term. %}
+By Lemma 4, we can tack on the chemical potential term too, so we have 
+$$H = \sum_{k \sigma} (\epsilon_k - \mu) a_{k \sigma}^\dagger a_{k \sigma}$$
+
+:::::: {style="float: right"}
+$\blacksquare$
+::::::
+
 :::::
 ::::
 
@@ -1094,125 +1078,62 @@ $\pm 1$ for the two exponentials; this means there are 4 exponentials: one with
 $+1$ in the $x$ direction, one with $-1$ in the $x$ direction, $+1$ in $y$, 
 and $-1$ in $y$. Notice that these 4 terms correspond to a difference of $1$ 
 in a single dimension, and by Lemma 2, we get the hopping term over neighbors 
-again. {% annotate Not done yet, need to combine $\mu$ term. %}
+again. 
+
+By Lemma 4, we can attach the chemical potential term to get 
+$$H = \sum_{k \sigma} (\epsilon_k - \mu) a_{k \sigma}^\dagger a_{k \sigma}$$
+
+:::::: {style="float: right"}
+$\blacksquare$
+::::::
+
 :::::
 ::::
 
 ### Choosing the states with best overlap {#overlap}
 
-We found a change of basis that makes it easy to find ground states of the 
-tunneling term and their corresponding ground state energies. Earlier we 
-noticed that adiabatic evolution doesn't always work if we input the ground 
-state as our initial state. This means that we typically have to try many 
-different eigenvectors until we find one that converges. Instead of doing this, 
-we'll cheat and do the following: 
+We've shown that a change of basis exists that makes it easy to find the 
+eigenvalues/vectors of the tunneling and chemical potential terms in the 
+Hubbard Hamiltonian. Eearlier, we noticed that adiabatic evolution doesn't 
+always work if we input the ground state as our initial state. This means we'll 
+have to try many different eigenvectors until we find one that converges. 
 
-1. Find the ground state of the Hubbard term by diagonalizing 
-2. Find the ground state of the tunneling term by diagonalizing 
-3. Perturb the tunneling term with the interaction term 
-4. Find the ground states of the perturbed Hamiltonian 
-5. Find the state with maximum fidelity with Hubbard ground state 
-6. Find the corresponding eigenvector of tunneling term that's closest to this 
+Here's how we'll approach this: 
 
-Since our $H_A$ and $H_B$ are pretty similar, $H_B$ is $H_A$ with the 
-interaction term, the *correct* starting state in $H_A$ will already have large 
-overlap with the ground state of $H_B$. 
+#. Let $H_A$ be the tunneling and chemical potential terms of the Hubbard 
+Hamiltonian (the quadratic terms). Let $H_B$ be the full Hubbard Hamiltonian. 
+#. Create a perturbed Hamiltonian: $H(s) = (1-s) H_A + s H_B$ for small $s$. 
+#. Find the ground state of $H_B$ by brute-force. (This is cheating.)
+#. Find the eigenvectors of $H(s)$ by brute-force. (This is cheating.)
+#. Try adiabatically evolving one of the eigenvectors of $H(s)$ into the 
+ground state 
+of $H_B$. Keep trying until we find one that works. 
+#. This will be our starting state - if we let $s \rightarrow 0$ we can make 
+this arbitrarily close to a linear combination of $H_B$'s eigenvectors. 
 
-<script src="https://gist.github.com/warrenalphonso/a7b1a4bb337b1be6684a0eaf06801083.js"></script>
+This seems very complicated! *Why can't be just try a bunch of $H_A$'s 
+eigenvectors until we find one that works? Why do we have to introduce this 
+perturbed Hamiltonian?* The answer is that our starting state might be a 
+linear combination of $H_A$'s eigenvectors. By perturbing it and then solving, 
+we let the full Hubbard Hamiltonian influence the state we pick so we're more 
+likely to find the correct superposition. 
+{% annotate I should see what the superposition of tunneling eigenvectors ends 
+up being. Otherwise, I wouldn't be able to use this technique for huge 
+Hamiltonians. %}
 
-<ul class="list-unstyled">
-<samp>
-<li>Eigenvector v_tun[:, 30] has ovelap 0.17136660881799165.</li>
-<li>Eigenvector v_tun[:, 34] has ovelap 0.19207310209956632.</li>
-<li>Eigenvector v_tun[:, 48] has ovelap 0.17799458524888018.</li>
-<li>Eigenvector v_tun[:, 53] has ovelap 0.12642028444816675.</li>
-</samp>
-</ul>
+Here's code for steps 1-4: 
+<script src="https://gist.github.com/warrenalphonso/a54eb8d48b12e16a2b3a87549b7c05d4.js"></script>
+<samp>Ground state energy: -6.828</samp>
 
-The highest overlap is about 18%, but this doesn't look too promising. Here's a 
-trick we can use: if we *perturb* the tunneling term with the interaction term 
-and then get the ground state, we'll find it has maximum overlap with the 
-Hubbard model as the perturbation goes to 0. Here's what that looks like in 
-code: 
+Now we'll run adiabatic evolution on eigenvectors `v_per[:, i]` until we find 
+one that evolves to have high overlap with `gstate`. Code for step 5:
+<script src="https://gist.github.com/warrenalphonso/c5abc26c1794d386cecb01efa0a6a228.js"></script>
+<samp>Overlap with perturbed eigenvector and true ground state is: 
+0.942</samp>
 
-<script src="https://gist.github.com/warrenalphonso/b47d1ad39cd12a0ad6c7ef5baa722391.js"></script>
+That's pretty good for a starting state. 
 
-<ul class="list-unstyled">
-<samp>
-<li>Eigenvector v_per[:, 0] has overlap 0.9770315592604043.</li>
-<li>Eigenvector v_per[:, 1] has overlap 3.831828765839691e-20.</li>
-<li>Eigenvector v_per[:, 2] has overlap 4.420004116654121e-26.</li>
-<li>Eigenvector v_per[:, 3] has overlap 7.542958924631367e-26.</li>
-<li>Eigenvector v_per[:, 4] has overlap 5.180144829300806e-26.</li>
-</samp>
-</ul>
 
-We should use the eigenvector `w_per[:, 0]` because it had a 97% overlap with 
-the Hubbard ground state. In reality, we wouldn't have been able to efficiently 
-find this state because it's perturbed with the interaction term and therefore 
-not quadratic. Instead, we'll find the tunneling eigenvector that's closest to 
-`v_per[:, 0]` and use that instead. 
-
-<script src="https://gist.github.com/warrenalphonso/4c4a0063f88955d56c985e4e3f73d4be.js"></script>
-
-<samp>Eigenvector v_tun[:, 34] had the maximum overlap of 0.19658956206777584 
-with the best perturbed state.</samp>
-
-Now we just need to get it in OpenFermion circuit form. 
-
-We need a way to specify the circuit for this initial state, so that we can 
-start from the computational all-zero state $\ket{0...0}$ and then apply a 
-cicuit to take us to `v_tun[:, 34]`. 
-
-OpenFermion provides us with the function `prepare_gaussian_state(qubits, 
-quadratic_hamiltonian, occupied_obritals=None)` which returns the `Circuit` 
-object to prepare an eigenvector of a quadratic Hamiltonian. Of course, there 
-could be many eigenvectors (our Hamiltonian matrix has 2^8^ = 256 dimensions so 
-256 eigenvectors). We need some way of specifying which one we want. That's 
-what the `occupied_orbitals` parameter is for. 
-
-{% annotate Read [this issue](https://github.com/quantumlib/OpenFermion/issues/284) 
-for a similar explanation of how to specify eigenvectors. %}
-Since we diagonalized our tunneling term, we can write it as 
-$\sum_k \epsilon_k a_k^\dagger a_k$, which indicates that the eigenvalues will 
-be subsets of $\epsilon_k$. One way to specify an eigenvector is to specify its 
-eigenvalue. But this doesns't work because there might be more than one 
-eigenvector for a specific eigenvalue! We call these *degenerate* states. Suppose 
-our $\epsilon_k$ were [-2, -2, 0, 0]. Then we have 4 different eigenvectors for 
-the eigenvalue -4 because wee can choose both -2's and then decide to pick some 
-of the 0's to yield a sum of -4. There are 4 ways to choose the 0's so we have 
-4 eigenvaectors for the the same eigenvalue. 
-
-Well instead of specifying the eigenvalue, we can instead specify the indices of 
-which energies in `orbital_energies` we want to include. This gives us a unique 
-way to choose any eigenvector. 
-
-In OpenFermion we can get this array of $\epsilon_k$ with 
-`orbital_energies, constant = quadratic_hamiltonian.orbital_energies()`. Then we 
-specify which of these we want by passing an array into `prepare_gaussian_state`. 
-
-First, we should find what eigenvalue our desired eigenvector has so that we 
-don't have to search through all 256 eigenvectors. We used `v_tun[:, 34]` so 
-our eigenvalue is `w_tun[34]` which is <samp>-3.9999999</samp>. Looks like this 
-was one of the ground states since -4 is the minimum eigenvalue. Now we just have 
-to try all the `orbital_energies` subsets that have a sum of -4. 
-
-<script src="https://gist.github.com/warrenalphonso/991d74e7b9a54b8846fa7ff3a6be4a54.js"></script>
-<samp>[-2.0, -2.0, -0.0, 0.0, 0.0, 0.0, 2.0, 2.0]</samp>
-
-We need to use both -2's and then we can pick any combination of the four 0's. 
-We'll try all of them and then calculate which yields the maximum overlap with 
-our desired state `v_tun[:, 34]`. 
-
-<script src="https://gist.github.com/warrenalphonso/9bcb34c33cd10ef0830e5d118c2153ba.js"></script>
-<samp>Orbital energies [0, 1] resulted in a state with 0.17255741661035914 overlap with our desired state.</samp>
-
-It's odd that the overlap is so low. I thought it would be close to 1. What's 
-really weird is that if I instead made the `overlaps` array the overlap between 
-state and `per_state_most_overlap`, the best overlap is <samp>0.99999</samp>. 
-Perhaps `prepare_gaussian_state` adds a perturbation? Regardless, this state 
-with <samp>0.99999</samp> overlap is the same as the state we got with overlap 
-<samp>0.17225</samp> so it shouldn't matter for our results. 
 
 ### How *good* is this ansatz? {#ansatz-quality}
 
@@ -1377,6 +1298,10 @@ spin-up and spin-down local moments will be roughly equal.
 This is a plot of the number of spin-up electrons in our trials. The number of 
 spin-down electrons is 4 - \# spin-up electrons because we're at half-filling. 
 The symmetric nature of this histogram means on average, there's no magnetism. 
+
+### Reducing the Trotter error 
+
+- point out how adiabatic evolution shows Trotter error is the problem 
 
 # Uncovering magnetism from the Hubbard model {#magnetism}
 
