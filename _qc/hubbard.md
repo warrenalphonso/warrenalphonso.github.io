@@ -3,19 +3,31 @@ layout: bootstrap
 title: Investigating the Hubbard model with variational algorithms
 ---
 
-[//]: # "Change the backticks to double quotes below!
-::: {.jumbotron style=`background-image: url('/images/quantumcountry.png'); background-size: cover;`}"
+:::context
 
-::: jumbotron
-
-:::: display-4
+::::display-2
 Investigating the Hubbard model with variational algorithms 
 ::::
 
-::::: lead
+:::::display-4
 A project done through the QC Mentorship program.
 :::::
 
+:::
+
+:::area
+<ul class="circles">
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
 :::
 
 ::: container-lg
@@ -233,7 +245,7 @@ adjacent to their current atom.
 These 4 assumptions define the *Hubbard model* of solids. Pictorially, we can 
 represent the Hubbard model on a 2-dimensional lattice as: 
 
-![[Image source](https://arxiv.org/abs/1811.04476).](
+![[Image source](https://arxiv.org/pdf/1811.04476.pdf#page=3).](
 /images/hubbard/2d_hubbard.png){ style="width: 50%; margin: auto;" }
 
 We're making good progress, but we'll need more than a purely visual 
@@ -455,7 +467,6 @@ $2^8 = 256$. For a 10 site model our vectors have dimension $2^{20} = 1048576$.
 This gets out of hand quickly!
 
 ## Mott gap {#Mott}
-- rewrite Hamiltonian so half-filling at $\mu = 0$
 
 Most chemistry problems are concerned with finding the eigenstates and 
 eigenvalues of the Hamiltonian. The most important eigenstate is the state 
