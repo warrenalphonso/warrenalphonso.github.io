@@ -88,7 +88,6 @@ as a reminder that we're assuming something without understanding it.
     - [Choosing the states with best overlap](#overlap)
     - [How *good* is this ansatz?](#ansatz-quality)
 - [Finding the ground state](#ground)
-- [Reducing the Trotter error](#Trotter)
 
 [Uncovering magnetism from the Hubbard model](#magnetism)
 
@@ -1219,10 +1218,6 @@ with the true ground state.
 <samp>VHA ground state and true ground state have an overlap of 0.942</samp>
 
 94.2% overlap is okay, but we didn't improve our initial state overlap at all...
-
-## Reducing the Trotter error {#Trotter}
-
-- point out how adiabatic evolution shows Trotter error is the problem 
 
 # Uncovering magnetism from the Hubbard model {#magnetism}
 
