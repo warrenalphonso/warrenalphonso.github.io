@@ -2,7 +2,7 @@
 .area{
     background: #4e54c8;  
     background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);  
-    min-width: 100%;
+    width: 100%;
     min-height: 50vh;
     padding-top: 10vh;
     margin-bottom: 5vh;
@@ -18,7 +18,7 @@
     overflow: hidden;*/
     position: absolute; 
     bottom: 0;
-    width: 100%;
+    width: 95%; /* At 100% it overflows and we get scroll bar */
 }
 
 .circles li{

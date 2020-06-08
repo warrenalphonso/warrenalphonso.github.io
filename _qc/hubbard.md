@@ -93,7 +93,6 @@ as a reminder that we're assuming something without understanding it.
 
 - [Spin and magnetism](#spin)
 - [Analyzing the ground state](#analyze)
-- [The Stoner criterion](#Stoner)
 
 ::::
 
@@ -267,8 +266,6 @@ explanation for these differences.
 Since we're describing electrons, the creation and annihilation operators have 
 *fermionic anticommutation relations*. In other words, for two fermions on 
 sites $j$ and $k$, with spins $\sigma$ and $\pi$, we have. 
-{% annotate Need to mention Fock 
-space. %}
 
 $$
 \Large
@@ -281,8 +278,7 @@ $$
 
 I'm not sure *why* these relations hold, but we can derive some interesting 
 properties of operators that obey the above relations, namely the Pauli 
-exclusion principle. {% annotate These are done in Nielsen's paper. I need to 
-do this here or in the appendix. %}
+exclusion principle. 
 
 For now, I'll quickly summarize what you need to know about these operators. 
 
@@ -386,8 +382,7 @@ possible locations an electron could be: each site can have an up electron and
 a down electron. We call each of the $2n$ locations a *spin-orbital*. Now that 
 we've simplified our model to deciding whether or not 
 an electron is in a spin-orbital, we can represent it with $2n$ qubits, one for 
-each spin-orbital. {% annotate I could use a picture that shows how we put all 
-the UP spins first and then all the DOWN spins. %} 
+each spin-orbital. 
 If we order our $2n$ qubits by having the $n$ up spin-orbitals be represented 
 in the first $n$ qubits, and then the $n$ down spin-orbitals be represented in 
 the last $n$ qubits, if the $j_\uparrow$-th spin-orbital has an electron, then the 
@@ -467,8 +462,7 @@ have a particular energy, namely their corresponding eigenvalues. Why is the
 ground state so important? Because the system will tend toward its lowest 
 energy state over time. Most systems spend the vast majority of their time in 
 their ground state, so if we can understand its properties well, we can 
-understand most of the behavior of the system. {% annotate Rewrite this 
-because I'm rambling and I feel I don't know most of it. %}
+understand most of the behavior of the system. 
 
 Before we decide to use a quantum computer to figure out some properties of the 
 Hubbard model, let's try to make some progress with paper-and-pencil. 
@@ -490,11 +484,14 @@ into the Hamiltonian, we can see that their eigenvalues are $0, -\mu, -\mu,
 U - 2\mu$, respectively. 
 
 With this, we can calculate the *partition function* of the system. {% annotate 
-Motivate the partition function more. %} 
+I don't yet understand *how* the partition function is so powerful, but we'll see 
+below that it allows us to calculate some important quantities. It's true by 
+magic. %} 
 
 It's defined as $$Z = \mathrm{Tr } (e^{-\beta H}) = \sum_i \bra{i} e^{-\beta H} \ket{i} = \sum_{i= 0, 
 \uparrow, \downarrow, \uparrow \downarrow} e^{-\beta E_i} \braket{i \vert i} 
 = 1 + 2e^{\beta \mu} + e^{-\beta U + 2 \beta \mu} $$
+where $\beta = \frac{1}{k_B T}$. 
 
 The partition function lets us calculate expectations easily. For any observable 
 $m$, $\braket{m} = Z^{-1} \mathrm{Tr } (m e^{-\beta H})$. We will find the 
@@ -508,8 +505,6 @@ e^{\beta \mu} + 2 e^{-\beta (U - 2 \mu)} ) \\
 &= 2 \cdot Z^{-1} ( e^{\beta \mu} + e^{2 \beta \mu - \beta U}) 
 \end{align}
 $$
-
-{% annotate What is $\beta$? I need to explain this somewhere. %}
 
 I graphed the density $\rho$ for temperatures $T = 0.5$ and $T = 2$ K. Try 
 changing the potential energy $U$. Can you explain the result based on the 
@@ -532,7 +527,7 @@ half-filling. This is the exact behavior we see in the graph.
 
 What's harder to explain is why this *doesn't occur at high temperatures*. 
 Indeed, the effect is almost completely gone when the temperature increases by 
-1.5 Kelvin! {% annotate Do I have an answer for this? %} I don't have an answer to this 
+1.5 Kelvin! I don't have an answer to this 
 yet. 
 
 Earlier, I motivated this by telling you about the Mott insulator. Let's see if 
@@ -720,10 +715,6 @@ few sections.
 
 ### Adiabatic evolution {#adiabatic}
 
-{% annotate How do I learn this myself and explain it well? Scott Aaronson's 
-textbook has an explanation and I have a few bookmarked. Also I can try using 
-the lecture in C191. %}
-
 A mysterious result in quantum mechanics is the *adiabatic theorem*. To quote 
 [Wikipedia](https://en.wikipedia.org/wiki/Adiabatic_theorem): "A physical 
 system remains in its instantaneous eigenstate if a given *pertubation* is 
@@ -761,8 +752,7 @@ $$\ket{\psi_B} = e^{-i H(1)} e^{-i H(0.75)} e^{-i H(0.50)} e^{-i H(0.25)}
 e^{-i H(0)} \ket{\psi_A}$$
 
 Of course, this only works if we choose sufficiently many discrete values for 
-$s$ and a short enough time $t$. {% annotate Give an 
-estimate for values for number of steps and $t$. %} 
+$s$ and a short enough time $t$. 
 
 The adiabatic theorem tells us this will work only if we choose sufficiently 
 many values of $s$ and a short enough time $t$. I wish I could prove some 
@@ -864,16 +854,7 @@ for initial parameters if we don't specify one. Here's the docstring that
 explains it: 
 <script src="https://gist.github.com/warrenalphonso/4e6ce0b1bca5a58537a3b3082f3e2c13.js"></script>
 
-{% annotate Explain how the ansatz is created with a circuit. Explain how the 
-number of 
-parameters stays constant, so we can explore an exponential space with constant 
-parameters that need to be optimized. Also maybe customize ansatz a bit so I 
-don't only use defaults? %}
-
 ## Choosing an initial state {#initial}
-
-- Read Wecker 2 Section 2C - something about how horizontal and veritcal commute 
-because they're diagonal in same basis? 
 
 We've got an ansatz and initial parameters. The final requirement for VQE is an 
 initial state. Since our ansatz is inspired by adiabatic evolution, our initial 
@@ -892,11 +873,7 @@ efficiently solvable it's an okay place to cheat.
 ### Position to momentum transformation {#fourier}
 
 We can apply a Fourier transform to our creation operators to change from 
-position to momentum basis: {% annotate I need to understand why this works. 
-Maybe [this](https://physics.stackexchange.com/questions/39442/intuitive-explanation-of-why-momentum-is-the-fourier-transform-variable-of-posit) 
-and [this](https://physics.stackexchange.com/questions/35746/is-there-a-relation-between-quantum-theory-and-fourier-analysis/50060#50060) 
-will help. Also the [Wikipedia page](https://en.wikipedia.org/wiki/Position_and_momentum_space#Relation_between_space_and_reciprocal_space)
-is helpful. %}
+position to momentum basis: 
 
 $$a_{k\sigma}^\dagger = \frac{1}{\sqrt{N}} \sum_l e^{i k \cdot l} 
 a_{l \sigma}^\dagger$$ 
@@ -1134,9 +1111,6 @@ perturbed Hamiltonian?* The answer is that our starting state might be a
 linear combination of $H_A$'s eigenvectors. By perturbing it and then solving, 
 we let the full Hubbard Hamiltonian influence the state we pick so we're more 
 likely to find the correct superposition. 
-{% annotate I should see what the superposition of tunneling eigenvectors ends 
-up being. Otherwise, I wouldn't be able to use this technique for huge 
-Hamiltonians. %}
 
 Here's code for steps 1-4: 
 <script src="https://gist.github.com/warrenalphonso/a54eb8d48b12e16a2b3a87549b7c05d4.js"></script>
@@ -1229,8 +1203,6 @@ with the true ground state.
 # Uncovering magnetism from the Hubbard model {#magnetism}
 
 ## Spin and magnetism {#spin}
-- Exercise 16, ..., all of Section 5,6
-- Section 10, 11
 
 Electron spin is deeply connected to magnetism. I don't yet understand the 
 physics behind this so we'll take it as a given. 
@@ -1241,11 +1213,19 @@ electron spins are balanced, they cancel each other out and we get
 *antiferromagnetism*, which means the material doesn't have a strong magnetic 
 moment. 
 
-![Ferromagnetic material.](
-https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Ferromagnetic_ordering.svg/180px-Ferromagnetic_ordering.svg.png)
+:::: { style="width: 80%; margin:0 auto; text-align: center;" }
+![](
+https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Ferromagnetic_ordering.svg/180px-Ferromagnetic_ordering.svg.png){
+float="left" style="width: 30%;" }
+![](
+https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Antiferromagnetic_ordering.svg/220px-Antiferromagnetic_ordering.svg.png){
+float="right" style="width: 30%;" } 
 
-![Antiferromagnetic material. Both images from Wikipedia. ](
-https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Antiferromagnetic_ordering.svg/220px-Antiferromagnetic_ordering.svg.png)
+Ferromagnetic order on the left ([Image source](
+https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Ferromagnetic_ordering.svg/180px-Ferromagnetic_ordering.svg.png)); 
+antiferromagnetic order on the right ([Image source](
+https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Antiferromagnetic_ordering.svg/220px-Antiferromagnetic_ordering.svg.png)). 
+::::
 
 So to figure out the magnetic properties of solids, we have to look at the spins 
 of its electrons. An important quantity we'll analyze is the *local moment*: 
@@ -1279,11 +1259,13 @@ $\braket{m^2} \rightarrow \frac{1}{2}$. The temperature seems to prefer random
 configurations and inhibits strong local moments. 
 
 What about the tunneling coefficient? Does it affect local moments? Turns out 
-this behaves like temperature: it inhibits local moments. I'll skip the math 
-here for the 2 site Hubbard model. 
+this behaves like temperature: it inhibits local moments. To show this, we'd 
+have to use the 2 site model, but I'll skip the math for now. 
+
+We'll test out our predictions: we expect that as $U \rightarrow \infty$, 
+we get magnetism, and that as $t \rightarrow \infty$ we get no magnetism. 
 
 ## Analyzing the ground state {#analyze}
-- show that parameters don't follow adiabatic evolution path
 
 First, let's see how many non-zero elements the state vector of the ground 
 state has: 
@@ -1335,53 +1317,44 @@ model. (Of course, we set $\mu$ in order to get this half-filling behavior but
 it's nice to verify that it works 100% of the time.)
 
 Well, this is more interesting. I wonder if the spin-up and spin-down results 
-are correlated in any way. Here's how we'll check this: the first 4 qubits 
-correspond to spin-up and the last 4 qubits correspond to spin-down so that 
-indices $i$ and $i+4$ correspond to the spin-up and spin-down electrons on the 
-$i$th site. This means if there're always two $\ket{1}$'s in the first 4 qubits 
-and two $\ket{1}$'s in the last 4 qubits, there're always 2 spin-up and 2 
-spin-down electrons in every ground state. 
+are correlated in any way. Our qubits are correlated with spin in the following 
+way: the 0th qubit represents a spin-up electron on site 0, the 1st qubit 
+represents a spin-down qubit on site 0, the 2nd qubit represents a spin-up 
+qubit on site 1, the 3rd qubit represents a spin-down qubit on site 1, etc. 
+This means if there are always 2 qubits with even indices and 2 qubits with 
+odd indices, there are always 2 spin-up and 2 spin-down electrons in every 
+ground state. 
 
 We can also check how often they're on the same site, though I suspect we'll 
 never find 2 electrons on the same site because of the interaction energy $U$. 
 
 <script src="https://gist.github.com/warrenalphonso/9523074fa3689f1e08b691598f374240.js"></script>
 
-<samp>Number of trials with unequal spin-up and spin-down electrons:  20917</samp>
+<samp>Number of trials with unequal spin-up and spin-down electrons:  0</samp>
 
-<samp>Number of trials with at least 2 electrons on the same site:  30674</samp>
+<samp>Number of trials with at least 2 electrons on the same site:  42095</samp>
 
-Huh, looks like both my guesses were wrong. In about 1/5 of the trials, we had 
-unequal spin-up and spin-down electrons. *This means there's a chance for 
-magnetism.* It also turns out that in about 1/3 of the trials, the ground state 
-had a fully occupied site, which I didn't expect because of the additional 
-interaction energy associated with it. 
+Huh, looks like my second guess was wrong. It turns out that in about 2/5 of 
+the trials, the ground state had a fully occupied site, which I didn't expect 
+because of the additional interaction energy associated with it. 
 
-Finally, let's look at the distribution of electron spins. We know that we 
-sometimes get a nonzero local moment, but I suspect the number of trials with 
-spin-up and spin-down local moments will be roughly equal. 
+Since we always have the same number of spin-up and spin-down electrons, the 
+ground state is *antiferromagnetic*. 
 
+Now let's check our earlier hypotheses: 
+
+#. I set $t = 1, U = 2000, \mu = 1$. Here's the number of spin-up electrons over 
+100,000 ground states: 
 <figure>
-![](/images/hubbard/symmetric_spins.png){ style="width: 60%; margin: auto;" }
+![](/images/hubbard/spins_U=2000.png){ style="width: 50%; margin: auto;" }
 </figure>
 
-This is a plot of the number of spin-up electrons in our trials. The number of 
-spin-down electrons is 4 - \# spin-up electrons because we're at half-filling. 
-The symmetric nature of this histogram means *on average*, there's no magnetism. 
-The spike in the center means for the vast majority of trials, there will be 
-exactly 0 magnetism. 
-
-I wonder if this huge ratio of 0 magnetism to small magnetism is present for 
-larger lattices. Let's try for a $4 \times 2$ lattice: 
-
+#. Now I set $t=1000, U=2, \mu=1$. Here're the results: 
 <figure>
-![ ](/images/hubbard/symmetric_spins_4x2.png){ style="width: 60%; margin: auto;" }
+![](/images/hubbard/spins_t=1000.png){ style="width: 50%; margin: auto;" }
 </figure>
 
-That's interesting &mdash; the spike on 0 magnetism is still there but it's 
-gotten relatively smaller. Regardless, because the graph is symmetric, 
-there's still no magnetism on average. 
-
-## The Stoner criterion {#Stoner}
+As we expected, as $U \rightarrow \infty$ we get lots of local moments but as 
+$t \rightarrow \infty$ we get no local moments. 
 
 :::
