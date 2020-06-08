@@ -15,4 +15,12 @@ interested in quantum computing. Find me on
 [Github](https://github.com/warrenalphonso). Reach me at warrenalphonso *[at]* 
 berkeley *[dot]* edu.
 
+## Posts 
+
+{% for post in site.qc %}
+  {% if post.publish == true %} 
+### [{{ post.title }}]({{ post.url }})
+  {% endif %}
+{% endfor %}
+
 {% include google-analytics.html %}

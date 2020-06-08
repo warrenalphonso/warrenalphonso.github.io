@@ -1,6 +1,7 @@
 ---
 layout: bootstrap
 title: Investigating the Hubbard model with variational algorithms
+publish: true
 ---
 
 :::area
