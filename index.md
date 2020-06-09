@@ -13,7 +13,7 @@ display_projects: false
 My name is Warren Alphonso. I'm an undergrad EECS major at UC Berkeley 
 interested in quantum computing. Find me on 
 [Github](https://github.com/warrenalphonso). Reach me at warrenalphonso *[at]* 
-berkeley *[dot]* edu.
+berkeley *[dot]* edu.  
 
 ## Posts 
 

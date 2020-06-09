@@ -6,11 +6,11 @@ publish: true
 
 :::area
 
-::::display-2
+::::{ .display-2 style="color: white;" }
 Investigating the Hubbard model with variational algorithms 
 ::::
 
-:::::display-4
+:::::{ .display-4 style="color: #D0D0D0;" }
 A project done through the QC Mentorship program
 :::::
 
