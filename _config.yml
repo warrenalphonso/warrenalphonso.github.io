@@ -6,7 +6,7 @@ highlighter: rouge
 
 header_pages: 
   - index.md
-  - courses.html
+  - courses.md
 
 collections: 
   projects:

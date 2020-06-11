@@ -23,4 +23,12 @@ berkeley *[dot]* edu.
   {% endif %}
 {% endfor %}
 
+---
+
+#### Testing Julia Plotting GIFs
+
+![](/images/infinite_well/one_and_two_stationary.gif){ style="width: 33%;" }
+![](/images/infinite_well/first_three_stationary.gif){ style="width: 33%;" }
+![](/images/infinite_well/4_6_9_stationary.gif){ style="width: 33%;" }
+
 {% include google-analytics.html %}
