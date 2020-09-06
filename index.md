@@ -19,10 +19,16 @@ berkeley *[dot]* edu.
 
 {% for post in site.qc %}
   {% if post.publish == true %} 
-### [{{ post.title }}]({{ post.url }})
+### [{{ post.title }}]({{ post.url }}) 
   {% endif %}
 {% endfor %}
 
----
+## Projects
+
+{% for project in site.projects %}
+  {% if project.publish == true %}
+### [{{ project.title }}]({{ project.url }}) 
+  {% endif %}
+{% endfor %}
 
 {% include google-analytics.html %}

@@ -26,3 +26,8 @@ publish: true
 || CS 198-89 | Quantum Computing Decal | QCB | 
 || CS 198-08 | Linux SysAdmin Decal | OCF | 
 | Summer 2020 | Physics 137A | Quantum Mechanics I | Austin Hedeman | 
+| Fall 2020 | Physics 7B | Physics II | Alessandra Lanzara | 
+|| BioEng 103 | Engineering Molecules II | Gerard Marriott | 
+|| CS 161 | Computer Security | Nicholas Weaver | 
+|| German 160C | Politics and Culture in 20th-Century Germany | Isabel Richter | 
+|| Physics 98 | Learn to Fly: Private Pilot Ground School | Jeremy Axelrod |
