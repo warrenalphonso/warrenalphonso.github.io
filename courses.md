@@ -30,4 +30,3 @@ publish: true
 || BioEng 103 | Engineering Molecules II | Gerard Marriott | 
 || CS 161 | Computer Security | Nicholas Weaver | 
 || German 160C | Politics and Culture in 20th-Century Germany | Isabel Richter | 
-|| Physics 98 | Learn to Fly: Private Pilot Ground School | Jeremy Axelrod |
