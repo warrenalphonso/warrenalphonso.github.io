@@ -264,14 +264,6 @@ harmonic oscillator. {% annotate I recommend [Lecture 8](
 https://www.youtube.com/watch?v=qu-jyrwW6hw) and [Lecture 9](
 https://www.youtube.com/watch?v=jJX_1zT73U0) of MIT OCW 8.04 Spring 2013. %}
 
-
-(TODO: REMOVE THIS: I don't have a good explanation for the mathemetical differences 
-between 
-bosons and fermions, but we'll still try to apply our derived tools from the 
-quantum harmonic oscillator to fermions. Even [Feynman admits](
-https://www.feynmanlectures.caltech.edu/III_04.html) he doesn't have a good 
-explanation for these differences. )
-
 Since we're describing electrons, the creation and annihilation operators have 
 *fermionic anticommutation relations*. In other words, for two fermions on 
 sites $j$ and $k$, with spins $\sigma$ and $\pi$, we have:
@@ -285,14 +277,9 @@ $$
 \end{split}
 $$
 
-TODO: Make footnote. I'm not sure *why* these relations hold. It's true by 
-magic. 
-
-TODO: I never explain what \{ \} curly brackets mean! They represent sum of 
-products!
-
-TODO: Either explain creation and annihilation operators better, or add MIT 
-OCW harmonic oscillators to the prerequisites. 
+{% annotate By the way, these curly braces are called the *anticommutator 
+operator*. It's just a shorthand for the sum of products of two operators: 
+$\{ A, B \} = AB + BA$. }
 
 We can derive some interesting 
 properties of operators that obey the above relations, namely the Pauli 
@@ -1225,11 +1212,8 @@ understand something about the world that our classical heuristics couldn't
 teach us, and all we've managed so far is a jargon-riddled journey to solving 
 the ground state of a simple model. This section aims to cross more into the 
 physical world. The ground state we discovered earlier is a real physical 
-configuration of some solid; now, we'll probe the magnetic properties of that 
+configuration of some solid; we'll now probe the magnetic properties of that 
 solid. 
-
-TODO: What solid is our model? The 2x2 Hubbard model is a 4 atom solid with 
-4 electrons? IDK. 
 
 ## Spin and magnetism {#spin}
 
@@ -1385,8 +1369,5 @@ Now let's check our earlier hypotheses:
 
 As we expected, as $U \rightarrow \infty$ we get lots of local moments but as 
 $t \rightarrow \infty$ we get no local moments. 
-
-TODO: Conclusion. I think I should review what the stuff we did meant physically, 
-some further reading like Michal's stuff, and link the QOSF and QCM program.
 
 :::

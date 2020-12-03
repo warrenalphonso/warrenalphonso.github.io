@@ -4,10 +4,6 @@ description: Built with Jekyll. Hosted on Github Pages.
 markdown: Pandoc
 highlighter: rouge 
 
-header_pages: 
-  - index.md
-  - courses.md
-
 collections: 
   projects:
     sequence: true
