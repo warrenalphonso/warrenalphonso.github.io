@@ -141,7 +141,7 @@ solid are *always* quantum mechanical; the nuclei are almost *never* quantum
 mechanical. 
 
 ^1^In a solid the inner electrons are attached to a particular nucleus, and for 
-them the relevant size would be the radius of the atom. But the outermost 
+them the relevant distance would be the radius of the atom. But the outermost 
 electrons are not attached, and for them the relevant distance is the lattice 
 spacing. This problem pertains to *outer* electrons. 
 ::::
@@ -150,7 +150,8 @@ spacing. This problem pertains to *outer* electrons.
 {% annotate We don't know what or why the de Broglie wavelength is useful. 
 We just assume that's correct. Treat it like magic. %}
 
-We need to solve $\lambda > 3 \times 10^{-10} \mathrm{m}$. We need to choose some value for 
+We want to solve $\lambda > 3 \times 10^{-10} \mathrm{m}$. To do that, we need 
+to choose some value for 
 mass $m$ to plug in, so that the inequality is only a function of temperature 
 $T$. The problem recommends using sodium: 
 
@@ -165,17 +166,19 @@ $$
 \frac{h^2 \cdot 10^{20}}{9 \cdot 3 m k_B} > T 
 $$
 
-*Electrons*: 
+*Solving for electrons*: 
 
 The mass of an electron is $m = 9.109 \times 10^{-31} \mathrm{kg}$. Plugging in 
 $h$, $m$, and $k_B$, we get 
 $$T < 1.2935 \times 10^{5} = 129350 \mathrm{K}$$
 
 For some perspective on this result, the surface of the sun is about $6000 
-\mathrm{K}$. Everywhere on Earth satisfies the above temperature inequality 
-so the electrons in sodium always require quantum mechanical treatment. 
+\mathrm{K}$. [Almost](
+https://www.theatlantic.com/technology/archive/2012/06/humans-create-a-temperature-250-000-times-hotter-than-the-sun-right-here-on-earth/259055/) 
+everywhere on Earth satisfies the above temperature inequality; the electrons 
+in sodium *always require* quantum mechanical treatment.
 
-*Nucleus*:
+*Solving for the nucleus*:
 
 Sodium has atomic number 11, which means it has 11 protons. The most common 
 isotope of Sodium is ^23^Na, which has 12 neutrons. Because the mass of an 
@@ -190,7 +193,7 @@ $$T < 3.062 \mathrm{K}$$
 
 This temperature is near-zero. The [lowest natural temperature recorded on 
 Earth](https://en.wikipedia.org/wiki/Lowest_temperature_recorded_on_Earth)
-is $184 \mathrm{K}$, so the above inequality is almost never true. The 
+is $184 \mathrm{K}$, so the above inequality is almost never met. The 
 nucleus can usually be treated with classical methods. 
 
 Our takeaway is that <u>outer electrons must be analyzed quantum mechanically 
@@ -218,15 +221,17 @@ Let's make some simplifying assumptions:
 sites. 
     - The mass of an electron is more than a thousand times smaller than the 
     mass of a proton. Since the nucleus is made up of protons and neutrons, we're 
-    justified in thinking only of movement *relative* to the nucleus, which 
-    treats it as stationary. 
+    justified in thinking only of movement *relative* to the nucleus, i.e.
+    we assume the nucleus is stationary. 
 #. Assume the atoms only have *one* electron orbital. The Pauli exclusion 
-principle states that each atom can have a maximum of 2 electrons: an up electron 
-and a down electron. 
-    - We've determined that the outer electrons *must* be treated quantum 
-    mechanically, so this restriction is justified if we only consider the outer 
-    electrons. We make the additional simplification of only considering *one 
-    orbital* of outer electrons. 
+principle states that each orbital can have a maximum of 2 electrons: a spin-up 
+electron and a spin-down electron. 
+    - This might seem like leap at first, because atoms can have many electron 
+    orbitals. But because we know that the *outer* electrons *must*
+    be treated quantum mechanically, we may ignore any inner orbitals. 
+    While there can be multiple outer electron orbitals, we choose to only 
+    consider one outer orbital. I don't have a great justification for this; 
+    it'll just make calculations easier if we focus on the simplest case. 
 #. Assume 2 electrons interact *with each other* only if they're in the same 
 orbital. 
     - Interaction strength is determined by proximity: two electrons interact 
@@ -258,15 +263,18 @@ creation and annihilation operators. These arise from studying the quantum
 harmonic oscillator. {% annotate I recommend [Lecture 8](
 https://www.youtube.com/watch?v=qu-jyrwW6hw) and [Lecture 9](
 https://www.youtube.com/watch?v=jJX_1zT73U0) of MIT OCW 8.04 Spring 2013. %}
-I don't have a good explanation for the mathemetical ddifferences between 
+
+
+(TODO: REMOVE THIS: I don't have a good explanation for the mathemetical differences 
+between 
 bosons and fermions, but we'll still try to apply our derived tools from the 
 quantum harmonic oscillator to fermions. Even [Feynman admits](
 https://www.feynmanlectures.caltech.edu/III_04.html) he doesn't have a good 
-explanation for these differences. 
+explanation for these differences. )
 
 Since we're describing electrons, the creation and annihilation operators have 
 *fermionic anticommutation relations*. In other words, for two fermions on 
-sites $j$ and $k$, with spins $\sigma$ and $\pi$, we have. 
+sites $j$ and $k$, with spins $\sigma$ and $\pi$, we have:
 
 $$
 \Large
@@ -277,7 +285,16 @@ $$
 \end{split}
 $$
 
-I'm not sure *why* these relations hold, but we can derive some interesting 
+TODO: Make footnote. I'm not sure *why* these relations hold. It's true by 
+magic. 
+
+TODO: I never explain what \{ \} curly brackets mean! They represent sum of 
+products!
+
+TODO: Either explain creation and annihilation operators better, or add MIT 
+OCW harmonic oscillators to the prerequisites. 
+
+We can derive some interesting 
 properties of operators that obey the above relations, namely the Pauli 
 exclusion principle. 
 
@@ -292,7 +309,7 @@ I said I don't know why these relations hold, but we can try to think about how
 we might have derived them by ourselves. We want some relation that makes it 
 clear that $a^2$ and $a^{\dagger^{2}}$ are both nonsense, since we can't have two 
 fermions of the same spin in the same place. Since we're working in a vector 
-space, we can set these both equal to $0$, which means that doing either of 
+space, we can set these both equal to $0$, which means that applying either of 
 these operations destroys our whole vector space. Notice another way of writing 
 $a^2 = 0$ is $2a^2 = \{ a, a \} = 0$ which is the exact anticommutation 
 relation we have. The same logic works for $a^\dagger$. This explain two of the 
@@ -365,8 +382,7 @@ potential energy* $\mu$ which scales with the total number of electrons:
 {% annotate I don't have a good explanation of why the chemical potential is 
 important. It seems to be how "accepting" the system is of additional 
 particles. It adds a linear potential term, so that we don't have a potential 
-*only* if we have 2 electrons, but we also keep the nonlinear potential on top 
-of the chemical potential. %}
+*only* if we have 2 electrons. %}
 
 $$ H = -t \sum_{ \braket{j, k} \sigma} ( a^\dagger_{j \sigma} a_{k \sigma} + 
 a^\dagger_{k \sigma} a_{j \sigma} ) + U \sum_j n_{j \uparrow} n_{j \downarrow} 
@@ -394,7 +410,7 @@ Now that we have this figured out, we need some way to encode our creation and
 annihilation operators into qubit operators. There are 3 main ways of doing 
 this, but we'll focus on the *Jordan-Wigner transformation*. {% annotate The 
 2 other popular ways to encode are the Bravyi-Kitaev and parity encodings. 
-These are more complex than the Jordan-Wigner encoding, but more useful in 
+These are more complex than the Jordan-Wigner encoding but more useful in 
 some situations. %} 
 
 The Jordan-Wigner transformation is very intuitive, and we can stumble across it 
@@ -458,8 +474,8 @@ Most chemistry problems are concerned with finding the eigenstates and
 eigenvalues of the Hamiltonian. The most important eigenstate is the state 
 corresponding to the lowest eigenvalue. We call this eigenstate the 
 *ground state* and its corresponding eigenvalue the *ground state energy*. 
-This name indicates that the eigenstates are configurations of the system that 
-have a particular energy, namely their corresponding eigenvalues. Why is the 
+The name indicates that the eigenstates are configurations of the system that 
+have a particular energy, specifically their corresponding eigenvalues. Why is the 
 ground state so important? Because the system will tend toward its lowest 
 energy state over time. Most systems spend the vast majority of their time in 
 their ground state, so if we can understand its properties well, we can 
@@ -469,7 +485,8 @@ Before we decide to use a quantum computer to figure out some properties of the
 Hubbard model, let's try to make some progress with paper-and-pencil. 
 
 Some 
-materials that were predicted to conduct electricity turn out to be insulators, 
+materials that were predicted to conduct electricity turned out to be 
+insulators, 
 especially at low temperatures. These are called [Mott insulators](
 https://en.wikipedia.org/wiki/Mott_insulator), and their behavior is due to 
 electron-electron interactions (like $U$ in the Hubbard model) that classical 
@@ -1203,10 +1220,21 @@ with the true ground state.
 
 # Uncovering magnetism from the Hubbard model {#magnetism}
 
+I set out with the goal of using near-term quantum computing to actually 
+understand something about the world that our classical heuristics couldn't 
+teach us, and all we've managed so far is a jargon-riddled journey to solving 
+the ground state of a simple model. This section aims to cross more into the 
+physical world. The ground state we discovered earlier is a real physical 
+configuration of some solid; now, we'll probe the magnetic properties of that 
+solid. 
+
+TODO: What solid is our model? The 2x2 Hubbard model is a 4 atom solid with 
+4 electrons? IDK. 
+
 ## Spin and magnetism {#spin}
 
 Electron spin is deeply connected to magnetism. I don't yet understand the 
-physics behind this so we'll take it as a given. 
+physics behind this so we'll treat it like magic. 
 
 When many electrons have the same spin, we get *ferromagnetism*, which means 
 all the magnetic moments are aligned and we get a strong magnetic moment. If 
@@ -1260,7 +1288,7 @@ $\braket{m^2} \rightarrow \frac{1}{2}$. The temperature seems to prefer random
 configurations and inhibits strong local moments. 
 
 What about the tunneling coefficient? Does it affect local moments? Turns out 
-this behaves like temperature: it inhibits local moments. To show this, we'd 
+it behaves like temperature: it inhibits local moments. To show this, we'd 
 have to use the 2 site model, but I'll skip the math for now. 
 
 We'll test out our predictions: we expect that as $U \rightarrow \infty$, 
@@ -1357,5 +1385,8 @@ Now let's check our earlier hypotheses:
 
 As we expected, as $U \rightarrow \infty$ we get lots of local moments but as 
 $t \rightarrow \infty$ we get no local moments. 
+
+TODO: Conclusion. I think I should review what the stuff we did meant physically, 
+some further reading like Michal's stuff, and link the QOSF and QCM program.
 
 :::
